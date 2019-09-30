@@ -1,8 +1,8 @@
-#include "colors.inc"
-#include "inc/Camera.inc"
 #include "inc/Head.inc"
 #include "inc/WizardRobe.inc"
 #include "inc/WizardHat.inc"
+#include "inc/WizardWand.inc"
+#include "inc/WizardTalisman.inc"
 
 #declare P_WizardHead = union {
 	object {
@@ -32,7 +32,16 @@
 
 #declare P_WizardHandLeft = object {
 	P_WizardHandRight
-	scale <-1, 0, 0>
+	scale <-1, 1, 1>
+}
+
+#declare P_WizardHandRightWand = union {
+	object {
+		P_WizardHandRight
+	}
+	object {
+		O_Wand
+	}
 }
 
 #declare O_Wizard = union {
@@ -49,9 +58,15 @@
 		translate <1.1, 1.6, -1.05>
 	}
 	object {
-		P_WizardHandRight
+		P_WizardHandRightWand
 		translate <-1.1, 1.6, -1.05>
 	}
+	object {
+		O_WizardTalisman
+		scale 0.25
+		rotate <90, 0, -20>
+		translate <0, 1.6, -1.25>
+	}	
 }
 
 #declare O_Wizard_2 = union {
@@ -63,10 +78,18 @@
 		O_WizardRobe_2
 		scale <1.75, 2.25, 1.75>
 	}
-}
-
-
-object {
-	O_Wizard
-	rotate <0, 0, 0>
+	object {
+		P_WizardHandLeft
+		translate <1.1, 1.4, -1.05>
+	}
+	object {
+		P_WizardHandRightWand
+		translate <-1.1, 1.4, -1.05>
+	}
+	object {
+		O_WizardTalisman
+		scale 0.25
+		rotate <90, 0, -20>
+		translate <0, 1.45, -1.25>
+	}
 }

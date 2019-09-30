@@ -1,0 +1,52 @@
+#!/bin/bash
+
+sMaterialType="woods"
+
+render() {
+	sInput="$1"
+	sOutput="$2"
+	if [ -z "$sOutput" ]
+	then
+		sOutput="$sInput"
+	fi
+	povray -I$sInput.pov -W256 -H256 -O$sOutput.png
+}
+
+createMaterial() {
+	sInclude=$1
+	sTexture=$2
+	read -d '' sFileContent <<EOT
+#include "$sInclude.inc"
+#include "colors.inc"
+
+camera {
+	location <0, 0, -10>
+	look_at <0, 0,  0>
+    right x
+}
+
+light_source { 
+	<2, 0, -10> color White
+}
+
+sphere {
+	<0, 0, 0>
+	0.5
+	texture {
+		$sTexture
+	}
+	scale 6
+}
+
+background { 0.8 }
+
+EOT
+	echo "$sFileContent">$sTexture.pov
+}
+
+for i in `seq 1 2`
+do
+	createMaterial woods T_Wood$i
+	render T_Wood$i
+	rm T_Wood$i.pov
+done

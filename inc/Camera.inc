@@ -1,6 +1,5 @@
 #declare CameraHeight = 2;
 
-
 camera {
 	location <0, CameraHeight, -20>
 	look_at  <0, CameraHeight,  0>

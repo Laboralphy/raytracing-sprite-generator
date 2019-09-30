@@ -1,16 +1,25 @@
-#declare T_FabricRed = texture {
+#ifndef(WizardRobeTint)
+	#declare WizardRobeTint = Cyan;
+#end
+
+#declare T_FabricWizardRobeRadial = texture {
 	pigment {
-		color Red
+		radial
+		color_map {
+			[0.5 WizardRobeTint]
+			[0.5 WizardRobeTint * 0.85 ]
+		}
+		frequency 16
+  	}
+}
+
+#declare T_FabricWizardRobePlain = texture {
+	pigment {
+		color WizardRobeTint
 	}
 }
 
-#declare T_FabricCyan = texture {
-	pigment {
-		color Cyan
-	}
-}
-
-#declare T_FabricWizardRobe = T_FabricCyan;
+#declare T_FabricWizardRobe = T_FabricWizardRobeRadial;
 
 /* main robe body */
 #declare P_WizardRobeGarb = object {
@@ -104,16 +113,16 @@
 #declare O_WizardRobe_2 = union {
 	object {
 		P_WizardRobeGarb_2
+		texture { T_FabricWizardRobe }
 	}
 	object {
 		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
 		translate <0.6, 0.6, -0.6>
 	}
 	object {
 		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
 		translate <-0.6, 0.6, -0.6>
 	}
-	texture { T_FabricWizardRobe }
 }
-
-

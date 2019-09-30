@@ -1,10 +1,12 @@
 #include "golds.inc"
 
-#declare T_FabricBrown = texture {
-	pigment {
-		color rgb <0.7, 0.3, 0.1>
+#ifndef(T_WizardHatFabric)
+	#declare T_WizardHatFabric = texture {
+		pigment {
+			color rgb <0.7, 0.3, 0.1>
+		}
 	}
-}
+#end
 
 #declare T_FabricLeatherBlack = texture {
 	pigment {
@@ -79,7 +81,7 @@
 #declare O_WizardHatBrown = union {
 	object {
 		P_WizardHat
-		texture { T_FabricBrown }
+		texture { T_WizardHatFabric }
 	}
 	object {
 		P_WizardHatBelt
