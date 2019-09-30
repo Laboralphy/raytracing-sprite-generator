@@ -1,0 +1,13 @@
+#!/bin/bash
+
+render() {
+	sInput="$1"
+	sOutput="$2"
+	if [ -z "$sOutput" ]
+	then
+		sOutput="$sInput"
+	fi
+	povray -I$sInput.pov +ua -Ooutput/$sOutput.png
+}
+
+render $*
