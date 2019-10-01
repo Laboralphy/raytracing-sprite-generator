@@ -2,14 +2,14 @@
 
 render() {
 	sInput="$1"
-	sOutput="$2"
-	fClock="$3"
+	fClock="$2"
+	sOutput="$3"
 	if [ -z "$sOutput" ]
 	then
-		sOutput="$sInput"
+		sOutput="${sInput}_$fClock"
 	fi
 	mkdir -p output
-	povray -I$sInput.pov -W1024 -H768 +UA +Q9 +A0.4 +K$fClock -Ooutput/$sOutput.png
+	povray -I$sInput.pov -W1024 -H768 +UA +Q9 +A0.4 +K$fClock +P -Ooutput/$sOutput.png
 }
 
 render $*

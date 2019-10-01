@@ -1,3 +1,8 @@
+#declare WizardRobeHeight = 2; /* initial height of the robe */
+#declare WizardRobeHeightSmaller = 0.95;  /* the second version is smaller by a certain percentage */
+#declare WizardRobeHeight_2 = WizardRobeHeight * WizardRobeHeightSmaller; /* initial height of the robe */
+#declare WizardRobeMancheDeltaHeight = 1.55; /* diference between robe top and manche top */
+
 #ifndef(WizardRobeTint)
 	#declare WizardRobeTint = Cyan;
 #end
@@ -21,21 +26,39 @@
 
 #declare T_FabricWizardRobe = T_FabricWizardRobeRadial;
 
-/* main robe body */
 #declare P_WizardRobeGarb = object {
 	sor {
-		7
+		8
 		<0, 0>
 		<0.26, 0.04>
 		<0.54, 0.21>
 		<0.61, 0.54>
 		<0.72, 0.83>
 		<0.79, 0.91>
+		<0.95, 0.99>
 		<1, 1>
 		sturm
 	}
-	scale -1
+	scale <1, -1, 1>
 	translate <0, 1, 0>
+}
+
+
+#declare P_WizardRobeGarb_2 = object {
+	sor {
+		8
+		<0, 0>
+		<0.26, 0.04>
+		<0.54, 0.21>
+		<0.61, 0.54>
+		<0.72, 0.83>
+		<0.82, 0.91>
+		<1.10, 0.99>
+		<1.30, 1>
+		sturm
+	}
+	scale <1, -0.95, 1>
+	translate <0, 0.95, 0>
 }
 
 
@@ -79,35 +102,29 @@
 	scale 0.8
 }
 
-#declare P_WizardRobeGarb_2 = object {
-	sor {
-		7
-		<0, 0>
-		<0.26, 0.04>
-		<0.54, 0.21>
-		<0.61, 0.54>
-		<0.72, 0.71>
-		<0.89, 0.95>
-		<1.15, 1>
-		sturm
-	}
-	scale -0.95
-	translate <0, 0.95, 0>
-}
+
+
+
+
+
+
 
 #declare O_WizardRobe = union {
 	object {
 		P_WizardRobeGarb
+		texture { T_FabricWizardRobe }
 	}
 	object {
 		P_WizardRobeManche
-		translate <0.6, 0.7, -0.6>
+		texture { T_FabricWizardRobe }
+		translate <0.6, 0.675, -0.6>
 	}
 	object {
 		P_WizardRobeManche
-		translate <-0.6, 0.7, -0.6>
+		texture { T_FabricWizardRobe }
+		translate <-0.6, 0.675, -0.6>
 	}
-	texture { T_FabricWizardRobe }
+	scale <1.75, 2.25, 1.75>
 }
 
 #declare O_WizardRobe_2 = union {
@@ -118,11 +135,12 @@
 	object {
 		P_WizardRobeManche
 		texture { T_FabricWizardRobe }
-		translate <0.6, 0.6, -0.6>
+		translate <0.6, 0.65, -0.6>
 	}
 	object {
 		P_WizardRobeManche
 		texture { T_FabricWizardRobe }
-		translate <-0.6, 0.6, -0.6>
+		translate <-0.6, 0.65, -0.6>
 	}
+	scale <1.75, 2.25, 1.75>
 }

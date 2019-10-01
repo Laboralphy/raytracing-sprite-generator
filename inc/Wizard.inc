@@ -47,49 +47,47 @@
 #declare O_Wizard = union {
 	object {
 		P_WizardHead
-		translate 2.8 * y
+		translate 2.6 * y
 	}
 	object {
 		O_WizardRobe
-		scale <1.75, 2.25, 1.75>
 	}
 	object {
 		P_WizardHandLeft
-		translate <1.1, 1.6, -1.05>
+		translate <1.1, 1.5, -1.05>
 	}
 	object {
 		P_WizardHandRightWand
-		translate <-1.1, 1.6, -1.05>
+		translate <-1.1, 1.5, -1.05>
 	}
 	object {
 		O_WizardTalisman
 		scale 0.25
-		rotate <90, 0, -20>
-		translate <0, 1.6, -1.25>
+		rotate <100, 0, -20>
+		translate <0, 1.6, -1>
 	}	
 }
 
 #declare O_Wizard_2 = union {
 	object {
 		P_WizardHead
-		translate 2.6 * y
+		translate 2.55 * y
 	}
 	object {
 		O_WizardRobe_2
-		scale <1.75, 2.25, 1.75>
 	}
 	object {
 		P_WizardHandLeft
-		translate <1.1, 1.4, -1.05>
+		translate <1.1, 1.45, -1.05>
 	}
 	object {
 		P_WizardHandRightWand
-		translate <-1.1, 1.4, -1.05>
+		translate <-1.1, 1.45, -1.05>
 	}
 	object {
 		O_WizardTalisman
 		scale 0.25
-		rotate <90, 0, -20>
-		translate <0, 1.45, -1.25>
+		rotate <100, 0, -20>
+		translate <0, 1.55, -1>
 	}
 }

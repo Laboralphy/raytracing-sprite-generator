@@ -14,7 +14,7 @@
 	}
 }
 
-
+/* height is about 2.41 */
 #declare P_WizardHatTop = sphere_sweep {
 	linear_spline
 	3
