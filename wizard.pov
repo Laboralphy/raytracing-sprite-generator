@@ -1,6 +1,5 @@
 #include "colors.inc"
 #include "inc/Camera.inc"
-#include "inc/Animation.inc"
 
 #declare WizardRobeTint = Red;
 

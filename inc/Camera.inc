@@ -1,9 +1,7 @@
 #include "colors.inc"
+#include "inc/Animation.inc"
 #declare CameraHeight = 3;
 #declare CameraDistance = 20;
-
-
-#declare MODE_DEV = 1;
 
 
 #if(MODE_DEV = 1)
