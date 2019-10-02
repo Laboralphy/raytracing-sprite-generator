@@ -1,15 +1,15 @@
 #!/bin/bash
 
 render() {
-	sInput="$1"
-	fClock="$2"
-	sOutput="$3"
+	local sInput="$1"
+	local fClock="$2"
+	local sOutput="$3"
 	if [ -z "$sOutput" ]
 	then
 		sOutput="${sInput}_$fClock"
 	fi
 	mkdir -p output
-	povray -I$sInput.pov -W1024 -H768 +UA +Q9 +A0.4 +K$fClock +P -Ooutput/$sOutput.png
+	povray -I$sInput.pov -W512 -H384 +UA +Q9 +A0.4 +K$fClock +P -Ooutput/$sOutput.png
 }
 
 render $*
