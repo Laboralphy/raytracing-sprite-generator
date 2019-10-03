@@ -47,7 +47,7 @@
 #declare O_Wizard = union {
 	object {
 		P_WizardHead
-		translate 2.6 * y
+		translate 2.7 * y
 	}
 	object {
 		O_WizardRobe
@@ -71,7 +71,7 @@
 #declare O_Wizard_2 = union {
 	object {
 		P_WizardHead
-		translate 2.55 * y
+		translate 2.65 * y
 	}
 	object {
 		O_WizardRobe_2

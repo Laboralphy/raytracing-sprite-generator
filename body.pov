@@ -241,18 +241,12 @@
 	}
 }
 
-#declare Head = blob {
-	threshold BlobTreshold
-	sphere {
-		0
-		1
-		5
-	}
-	sphere {
-		<0, -0.5, -0.25> 
-		0.5
-		1
-	}
+#declare Head = ovus {
+	2
+	0.4
+	scale <1.4, -1.4, 1.4>
+	rotate <30, 0, 0>
+	translate 0.5 * y
 	pigment {
 		C_Torso
 	}
@@ -276,11 +270,35 @@
 		translate <0, TorsoLen + HeadSize + 2, 0>
 	}
 	scale 0.5
-	rotate AnimationAngle * y
 }
 
 
-object {
-	Head
+
+#declare Skirt_1 = sor {
+	6
+	<0, 0>
+	<0.5, 0.1>
+	<0.75, 0.5>
+	<0.9, 0.9>
+	<1, 1>
+	<1, 2>
+	scale <1.8, -1.7, 1>
+	translate <0, 1, 0>
+	pigment {
+		C_Torso
+	}
+}
+
+
+
+
+union {
+	object {
+		Body
+	}
+	object {
+		Skirt_1
+	}
 	rotate AnimationAngle * y
 }
+
