@@ -13,7 +13,7 @@
 #declare ArmThickness = 0.55;
 
 #declare LegShift = 0.1;
-#declare ButtShift = 0.2;
+#declare ButtShift = 0.3;
 #declare ArmShift = 2.35;
 
 #declare BoobSize = 1.4;
@@ -26,8 +26,8 @@
 #declare AngleArmLeft = <0, 0, -10>;
 #declare AngleForeArmLeft = <0, 0, 0>;
 
-#declare AngleKneelRight = 0;
-#declare AngleLegRight = <0, 0, 0>;
+#declare AngleKneelRight = 30;
+#declare AngleLegRight = <-30, 0, 0>;
 #declare AngleArmRight = <0, 0, 10>;
 #declare AngleForeArmRight = <0, 0, 0>;
 
@@ -36,68 +36,45 @@
 #declare C_Torso = Gray40;
 #declare C_Arms = Gray70;
 
-
-#declare LegLeft = blob {
-	threshold BlobTreshold
-	sphere {
-		0
-		1
-		1
+#declare LegLeft = union {
+	sphere_sweep {
+		linear_spline
+		3
+		<0, 0, 0>, LegThickness
+		<0, -ThighLen, 0>, LegThickness * 0.9
+		<
+			-LegShift, 
+			-ThighLen - ShinLen * cos(radians(AngleKneelLeft)), 
+			ShinLen * sin(radians(AngleKneelLeft))
+		>, LegThickness * 0.7
+		rotate AngleLegLeft
 	}
 	sphere {
-		<LegShift, 0, ButtShift>
-		1.6
-		1
-	}
-	cylinder { 
-		0
-		(-ThighLen) * y
-		LegThickness
-		1.2 
-		translate -LegShift * x
-	}
-	cylinder { 
-		0
-		(-ShinLen) * y
-		LegThickness * 0.95
+		<ButtShift, 0, ButtShift>
 		1.2
-		rotate AngleKneelLeft * x
-		translate <-LegShift, -ThighLen, 0>
 	}
-	rotate AngleLegLeft
 	pigment { 
 		C_Legs 
 	}
 }
 
-#declare LegRight = blob {
-	threshold BlobTreshold
-	sphere {
-		0
-		1
-		1
+#declare LegRight = union {
+	sphere_sweep {
+		linear_spline
+		3
+		<0, 0, 0>, LegThickness
+		<0, -ThighLen, 0>, LegThickness * 0.9
+		<
+			LegShift, 
+			-ThighLen - ShinLen * cos(radians(AngleKneelRight)), 
+			ShinLen * sin(radians(AngleKneelRight))
+		>, LegThickness * 0.7
+		rotate AngleLegRight
 	}
 	sphere {
-		<-LegShift, 0, ButtShift>
-		1.6
-		1
-	}
-	cylinder { 
-		0
-		(-ThighLen) * y
-		LegThickness
-		1.2 
-		translate LegShift * x
-	}
-	cylinder { 
-		0
-		(-ShinLen) * y
-		LegThickness * 0.95
+		<-ButtShift, 0, ButtShift>
 		1.2
-		rotate AngleKneelRight * x
-		translate <LegShift, -ThighLen, 0>
 	}
-	rotate AngleLegRight
 	pigment { 
 		C_Legs 
 	}
@@ -269,7 +246,8 @@
 		Head
 		translate <0, TorsoLen + HeadSize + 2, 0>
 	}
-	scale 0.5
+	translate (LegThickness + ThighLen + ShinLen) * y
+	scale 0.3
 }
 
 
@@ -296,9 +274,9 @@ union {
 	object {
 		Body
 	}
-	object {
+/*	object {
 		Skirt_1
-	}
+	}*/
 	rotate AnimationAngle * y
 }
 
