@@ -1,17 +1,11 @@
 #include "colors.inc"
+#include "debug.inc"
 #include "inc/Camera.inc"
 #include "inc/BodyTextures.inc"
 
 #declare BlobTreshold = 0.158;
 
-#declare ShinLen = 3;
-#declare ThighLen = 3;
-#declare TorsoLen = 4;
-#declare ArmLen = 2.5;
-#declare ForeArmLen = 2.5;
-
-#declare LegThickness = 1;
-#declare ArmThickness = 0.55;
+#include "inc/BodyLengthes.inc"
 
 #declare LegShift = 0.1;
 #declare ButtShift = 0.3;
@@ -23,71 +17,28 @@
 #declare HeadSize = 2;
 
 
-#macro RotatePoint(V_Point, V_Angle)
+#declare A_LegLeft = 30;
+#declare A_KneelLeft = -20;
+#declare V_KneelPosLeft = <0, (-ThighLen) * cos(radians(A_LegLeft)), (-ThighLen) * sin(radians(A_LegLeft))>;
+#declare V_FootPosLeft = V_KneelPosLeft + <0, (-ShinLen) * cos(radians(A_KneelLeft + A_LegLeft)), (-ShinLen) * sin(radians(A_KneelLeft + A_LegLeft))>;
 
-	#local pitch = radians(V_Angle.x);
-	#local yaw = radians(V_Angle.y);
-	#local roll = radians(V_Angle.z);
+#declare A_ArmLeft = 0;
+#declare A_ForeArmLeft = 0;
+#declare V_ElbowPosLeft = <0, (-ArmLen) * cos(radians(A_ArmLeft)), (-ArmLen) * sin(radians(A_ArmLeft))>;
+#declare V_HandPosLeft = V_ElbowPosLeft + <0, (-ForeArmLen) * cos(radians(A_ForeArmLeft + A_ArmLeft)), (-ForeArmLen) * sin(radians(A_ForeArmLeft + A_ArmLeft))>;
 
-    #local cosa = cos(yaw);
-    #local sina = sin(yaw);
 
-    #local cosb = cos(pitch);
-    #local sinb = sin(pitch);
 
-    #local cosc = cos(roll);
-    #local sinc = sin(roll);
 
-    #local Axx = cosa * cosb;
-    #local Axy = cosa * sinb * sinc - sina * cosc;
-    #local Axz = cosa * sinb * cosc + sina * sinc;
-
-    #local Ayx = sina * cosb;
-    #local Ayy = sina * sinb * sinc + cosa * cosc;
-    #local Ayz = sina * sinb * cosc - cosa * sinc;
-
-    #local Azx = -sinb;
-    #local Azy = cosb * sinc;
-    #local Azz = cosb * cosc;
-
-	#local px = V_Point.x;
-    #local py = V_Point.y;
-    #local pz = V_Point.z;
-
-    <
-		Axx * px + Axy * py + Axz * pz, 
-        Ayx * px + Ayy * py + Ayz * pz,
-        Azx * px + Azy * py + Azz * pz
-	>;
-#end
-
-#declare A_LegLeft = 45;
-#declare A_KneelLeft = 80;
-#declare AV_LegLeft = <A_LegLeft, 0, 0>;
-#declare AV_ArmLeft = <0, 0, -10>;
-#declare AV_ForeArmLeft = <0, 0, 0>;
-#declare V_KneelLeft = <0, -ThighLen, 0>;
-#declare V_FootLeft = 
-<
-	-LegShift, 
-	-ThighLen - ShinLen * cos(radians(A_KneelLeft)), 
-	ShinLen * sin(radians(A_KneelLeft))
->;
-#declare V_BootBaseLeft = RotatePoint(V_FootLeft, AV_LegLeft);
-
-#declare A_KneelRight = 0;
 #declare A_LegRight = 0;
-#declare AV_LegRight = <A_LegRight, 0, 0>;
-#declare AV_ArmRight = <0, 0, 10>;
-#declare AV_ForeArmRight = <0, 0, 0>;
-#declare V_KneelRight = <0, -ThighLen, 0>;
-#declare V_FootRight =
-<
-	LegShift, 
-	-ThighLen - ShinLen * cos(radians(A_KneelRight)), 
-	ShinLen * sin(radians(A_KneelRight))
->;
-#declare V_BootBaseRight = RotatePoint(V_FootRight, AV_LegRight);
+#declare A_KneelRight = 0;
+#declare V_KneelPosRight = <0, (-ThighLen) * cos(radians(A_LegRight)), (-ThighLen) * sin(radians(A_LegRight))>;
+#declare V_FootPosRight = V_KneelPosRight + <0, (-ShinLen) * cos(radians(A_KneelRight + A_LegRight)), (-ShinLen) * sin(radians(A_KneelRight + A_LegRight))>;
+
+#declare A_ArmRight = 10;
+#declare A_ForeArmRight = 10;
+#declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
+#declare V_HandPosRight = V_ElbowPosRight + <0, (-ForeArmLen) * cos(radians(A_ForeArmRight + A_ArmRight)), (-ForeArmLen) * sin(radians(A_ForeArmRight + A_ArmRight))>;
 
 
 #declare P_LegLeft = union {
@@ -95,9 +46,8 @@
 		linear_spline
 		3
 		<0, 0, 0>, LegThickness
-		V_KneelLeft, LegThickness * 0.9
-		V_FootLeft,	LegThickness * 0.7
-		rotate AV_LegLeft
+		V_KneelPosLeft, LegThickness * 0.9
+		V_FootPosLeft,	LegThickness * 0.7
 	}
 	sphere {
 		0
@@ -115,9 +65,8 @@
 		linear_spline
 		3
 		<0, 0, 0>, LegThickness
-		V_KneelRight, LegThickness * 0.9
-		V_FootRight, LegThickness * 0.7
-		rotate AV_LegRight
+		V_KneelPosRight, LegThickness * 0.9
+		V_FootPosRight,	LegThickness * 0.7
 	}
 	sphere {
 		0
@@ -130,13 +79,54 @@
 	}
 }
 
-#declare P_Legs = union {
+#ifndef (P_Boot)
+	#declare P_Boot = union {
+		cylinder {
+			<0, 0, 0>
+			<0, ShinLen * 0.7, 0>
+			LegThickness * 0.9
+		}
+		cylinder {
+			<0, 0, 0>
+			<0, -LegThickness, 0>
+			LegThickness * 1.1
+		}
+		pigment {
+			Green
+		}
+	}
+#end
+
+#declare P_LegBootLeft = union {
 	object {
 		P_LegLeft
+	}
+	object {
+		P_Boot
+		rotate x * (A_KneelLeft + A_LegLeft)
+		translate V_FootPosLeft
+	}
+}
+
+#declare P_LegBootRight = union {
+	object {
+		P_LegRight
+	}
+	object {
+		P_Boot
+		scale <-1, 1, 1>
+		rotate x * (A_LegRight - A_KneelRight)
+		translate V_FootPosRight
+	}
+}
+
+#declare P_Legs = union {
+	object {
+		P_LegBootLeft
 		translate <-1.1, 0, 0>
 	}
 	object {
-		P_LegRight
+		P_LegBootRight
 		translate <1.1, 0, 0>
 	}
 }
@@ -181,70 +171,142 @@
 	}
 }
 
-#declare P_ArmLeft = blob {
-	threshold BlobTreshold
-	cylinder {
-		ArmThickness * x
-		ArmShift * x
-		ArmThickness
-		1.2
+
+
+
+#ifndef (P_Glove)
+	#declare P_Glove = union {
+		cylinder {
+			<0, ForeArmLen, 0>
+			<0, ForeArmLen * 0.25, 0>
+			ArmThickness * 1.1
+		}
+		sphere {
+			<0, ForeArmLen, 0>
+			ArmThickness * 1.15
+		}
+		pigment {
+			Gray10
+		}
 	}
-	cylinder { 
+#end
+
+#declare FingerThickness = ArmThickness * 0.35;
+#declare FingerLen = ArmThickness * 1.2;
+#declare P_Finger = sphere_sweep {
+	linear_spline
+	3
+	<0, 0, 0>, FingerThickness
+	<0, -FingerLen, 0>, FingerThickness
+	<-FingerLen / 4, (-2) * FingerLen, 0>, FingerThickness
+}
+#declare P_Thumb = sphere_sweep {
+	linear_spline
+	2
+	<0, 0, 0>, FingerThickness
+	<0, -FingerLen * 1.2, 0>, FingerThickness
+}
+#declare P_Fingers = union {
+	object {
+		P_Finger
+	}
+	object {
+		P_Finger
+		translate <0, 0, -2 * FingerThickness>
+	}
+	object {
+		P_Finger
+		translate <0, 0, 2 * FingerThickness>
+	}
+	object {
+		P_Thumb
+		rotate <0, 0, 5>
+		translate <-3 * FingerThickness, 0, -2 * FingerThickness>
+	}
+}
+#declare P_Hand = union {
+	sphere {
 		0
-		(-ArmLen) * y
-		ArmThickness
-		1.2 
+		ArmThickness * 1.2
+		scale <0.8, 1, 1>
 	}
-	cylinder { 
-		0
-		(-ForeArmLen) * y
-		ArmThickness * 0.95
-		1.2
-		rotate AV_ForeArmLeft
-		translate <0, -ArmLen, 0>
+	object {
+		P_Fingers
+		translate <ArmThickness / 2, 0, 0>
 	}
-	rotate AV_ArmLeft
-	translate -ArmShift * x
 	texture {
 		T_Arms
 	}
 }
 
-#declare P_ArmRight = blob {
-	threshold BlobTreshold
-	cylinder {
-		(-ArmThickness) * x
-		(-ArmShift) * x
-		ArmThickness
-		1.2
-	}
-	cylinder { 
-		0
-		(-ArmLen) * y
-		ArmThickness
-		1.2 
-	}
-	cylinder { 
-		0
-		(-ForeArmLen) * y
-		ArmThickness * 0.95
-		1.2
-		rotate AV_ForeArmRight
-		translate <0, -ArmLen, 0>
-	}
-	rotate AV_ArmRight
-	translate ArmShift * x
+
+#declare P_ArmLeft = sphere_sweep {
+	linear_spline
+	3
+	0, ArmThickness
+	V_ElbowPosLeft, ArmThickness * 0.9
+	V_HandPosLeft, ArmThickness * 0.7
 	texture {
 		T_Arms
 	}
 }
 
-#declare P_Arms = union {
+#declare P_ArmGloveLeft = union {
 	object {
 		P_ArmLeft
 	}
 	object {
+		P_Hand
+		scale <-1, 1, 1>
+		rotate x * (A_ForeArmLeft + A_ArmLeft)
+		translate V_HandPosLeft
+	}
+	object {
+		P_Glove
+		rotate x * (A_ForeArmLeft + A_ArmLeft)
+		translate V_HandPosLeft
+	}
+	rotate (-z) * 10
+	translate (-ArmShift) * x
+}
+
+#declare P_ArmRight = sphere_sweep {
+	linear_spline
+	3
+	0, ArmThickness
+	V_ElbowPosRight, ArmThickness * 0.9
+	V_HandPosRight, ArmThickness * 0.7
+	texture {
+		T_Arms
+	}
+}
+
+#declare P_ArmGloveRight = union {
+	object {
 		P_ArmRight
+	}
+	object {
+		P_Hand
+		scale <1, 1, 1>
+		rotate x * (A_ForeArmRight + A_ArmRight)
+		translate V_HandPosRight
+	}
+	object {
+		P_Glove
+		rotate x * (A_ForeArmRight + A_ArmRight)
+		translate V_HandPosRight
+	}
+	rotate z * 10
+	translate ArmShift * x
+}
+
+
+#declare P_Arms = union {
+	object {
+		P_ArmGloveLeft
+	}
+	object {
+		P_ArmGloveRight
 	}
 	translate (0.5 + TorsoLen) * y
 }
