@@ -10,12 +10,7 @@
 #declare LegShift = 0.1;
 #declare ButtShift = 0.3;
 #declare ArmShift = 2.35;
-
-#declare BoobSize = 1.5;
 #declare BoobPos = 0.75;
-
-#declare HeadSize = 2;
-
 
 #declare A_LegLeft = 30;
 #declare A_KneelLeft = -20;
@@ -191,20 +186,19 @@
 	}
 #end
 
-#declare FingerThickness = ArmThickness * 0.35;
-#declare FingerLen = ArmThickness * 1.2;
 #declare P_Finger = sphere_sweep {
 	linear_spline
 	3
 	<0, 0, 0>, FingerThickness
 	<0, -FingerLen, 0>, FingerThickness
-	<-FingerLen / 4, (-2) * FingerLen, 0>, FingerThickness
+	<-FingerLen / 4, (-1.5) * FingerLen, 0>, FingerThickness
 }
 #declare P_Thumb = sphere_sweep {
 	linear_spline
-	2
+	3
+	<FingerLen * 0.4, FingerLen * 0.3, FingerLen * 0.3>, FingerThickness * 1.5
 	<0, 0, 0>, FingerThickness
-	<0, -FingerLen * 1.2, 0>, FingerThickness
+	<0, -FingerLen * 0.75, 0>, FingerThickness
 }
 #declare P_Fingers = union {
 	object {
@@ -212,27 +206,38 @@
 	}
 	object {
 		P_Finger
-		translate <0, 0, -2 * FingerThickness>
+		translate <0, 0, -1.8 * FingerThickness>
 	}
 	object {
 		P_Finger
-		translate <0, 0, 2 * FingerThickness>
+		translate <0, 0, 1.8 * FingerThickness>
 	}
 	object {
 		P_Thumb
-		rotate <0, 0, 5>
-		translate <-3 * FingerThickness, 0, -2 * FingerThickness>
+		rotate <5, 0, 5>
+		translate <-2.5 * FingerThickness, 0.3, -2.5 * FingerThickness>
+	}
+	blob {
+		threshold BlobTreshold
+		sphere {
+			<0, 0, -1.8 * FingerThickness>, FingerThickness * 1.6, 0.5
+		}
+		sphere {
+			<0, 0, 0>, FingerThickness * 1.6, 0.5
+		}
+		sphere {
+			<0, 0, 1.8 * FingerThickness>, FingerThickness * 1.6, 0.5
+		}
+		sphere {
+			<0, ArmThickness, 0>, ArmThickness * 1.2, 2
+			scale <0.5, 0.7, 1>
+		}
 	}
 }
 #declare P_Hand = union {
-	sphere {
-		0
-		ArmThickness * 1.2
-		scale <0.8, 1, 1>
-	}
 	object {
 		P_Fingers
-		translate <ArmThickness / 2, 0, 0>
+		translate <ArmThickness * 0.5, -0.5, 0>
 	}
 	texture {
 		T_Arms
