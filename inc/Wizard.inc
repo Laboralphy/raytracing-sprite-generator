@@ -3,6 +3,7 @@
 #include "inc/WizardHat.inc"
 #include "inc/WizardWand.inc"
 #include "inc/WizardTalisman.inc"
+#include "inc/BodyParts.inc"
 
 #declare P_WizardHead = union {
 	object {
@@ -16,33 +17,6 @@
 	}
 }
 
-#declare P_WizardHandRight = sphere {
-	<0, 0, 0>
-	0.25
-	texture {
-		pigment {
-			image_map {
-				png "png/w_hand.png"
-				map_type 1
-			}
-		}
-	}
-	rotate <0, 0, 45>
-}
-
-#declare P_WizardHandLeft = object {
-	P_WizardHandRight
-	scale <-1, 1, 1>
-}
-
-#declare P_WizardHandRightWand = union {
-	object {
-		P_WizardHandRight
-	}
-	object {
-		O_Wand
-	}
-}
 
 #declare O_Wizard = union {
 	object {
@@ -53,12 +27,21 @@
 		O_WizardRobe
 	}
 	object {
-		P_WizardHandLeft
+		P_Hand
+		rotate <90, 0, 0>
+		scale <0.4, 0.4, 0.3>
 		translate <1.1, 1.5, -1.05>
 	}
 	object {
-		P_WizardHandRightWand
+		P_Hand
+		scale <-1, 1, 1>
+		rotate <90, 0, 0>
+		scale <0.4, 0.4, 0.3>
 		translate <-1.1, 1.5, -1.05>
+	}
+	object {
+		O_Wand
+		translate <-1.1, 1.6, -1.05>
 	}
 	object {
 		O_WizardTalisman
@@ -75,14 +58,6 @@
 	}
 	object {
 		O_WizardRobe_2
-	}
-	object {
-		P_WizardHandLeft
-		translate <1.1, 1.45, -1.05>
-	}
-	object {
-		P_WizardHandRightWand
-		translate <-1.1, 1.45, -1.05>
 	}
 	object {
 		O_WizardTalisman

@@ -26,7 +26,6 @@
 }
 
 
-
 #declare Boot_Type1_Top = difference {
 	cylinder {
 		<0, -1, 0>
@@ -71,3 +70,6 @@
 		}
 	}
 }
+
+
+

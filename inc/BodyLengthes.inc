@@ -9,5 +9,5 @@
 	#declare FingerThickness = ArmThickness * 0.35;
 	#declare FingerLen = ArmThickness * 1.0;
 	#declare BoobSize = 1.5;
-	#declare HeadSize = 2;
+	#declare HeadSize = 2.5;
 #end

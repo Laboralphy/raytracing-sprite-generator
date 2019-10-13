@@ -335,15 +335,51 @@
 	}
 }
 
-#declare P_Head = ovus {
-	2
-	0.4
-	scale <1.4, -1.4, 1.4>
-	rotate <30, 0, 0>
-	translate 0.5 * y
+
+#declare P_Face = ovus {
+	1
+	0.2
+	scale <1, -1, 1>
 	texture {
 		T_Head
 	}
-	translate <0, TorsoLen + HeadSize + 2, 0>
 }
 
+#ifndef (P_Hair) 
+	#declare P_Hair_Width = 0.2;
+	#declare P_Hair_Extruder = cylinder {
+		
+	}
+	#declare P_Hair = sor {
+		8
+		<P_Hair_Width + 1.5, 0>
+		<P_Hair_Width + 1.25, 0.125>
+		<P_Hair_Width + 1, 0.5>
+		<P_Hair_Width + cos(radians(0)), 1 + sin(radians(0))>
+		<P_Hair_Width + cos(radians(30)), 1 + sin(radians(30))>
+		<P_Hair_Width + cos(radians(60)), 1 + sin(radians(60))>
+		<P_Hair_Width + cos(radians(90)), 1 + sin(radians(90))>
+		<0, 2>
+		open
+		sturm
+		texture {
+			pigment {
+				color rgbf <1, 0, 0, 0.5>
+			}
+		}
+	}
+#end
+
+#declare P_Head = union {
+	object {
+		P_Face
+		scale HeadSize
+		rotate <30, 0, 0>
+	}
+	object {
+		P_Hair
+		scale <2.3, 3, 2.3>
+		translate (-3) * y
+	}
+	translate <0, TorsoLen + HeadSize + 1.7, 0>
+}
