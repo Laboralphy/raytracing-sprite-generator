@@ -126,43 +126,61 @@
 	}
 }
 
-#declare P_Torso = blob {
-	threshold 0.5
-	sphere {
+#ifndef (P_Belt)
+	#declare P_Belt = cylinder {
 		0
-		3 
-		2
-		scale <1, 0.5, 0.5>
+		y
+		3
+		pigment {
+			Red
+		}
 	}
-	cylinder {
-		0.5 * y
-		TorsoLen * y
-		2.5
-		2
+#end
+
+#declare P_Torso = union {
+	blob {
+		threshold 0.5
+		sphere {
+			0
+			3 
+			2
+			scale <1, 0.5, 0.5>
+		}
+		cylinder {
+			0.5 * y
+			TorsoLen * y
+			2.5
+			2
+			scale <1, 1, 0.5>
+		}
+		sphere {
+			<2.2, TorsoLen + 0.5, 0>
+			1.2
+			1
+		}
+		sphere {
+			<-2.2, TorsoLen + 0.5, 0>
+			1.2
+			1
+		}
+		sphere {
+			<BoobPos, TorsoLen, -BoobSize / 2>
+			BoobSize 
+			2
+		}
+		sphere {
+			<-BoobPos, TorsoLen, -BoobSize / 2>
+			BoobSize 
+			2
+		}
+		texture {
+			T_Torso
+		}
+	}
+	object {
+		P_Belt
 		scale <1, 1, 0.5>
-	}
-	sphere {
-		<2.2, TorsoLen + 0.5, 0>
-		1.2
-		1
-	}
-	sphere {
-		<-2.2, TorsoLen + 0.5, 0>
-		1.2
-		1
-	}
-	sphere {
-		<BoobPos, TorsoLen, -BoobSize / 2>
-		BoobSize 
-		2
-	}
-	sphere {
-		<-BoobPos, TorsoLen, -BoobSize / 2>
-		BoobSize 
-		2
-	}
-	texture {
-		T_Torso
+		translate <0, 1.7, 0>
 	}
 }
 

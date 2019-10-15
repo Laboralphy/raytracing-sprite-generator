@@ -104,3 +104,16 @@
 		T_Gold_3C
 	}
 }
+
+
+
+/* les ceinture sont basée sur des cylindre de diametre 2 */
+
+#declare Belt_Type1_Leather = cylinder {
+	0
+	1
+	2
+	pigment {
+		Red
+	}
+}
