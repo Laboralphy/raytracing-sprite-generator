@@ -168,6 +168,27 @@
 
 
 
+#ifndef (P_ArmWear)
+	#declare P_ArmWear = union {
+		sphere {
+			<0, ArmLen, 0>
+			ArmThickness * 1.75
+			pigment {
+				Gray10
+			}
+		}
+		cylinder {
+			<0, ArmLen, 0>
+			<0, ArmLen * 0.125, 0>
+			ArmThickness * 1.1
+			pigment {
+				Gray10
+			}
+		}
+	}
+#end
+
+
 
 #ifndef (P_Glove)
 	#declare P_Glove = union {
@@ -268,8 +289,15 @@
 	}
 	object {
 		P_Glove
+		scale <-1, 1, 1>
 		rotate x * (A_ForeArmLeft + A_ArmLeft)
 		translate V_HandPosLeft
+	}
+	object {
+		P_ArmWear
+		scale <-1, 1, 1>
+		rotate x * A_ArmLeft
+		translate V_ElbowPosLeft
 	}
 	rotate (-z) * 10
 	translate (-ArmShift) * x
@@ -292,7 +320,6 @@
 	}
 	object {
 		P_Hand
-		scale <1, 1, 1>
 		rotate x * (A_ForeArmRight + A_ArmRight)
 		translate V_HandPosRight
 	}
@@ -300,6 +327,11 @@
 		P_Glove
 		rotate x * (A_ForeArmRight + A_ArmRight)
 		translate V_HandPosRight
+	}
+	object {
+		P_ArmWear
+		rotate x * A_ArmRight
+		translate V_ElbowPosRight
 	}
 	rotate z * 10
 	translate ArmShift * x
@@ -346,22 +378,32 @@
 }
 
 #ifndef (P_Hair) 
-	#declare P_Hair_Width = 0.2;
-	#declare P_Hair_Extruder = cylinder {
-		
+	#declare P_Hair_Extruder = prism {
+		linear_spline
+		0
+		1.333
+		3
+		<0, 0>
+		<3, -2>
+		<-3, -2>
 	}
-	#declare P_Hair = sor {
-		8
-		<P_Hair_Width + 1.5, 0>
-		<P_Hair_Width + 1.25, 0.125>
-		<P_Hair_Width + 1, 0.5>
-		<P_Hair_Width + cos(radians(0)), 1 + sin(radians(0))>
-		<P_Hair_Width + cos(radians(30)), 1 + sin(radians(30))>
-		<P_Hair_Width + cos(radians(60)), 1 + sin(radians(60))>
-		<P_Hair_Width + cos(radians(90)), 1 + sin(radians(90))>
-		<0, 2>
-		open
-		sturm
+	#declare P_Hair = difference {
+		sor {
+			8
+			<1.5, 0>
+			<1.25, 0.125>
+			<1, 0.5>
+			<cos(radians(0)), 1 + sin(radians(0))>
+			<cos(radians(30)), 1 + sin(radians(30))>
+			<cos(radians(60)), 1 + sin(radians(60))>
+			<cos(radians(85)), 1 + sin(radians(85))>
+			<0, 2>
+			open
+			sturm
+		}
+		object {
+			P_Hair_Extruder
+		}
 		texture {
 			pigment {
 				color rgbf <1, 0, 0, 0.5>
@@ -378,8 +420,8 @@
 	}
 	object {
 		P_Hair
-		scale <2.3, 3, 2.3>
+		scale <2.75, 3, 2.75>
 		translate (-3) * y
 	}
-	translate <0, TorsoLen + HeadSize + 1.7, 0>
+	translate <0, TorsoLen + HeadSize + 2, 0>
 }

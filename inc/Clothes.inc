@@ -1,5 +1,7 @@
 #include "colors.inc"
 #include "finish.inc"
+#include "metals.inc"
+#include "golds.inc"
 #include "inc/BodyLengthes.inc"
 
 #declare Skirt_Pleaded_Blue = sor {
@@ -71,5 +73,34 @@
 	}
 }
 
+#declare ArmWear_Type1 = union {
+	sphere {
+		<0, ArmLen, 0>
+		ArmThickness * 1.75
+		pigment {
+			radial
+			color_map {
+				[0.5 Blue]
+				[0.5 Blue * 0.5 ]
+			}
+			frequency 8
+		}
+	}
+	cylinder {
+		<0, ArmLen, 0>
+		<0, ArmLen * 0.125, 0>
+		ArmThickness * 1.1
+		pigment {
+			Blue
+		}
+	}
+}
 
-
+#declare Bracer_Type1 = torus {
+	ArmThickness
+	ArmThickness * 0.3
+	translate <0, 0.65, 0>
+	texture {
+		T_Gold_3C
+	}
+}

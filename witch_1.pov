@@ -1,5 +1,6 @@
 #include "colors.inc"
 #include "inc/Camera.inc"
+#include "inc/BodyHair.inc"
 
 #declare T_Skin = texture {
 	pigment {
@@ -13,6 +14,9 @@
 #include "inc/Clothes.inc"
 
 #declare P_Boot = Boot_Type1;
+#declare P_Hair = P_Hair_2;
+#declare P_ArmWear = ArmWear_Type1;
+#declare P_Glove = Bracer_Type1;
 
 #include "inc/Body.inc";
 
@@ -25,5 +29,6 @@ union {
 		Skirt_Pleaded_Blue
 	}
 	rotate AnimationAngle * y
+	scale 0.7
 }
 
