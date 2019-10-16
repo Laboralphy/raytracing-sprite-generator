@@ -132,7 +132,7 @@
 		y
 		3
 		pigment {
-			Red
+			Green
 		}
 	}
 #end
@@ -180,7 +180,7 @@
 	object {
 		P_Belt
 		scale <1, 1, 0.5>
-		translate <0, 1.7, 0>
+		translate <0, 1.6, 0>
 	}
 }
 
@@ -392,6 +392,9 @@
 	scale <1, -1, 1>
 	texture {
 		T_Head
+	}
+	texture {
+		T_Face
 	}
 }
 

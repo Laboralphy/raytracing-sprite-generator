@@ -26,7 +26,7 @@
 #declare P_Hair_Extruder = prism {
 	linear_spline
 	-10
-	1.333
+	1.222
 	3
 	<0, 0>
 	<3, -2>
@@ -36,7 +36,7 @@
 #declare P_Hair_Large_Extruder = prism {
 	linear_spline
 	-10
-	1.333
+	1.222
 	3
 	<0, 0>
 	<15, -2>

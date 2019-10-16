@@ -8,8 +8,15 @@ render() {
 	then
 		sOutput="${sInput}_$fClock"
 	fi
+	local sFrame
+	if [ "$fClock" -ge 1000 ]
+	then
+		sFrame="-SR0.0 -ER0.60 -SC0.33 -EC0.66 -W1364 -H1024"
+	else
+		sFrame="-W1024 -H768"
+	fi
 	mkdir -p output
-	povray -I$sInput.pov -W512 -H384 +UA +Q9 +A0.4 +K$fClock +P -Ooutput/$sOutput.png
+	povray -I$sInput.pov $sFrame +UA +Q9 +A0.4 +K$fClock +P -Ooutput/$sOutput.png
 }
 
 render $*

@@ -4,7 +4,7 @@
 #include "golds.inc"
 #include "inc/BodyLengthes.inc"
 
-#declare Skirt_Pleaded_Blue = sor {
+#declare Clothe_Skirt_Pleaded_Blue = sor {
 	6
 	<0, 0>
 	<0.5, 0.1>
@@ -12,7 +12,7 @@
 	<0.9, 0.9>
 	<1, 1>
 	<1, 2>
-	scale <1, -1, 0.6>
+	scale <1, -1, 0.7>
 	texture {
 		pigment {
 			radial
@@ -28,7 +28,7 @@
 }
 
 
-#declare Boot_Type1_Top = difference {
+#declare Clothe_Boot_Type1_Top = difference {
 	cylinder {
 		<0, -1, 0>
 		<0, ShinLen * 0.7, 0>
@@ -42,7 +42,7 @@
 	}
 }
 
-#declare Boot_Type1_Heel = intersection {
+#declare Clothe_Boot_Type1_Heel = intersection {
 	sphere {
 		<0, 0, 0>
 		LegThickness
@@ -55,12 +55,12 @@
 	translate -LegThickness * y
 }
 
-#declare Boot_Type1 = union {
+#declare Clothe_Boot_Type1 = union {
 	object {
-		Boot_Type1_Top
+		Clothe_Boot_Type1_Top
 	}
 	object {
-		Boot_Type1_Heel
+		Clothe_Boot_Type1_Heel
 	}
 	
 	texture {
@@ -73,7 +73,7 @@
 	}
 }
 
-#declare ArmWear_Type1 = union {
+#declare Clothe_ArmWear_Type1 = union {
 	sphere {
 		<0, ArmLen, 0>
 		ArmThickness * 1.75
@@ -96,7 +96,7 @@
 	}
 }
 
-#declare Bracer_Type1 = torus {
+#declare Clothe_Bracer_Type1 = torus {
 	ArmThickness
 	ArmThickness * 0.3
 	translate <0, 0.65, 0>
@@ -109,11 +109,31 @@
 
 /* les ceinture sont basée sur des cylindre de diametre 2 */
 
-#declare Belt_Type1_Leather = cylinder {
+#declare Clothe_Belt_Type1_Leather = cylinder {
 	0
-	1
-	2
+	y * 0.5
+	1.8
 	pigment {
-		Red
+		Gray10
+	}
+}
+
+#declare Clothe_Belt_Type1_Buckle = torus {
+	0.9
+	0.3
+	rotate <90, 0, 0>
+	scale 0.33
+	texture {
+		T_Gold_1B
+	}
+}
+
+#declare Clothe_Belt_Type1 = union {
+	object {
+		Clothe_Belt_Type1_Leather
+	}
+	object {
+		Clothe_Belt_Type1_Buckle
+		translate <0, 0.3, -2.8>
 	}
 }
