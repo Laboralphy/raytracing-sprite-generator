@@ -1,6 +1,14 @@
+/*
+witch type 1
+has a blue dress, violet hair, a wear a wizard hat
+she has a ruby wand
+*/
+
 #include "colors.inc"
 #include "inc/Camera.inc"
 #include "inc/BodyHair.inc"
+#include "inc/WizardHat.inc"
+#include "inc/RunFrames.inc"
 
 
 #declare C_Skin = color rgb <0.8, 0.6, 0.4>;
@@ -53,7 +61,13 @@ union {
 	object {
 		Clothe_Skirt_Pleaded_Blue
 	}
+	object {
+		O_WizardHatBrown
+		rotate x * 20
+		scale 0.8
+		translate <0, 5, 0>
+	}
 	rotate AnimationAngle * y
-	scale 0.7
+	scale 0.85
 }
 

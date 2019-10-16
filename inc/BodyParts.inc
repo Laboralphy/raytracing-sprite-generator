@@ -12,26 +12,30 @@
 #declare ArmShift = 2.35;
 #declare BoobPos = 0.75;
 
-#declare A_LegLeft = 30;
-#declare A_KneelLeft = -20;
+#ifndef (A_LegLeft) 
+	/* left */
+	/* leg */
+	#declare A_LegLeft = 0;
+	#declare A_KneelLeft = 0;
+	/* arm */
+	#declare A_ArmLeft = 0;
+	#declare A_ForeArmLeft = 0;
+
+	/* right */
+	/* leg */
+	#declare A_LegRight = 0;
+	#declare A_KneelRight = 0;
+	/* arm */
+	#declare A_ArmRight = 0;
+	#declare A_ForeArmRight = 0;
+#end
+
 #declare V_KneelPosLeft = <0, (-ThighLen) * cos(radians(A_LegLeft)), (-ThighLen) * sin(radians(A_LegLeft))>;
 #declare V_FootPosLeft = V_KneelPosLeft + <0, (-ShinLen) * cos(radians(A_KneelLeft + A_LegLeft)), (-ShinLen) * sin(radians(A_KneelLeft + A_LegLeft))>;
-
-#declare A_ArmLeft = 0;
-#declare A_ForeArmLeft = 0;
 #declare V_ElbowPosLeft = <0, (-ArmLen) * cos(radians(A_ArmLeft)), (-ArmLen) * sin(radians(A_ArmLeft))>;
 #declare V_HandPosLeft = V_ElbowPosLeft + <0, (-ForeArmLen) * cos(radians(A_ForeArmLeft + A_ArmLeft)), (-ForeArmLen) * sin(radians(A_ForeArmLeft + A_ArmLeft))>;
-
-
-
-
-#declare A_LegRight = 0;
-#declare A_KneelRight = 0;
 #declare V_KneelPosRight = <0, (-ThighLen) * cos(radians(A_LegRight)), (-ThighLen) * sin(radians(A_LegRight))>;
 #declare V_FootPosRight = V_KneelPosRight + <0, (-ShinLen) * cos(radians(A_KneelRight + A_LegRight)), (-ShinLen) * sin(radians(A_KneelRight + A_LegRight))>;
-
-#declare A_ArmRight = 10;
-#declare A_ForeArmRight = 10;
 #declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
 #declare V_HandPosRight = V_ElbowPosRight + <0, (-ForeArmLen) * cos(radians(A_ForeArmRight + A_ArmRight)), (-ForeArmLen) * sin(radians(A_ForeArmRight + A_ArmRight))>;
 
@@ -385,6 +389,14 @@
 	}
 }
 
+
+#ifndef (T_Face) 
+	#declare T_Face = texture {
+		pigment {
+			color rgbf <0, 0, 0, 0>
+		}	
+	}
+#end
 
 #declare P_Face = ovus {
 	1
