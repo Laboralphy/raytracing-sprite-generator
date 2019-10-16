@@ -7,7 +7,7 @@
 #declare Clothe_Skirt_Pleaded_Blue = sor {
 	6
 	<0, 0>
-	<0.5, 0.1>
+	<0.4, 0.1>
 	<0.75, 0.5>
 	<0.9, 0.9>
 	<1, 1>
@@ -24,7 +24,6 @@
 			frequency 16
 		}
 	}
-	translate <0, 2.7, 0>
 }
 
 
@@ -112,7 +111,7 @@
 #declare Clothe_Belt_Type1_Leather = cylinder {
 	0
 	y * 0.5
-	1.8
+	1.9
 	pigment {
 		Gray10
 	}
@@ -134,6 +133,6 @@
 	}
 	object {
 		Clothe_Belt_Type1_Buckle
-		translate <0, 0.3, -2.8>
+		translate <0, 0.3, -1.85>
 	}
 }

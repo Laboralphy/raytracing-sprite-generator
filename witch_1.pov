@@ -8,6 +8,7 @@ she has a ruby wand
 #include "inc/Camera.inc"
 #include "inc/BodyHair.inc"
 #include "inc/WizardHat.inc"
+#include "inc/WizardWand.inc"
 #include "inc/RunFrames.inc"
 
 
@@ -27,6 +28,17 @@ she has a ruby wand
 #declare P_Hair = P_Hair_2;
 #declare P_ArmWear = Clothe_ArmWear_Type1;
 #declare P_Glove = Clothe_Bracer_Type1;
+#declare P_Glove_Right = union {
+	object {
+		Clothe_Bracer_Type1
+	}
+	object {
+		O_Wand
+		rotate -90 * x
+		scale 3
+		translate -0.3 * z
+	}
+}
 #declare P_Belt = Clothe_Belt_Type1;
 #declare T_Head = T_Skin;
 #declare T_Face = texture {
@@ -60,6 +72,7 @@ union {
 	}
 	object {
 		Clothe_Skirt_Pleaded_Blue
+		translate 2.7 * y
 	}
 	object {
 		O_WizardHatBrown
@@ -69,5 +82,6 @@ union {
 	}
 	rotate AnimationAngle * y
 	scale 0.85
+	translate OffsetBody * y
 }
 

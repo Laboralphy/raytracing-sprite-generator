@@ -23,6 +23,6 @@
 		P_Head
 	}
 	
-	translate (OffsetBody + LegThickness + ThighLen + ShinLen) * y
+	translate (LegThickness + ThighLen + ShinLen) * y
 	scale 0.3
 }

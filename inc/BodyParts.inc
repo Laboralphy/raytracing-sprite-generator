@@ -114,7 +114,7 @@
 	object {
 		P_Boot
 		scale <-1, 1, 1>
-		rotate x * (A_LegRight - A_KneelRight)
+		rotate x * (A_LegRight + A_KneelRight)
 		translate V_FootPosRight
 	}
 }
@@ -229,6 +229,15 @@
 	}
 #end
 
+#ifndef (P_Glove_Right)
+	#declare P_Glove_Right = P_Glove;
+#end
+
+#ifndef (P_Glove_Left)
+	#declare P_Glove_Left = P_Glove;
+#end
+
+
 #declare P_Finger = sphere_sweep {
 	linear_spline
 	3
@@ -305,24 +314,21 @@
 	}
 	object {
 		P_Hand
-		scale <-1, 1, 1>
 		rotate x * (A_ForeArmLeft + A_ArmLeft)
 		translate V_HandPosLeft
 	}
 	object {
-		P_Glove
-		scale <-1, 1, 1>
+		P_Glove_Left
 		rotate x * (A_ForeArmLeft + A_ArmLeft)
 		translate V_HandPosLeft
 	}
 	object {
 		P_ArmWear
-		scale <-1, 1, 1>
 		rotate x * A_ArmLeft
 		translate V_ElbowPosLeft
 	}
-	rotate (-z) * 10
-	translate (-ArmShift) * x
+	rotate z * 10
+	translate ArmShift * x
 }
 
 #declare P_ArmRight = sphere_sweep {
@@ -342,21 +348,24 @@
 	}
 	object {
 		P_Hand
+		scale <-1, 1, 1>
 		rotate x * (A_ForeArmRight + A_ArmRight)
 		translate V_HandPosRight
 	}
 	object {
-		P_Glove
+		P_Glove_Right
+		scale <-1, 1, 1>
 		rotate x * (A_ForeArmRight + A_ArmRight)
 		translate V_HandPosRight
 	}
 	object {
 		P_ArmWear
+		scale <-1, 1, 1>
 		rotate x * A_ArmRight
 		translate V_ElbowPosRight
 	}
-	rotate z * 10
-	translate ArmShift * x
+	rotate (-z) * 10
+	translate (-ArmShift) * x
 }
 
 
