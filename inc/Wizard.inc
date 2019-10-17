@@ -60,6 +60,23 @@
 		O_WizardRobe_2
 	}
 	object {
+		P_Hand
+		rotate <90, 0, 0>
+		scale <0.4, 0.4, 0.3>
+		translate <1.1, 1.45, -1.05>
+	}
+	object {
+		P_Hand
+		scale <-1, 1, 1>
+		rotate <90, 0, 0>
+		scale <0.4, 0.4, 0.3>
+		translate <-1.1, 1.45, -1.05>
+	}
+	object {
+		O_Wand
+		translate <-1.1, 1.55, -1.05>
+	}
+	object {
 		O_WizardTalisman
 		scale 0.25
 		rotate <100, 0, -20>

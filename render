@@ -8,23 +8,33 @@ crop() {
 render() {
 	local sInput="$1"
 	local fClock="$2"
-	local sOutput="$3"
-	if [ -z "$sOutput" ]
-	then
-		sOutput="${sInput}_$fClock"
-	fi
+	local sOutput="${sInput}_$fClock"
 	local sFrame
 	local bPreview
+	local bBatch
+	local sPause
+	mkdir -p output
+	povray -I$sInput.pov -W512 -H384 +UA +Q9 +A0.8 +K$fClock -D0 -GA -Ooutput/$sOutput.png 2> /dev/null
+}
+
+renderPreview() {
+	local sInput="$1"
+	local fClock="$2"
+	local sOutput="${sInput}_$fClock"
+	local sFrame
+	local bPreview
+	local bBatch
+	local sPause
 	if [ "$fClock" -ge 1000 ]
 	then
-		bPreview=1
+		bOrth=1
 	else
-		bPreview=0
+		bOrth=0
 	fi
 	mkdir -p output
-	if [ $bPreview == 1 ]
+	if [ $bOrth == 1 ]
 	then
-		povray -I$sInput.pov -SR0.0 -ER0.60 -SC0.33 -EC0.67 -W1024 -H768 -D0 +UA +Q9 +A0.2 +K$fClock -Ooutput/$sOutput.png
+		povray -I$sInput.pov -SR0.0 -ER0.60 -SC0.33 -EC0.67 -W1024 -H768 -D0 +UA +Q9 +A0.2 +K$fClock -D0 -Ooutput/$sOutput.png
 		crop output/$sOutput.png
 		display output/$sOutput.png
 	else
@@ -32,4 +42,60 @@ render() {
 	fi
 }
 
-render $*
+
+renderAllFrames() {
+	local sFile="$1"
+	local nDir="$2"
+	local nStop="$3"
+	local i
+	local nFrame
+	for i in `seq 0 $nStop`
+	do
+		nFrame=$i
+		if [ "$nFrame" -le 10 ]
+		then
+			nFrame=0$nFrame
+		fi
+		render "$sFile" $nDir$nFrame
+		echo -en "▶"
+	done
+}
+
+renderAllDirections() {
+	local sFile="$1"
+	local nStop=`grep -oe "@frames \\+[0-9]\\+" $sFile.pov| awk '{print $2}'`
+	local i
+	local nFrame
+	local nFrames=`expr 8 "*" "(" $nStop + 1 ")"`
+	echo "rendering $sFile - last frame : $nStop - total frames : $nFrames"
+	for i in `seq 1 $nFrames`
+	do
+		echo -en "▷"
+	done
+	echo -en \\r
+	for i in `seq 0 7`
+	do
+		renderAllFrames $sFile $i $nStop
+	done
+	echo " "
+	echo "done"
+}
+
+sCommand="$1"
+shift
+case $sCommand in 
+	-r)
+		sInput="$1"
+		renderAllDirections "$sInput"
+	;;
+	
+	-p)
+		renderPreview $*
+	;;
+	
+	*)
+		echo "first parameter must be :"
+		echo "   -p preview"
+		echo "   -r render all frames"
+	;;
+esac

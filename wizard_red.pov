@@ -1,3 +1,8 @@
+/**
+ * @frames 1
+ *
+ * @description Red Wizard, with ruby wand
+ */
 #include "colors.inc"
 #include "inc/Camera.inc"
 

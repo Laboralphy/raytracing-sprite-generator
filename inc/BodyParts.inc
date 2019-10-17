@@ -39,6 +39,10 @@
 #declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
 #declare V_HandPosRight = V_ElbowPosRight + <0, (-ForeArmLen) * cos(radians(A_ForeArmRight + A_ArmRight)), (-ForeArmLen) * sin(radians(A_ForeArmRight + A_ArmRight))>;
 
+#ifndef (B_FIST_INSTEAD_OF_HAND)
+	#declare B_FIST_INSTEAD_OF_HAND = 0;
+#end
+
 
 #declare P_LegLeft = union {
 	sphere_sweep {
@@ -141,7 +145,7 @@
 	}
 #end
 
-#declare P_Torso = union {
+#declare P_TorsoF = union {
 	blob {
 		threshold 0.5
 		sphere {
@@ -190,6 +194,61 @@
 
 
 
+
+#declare P_TorsoM = union {
+	blob {
+		threshold 0.5
+		sphere {
+			0
+			3 
+			2
+			scale <1, 0.5, 0.5>
+		}
+		cylinder {
+			0.5 * y
+			TorsoLen * y
+			2.5
+			2
+			scale <1, 1, 0.5>
+		}
+		cylinder {
+			TorsoLen * 0.5 * y
+			TorsoLen * y
+			2.5
+			2
+			scale <1, 1, 0.65>
+		}
+		cylinder {
+			TorsoLen * 0.75 * y
+			TorsoLen * y
+			2.5
+			2
+			scale <1, 1, 0.75>
+		}
+		sphere {
+			<2.2, TorsoLen + 0.5, 0>
+			1.2
+			1
+		}
+		sphere {
+			<-2.2, TorsoLen + 0.5, 0>
+			1.2
+			1
+		}
+		texture {
+			T_Torso
+		}
+	}
+	object {
+		P_Belt
+		scale <1, 1, 0.5>
+		translate <0, 1.6, 0>
+	}
+}
+
+
+
+
 #ifndef (P_ArmWear)
 	#declare P_ArmWear = union {
 		sphere {
@@ -212,8 +271,8 @@
 
 
 
-#ifndef (P_Glove)
-	#declare P_Glove = union {
+#ifndef (P_Wrist)
+	#declare P_Wrist = union {
 		cylinder {
 			<0, ForeArmLen, 0>
 			<0, ForeArmLen * 0.25, 0>
@@ -229,12 +288,12 @@
 	}
 #end
 
-#ifndef (P_Glove_Right)
-	#declare P_Glove_Right = P_Glove;
+#ifndef (P_Wrist_Right)
+	#declare P_Wrist_Right = P_Wrist;
 #end
 
-#ifndef (P_Glove_Left)
-	#declare P_Glove_Left = P_Glove;
+#ifndef (P_Wrist_Left)
+	#declare P_Wrist_Left = P_Wrist;
 #end
 
 
@@ -244,7 +303,28 @@
 	<0, 0, 0>, FingerThickness
 	<0, -FingerLen, 0>, FingerThickness
 	<-FingerLen / 4, (-1.5) * FingerLen, 0>, FingerThickness
+	/* <-FingerLen, -FingerLen, 0>, FingerThickness */
 }
+
+#if (B_FIST_INSTEAD_OF_HAND = 1) 
+	#declare P_Finger = sphere_sweep {
+		linear_spline
+		3
+		<0, 0, 0>, FingerThickness
+		<0, -FingerLen, 0>, FingerThickness
+		<-FingerLen, -FingerLen, 0>, FingerThickness
+	}
+#else
+	#declare P_Finger = sphere_sweep {
+		linear_spline
+		3
+		<0, 0, 0>, FingerThickness
+		<0, -FingerLen, 0>, FingerThickness
+		<-FingerLen / 4, (-1.5) * FingerLen, 0>, FingerThickness
+	}
+#end
+
+
 #declare P_Thumb = sphere_sweep {
 	linear_spline
 	3
@@ -252,6 +332,7 @@
 	<0, 0, 0>, FingerThickness
 	<0, -FingerLen * 0.75, 0>, FingerThickness
 }
+
 #declare P_Fingers = union {
 	object {
 		P_Finger
@@ -318,7 +399,7 @@
 		translate V_HandPosLeft
 	}
 	object {
-		P_Glove_Left
+		P_Wrist_Left
 		rotate x * (A_ForeArmLeft + A_ArmLeft)
 		translate V_HandPosLeft
 	}
@@ -353,7 +434,7 @@
 		translate V_HandPosRight
 	}
 	object {
-		P_Glove_Right
+		P_Wrist_Right
 		scale <-1, 1, 1>
 		rotate x * (A_ForeArmRight + A_ArmRight)
 		translate V_HandPosRight

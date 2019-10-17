@@ -1,8 +1,7 @@
-/*
-witch type 1
-has a blue dress, violet hair, a wear a wizard hat
-she has a ruby wand
-*/
+/**
+ * @description Witch with blue pleaded skirt, wizard hat, and ruby wand
+ * @frames 4
+ */
 
 #include "colors.inc"
 #include "inc/Camera.inc"
@@ -24,13 +23,13 @@ she has a ruby wand
 
 #include "inc/Clothes.inc"
 
-#declare P_Boot = Clothe_Boot_Type1;
+#declare P_Boot = Clothe_Boot_Leather;
 #declare P_Hair = P_Hair_2;
-#declare P_ArmWear = Clothe_ArmWear_Type1;
-#declare P_Glove = Clothe_Bracer_Type1;
-#declare P_Glove_Right = union {
+#declare P_ArmWear = Clothe_Shoulder_Fancy_Blue;
+#declare P_Wrist = Clothe_Wrist_Bracer_Gold;
+#declare P_Wrist_Right = union {
 	object {
-		Clothe_Bracer_Type1
+		P_Wrist
 	}
 	object {
 		O_Wand
@@ -68,7 +67,7 @@ she has a ruby wand
 
 union {
 	object {
-		Body
+		BodyF
 	}
 	object {
 		Clothe_Skirt_Pleaded_Blue
