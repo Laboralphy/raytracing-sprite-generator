@@ -19,11 +19,14 @@
 
 #declare T_Legs = T_Skin;
 #declare T_Arms = T_Skin;
+#declare T_Torso = T_Skin;
 
 #include "inc/Clothes.inc"
 
 #declare P_Boot = Clothe_Boot_Soleret;
 #declare P_Wrist = Clothe_Wrist_Gauntlet;
+#declare P_Shoulder = Clothe_Shoulder_Armor_Pad;
+#declare P_Legging = Clothe_Legging_Armor;
 
 #declare T_Head = T_Skin;
 #declare T_Face = texture {
@@ -35,25 +38,15 @@
 	}
 }
 
-#declare T_Torso = texture {
-	pigment {
-		cylindrical
-		color_map {
-			[0.5 Blue]
-			[0.5 C_Skin]
-		}
-	}
-	rotate <90, 0, 0>
-	scale 3
-	translate <0, 5.75, 0>
-}
-
 #include "inc/Body.inc";
-
 
 union {
 	object {
 		BodyM
+	}
+	object {
+		Clothe_Mail_Skirt
+		translate 2.7 * y
 	}
 	rotate AnimationAngle * y
 	scale 0.85

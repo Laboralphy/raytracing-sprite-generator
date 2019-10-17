@@ -44,7 +44,20 @@
 #end
 
 
-#declare P_LegLeft = union {
+#ifndef (P_Legging)
+	#declare P_Legging = cylinder {
+		0
+		<0, -ShinLen, 0>
+		LegThickness * 1.05
+		pigment {
+			Blue
+		}
+	}
+#end
+
+
+
+#declare P_LegLeftNaked = union {
 	sphere_sweep {
 		linear_spline
 		3
@@ -63,7 +76,17 @@
 	}
 }
 
-#declare P_LegRight = union {
+#declare P_LegLeft = union {
+	object {
+		P_LegLeftNaked
+	}
+	object {
+		P_Legging
+	}
+}
+
+
+#declare P_LegRightNaked = union {
 	sphere_sweep {
 		linear_spline
 		3
@@ -81,6 +104,20 @@
 		T_Legs
 	}
 }
+
+
+#declare P_LegRight = union {
+	object {
+		P_LegRightNaked
+	}
+	object {
+		P_Legging
+		scale <-1, 1, 1>
+	}
+}
+
+
+
 
 #ifndef (P_Boot)
 	#declare P_Boot = union {
@@ -123,6 +160,8 @@
 	}
 }
 
+
+
 #declare P_Legs = union {
 	object {
 		P_LegBootLeft
@@ -133,6 +172,10 @@
 		translate <1.1, 0, 0>
 	}
 }
+
+
+
+
 
 #ifndef (P_Belt)
 	#declare P_Belt = cylinder {
@@ -249,8 +292,8 @@
 
 
 
-#ifndef (P_ArmWear)
-	#declare P_ArmWear = union {
+#ifndef (P_Shoulder)
+	#declare P_Shoulder = union {
 		sphere {
 			<0, ArmLen, 0>
 			ArmThickness * 1.75
@@ -296,15 +339,6 @@
 	#declare P_Wrist_Left = P_Wrist;
 #end
 
-
-#declare P_Finger = sphere_sweep {
-	linear_spline
-	3
-	<0, 0, 0>, FingerThickness
-	<0, -FingerLen, 0>, FingerThickness
-	<-FingerLen / 4, (-1.5) * FingerLen, 0>, FingerThickness
-	/* <-FingerLen, -FingerLen, 0>, FingerThickness */
-}
 
 #if (B_FIST_INSTEAD_OF_HAND = 1) 
 	#declare P_Finger = sphere_sweep {
@@ -367,6 +401,7 @@
 		}
 	}
 }
+
 #declare P_Hand = union {
 	object {
 		P_Fingers
@@ -404,7 +439,7 @@
 		translate V_HandPosLeft
 	}
 	object {
-		P_ArmWear
+		P_Shoulder
 		rotate x * A_ArmLeft
 		translate V_ElbowPosLeft
 	}
@@ -440,7 +475,7 @@
 		translate V_HandPosRight
 	}
 	object {
-		P_ArmWear
+		P_Shoulder
 		scale <-1, 1, 1>
 		rotate x * A_ArmRight
 		translate V_ElbowPosRight

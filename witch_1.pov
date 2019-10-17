@@ -25,7 +25,8 @@
 
 #declare P_Boot = Clothe_Boot_Leather;
 #declare P_Hair = P_Hair_2;
-#declare P_ArmWear = Clothe_Shoulder_Fancy_Blue;
+#declare P_Shoulder = Clothe_Shoulder_Fancy_Blue;
+#declare P_Legging = sphere { 0 0 }
 #declare P_Wrist = Clothe_Wrist_Bracer_Gold;
 #declare P_Wrist_Right = union {
 	object {

@@ -4,6 +4,41 @@
 #include "golds.inc"
 #include "inc/BodyLengthes.inc"
 
+
+
+
+/*** ACCESSORIES ****** ACCESSORIES ****** ACCESSORIES ***/
+/*** ACCESSORIES ****** ACCESSORIES ****** ACCESSORIES ***/
+/*** ACCESSORIES ****** ACCESSORIES ****** ACCESSORIES ***/
+
+#declare Clothe_Armor_Spike = cone {
+	<0, 0, 0>
+	ArmThickness * 0.75
+	<0, 3 * ArmThickness, 0>
+	0
+}
+
+
+
+
+/*** TEXTURES ****** TEXTURES ****** TEXTURES ****** TEXTURES ***/
+/*** TEXTURES ****** TEXTURES ****** TEXTURES ****** TEXTURES ***/
+/*** TEXTURES ****** TEXTURES ****** TEXTURES ****** TEXTURES ***/
+
+#declare T_Clothe_Armor = texture {
+	T_Chrome_1A
+	normal {
+		dents 2
+	}
+}
+
+
+
+
+/*** ROBES ****** ROBES ****** ROBES ****** ROBES ****** ROBES ***/
+/*** ROBES ****** ROBES ****** ROBES ****** ROBES ****** ROBES ***/
+/*** ROBES ****** ROBES ****** ROBES ****** ROBES ****** ROBES ***/
+
 #declare Clothe_Skirt_Pleaded_Blue = sor {
 	6
 	<0, 0>
@@ -26,6 +61,24 @@
 	}
 }
 
+
+#declare Clothe_Mail_Skirt = cone {
+	0
+	1
+	<0, -1, 0>
+	1.2
+	scale <0.7, 0.9, 0.5>
+	texture {
+		pigment {
+			hexagon
+			pigment { Gray50 },
+			pigment { Gray30 },
+			pigment { Gray20 }
+		}
+		scale 0.1
+		rotate 90 * x
+	}
+}
 
 /*** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ***/
 /*** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ***/
@@ -148,7 +201,7 @@
 		translate <0, ShinLen * 0.5, 0>
 	}
 	texture {
-		T_Chrome_1A
+		T_Clothe_Armor
 	}
 }
 
@@ -159,8 +212,57 @@
 	object {
 		Clothe_Boot_Leather_Heel
 		texture {
-			T_Chrome_1A
+			T_Clothe_Armor
 		}
+	}
+	cylinder {
+		<0, -1, 0>
+		<0, ShinLen, 0>
+		LegThickness * 1.05
+		texture {
+			T_Clothe_Armor
+		}
+	}
+	sphere {
+		<0, ShinLen, 0>
+		LegThickness * 1.15
+		texture {
+			T_Clothe_Armor
+		}
+	}
+	object {
+		Clothe_Armor_Spike
+		rotate x * (-90)
+		translate <0, ShinLen, -0.5>
+		texture {
+			T_Clothe_Armor
+		}
+	}
+}
+
+
+
+
+
+
+/*** LEGGING ****** LEGGING ****** LEGGING ****** LEGGING ******/
+/*** LEGGING ****** LEGGING ****** LEGGING ****** LEGGING ******/
+/*** LEGGING ****** LEGGING ****** LEGGING ****** LEGGING ******/
+
+#declare Clothe_Legging_Armor = union {
+	cylinder {
+		0
+		<0, -ShinLen, 0>
+		LegThickness * 1.1
+	}
+	cone {
+		0
+		LegThickness
+		<0, -ShinLen / 2, 0>
+		LegThickness * 1.2
+	}
+	texture {
+		T_Clothe_Armor
 	}
 }
 
@@ -197,6 +299,35 @@
 }
 
 
+#declare Clothe_Shoulder_Armor_Pad = union {
+	sphere {
+		<0, ArmLen, 0>
+		ArmThickness * 1.75
+	}
+	/* first shoulder pike */
+	object {
+		Clothe_Armor_Spike
+		translate y * ArmLen
+	}
+	/* second shoulder pike */
+	object {
+		Clothe_Armor_Spike
+		rotate <0, 0, -60>
+		translate y * ArmLen
+	}
+	cylinder {
+		<0, ArmLen, 0>
+		<0, ArmLen * 0.125, 0>
+		ArmThickness * 1.3
+	}
+	texture {
+		T_Clothe_Armor
+	}
+}
+
+
+
+
 /*** WRIST ****** WRIST ****** WRIST ****** WRIST ****** WRIST ***/
 /*** WRIST ****** WRIST ****** WRIST ****** WRIST ****** WRIST ***/
 /*** WRIST ****** WRIST ****** WRIST ****** WRIST ****** WRIST ***/
@@ -213,17 +344,23 @@
 }
 
 #declare Clothe_Wrist_Gauntlet = union {
-	cylinder {
+	cone {
 		<0, ForeArmLen, 0>
+		ArmThickness * 1.3
 		<0, 0, 0>
-		ArmThickness * 1.2
+		ArmThickness * 1.1
 	}
 	sphere {
 		<0, ForeArmLen, 0>
-		ArmThickness * 1.25
+		ArmThickness * 1.6
+	}
+	object {
+		Clothe_Armor_Spike
+		rotate z * (-90)
+		translate <0, ForeArmLen, 0>
 	}
 	texture {
-		T_Chrome_1A
+		T_Clothe_Armor
 	}
 }
 
@@ -268,21 +405,6 @@
 }
 
 
-#declare Clothe_ArmWear_Witch = union {
-	sphere {
-		<0, ArmLen, 0>
-		ArmThickness * 1.75
-		pigment {
-			Gray10
-		}
-	}
-	cylinder {
-		<0, ArmLen, 0>
-		<0, ArmLen * 0.125, 0>
-		ArmThickness * 1.1
-		pigment {
-			Gray10
-		}
-	}
-}
+
+
 
