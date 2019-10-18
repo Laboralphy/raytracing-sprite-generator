@@ -2,6 +2,7 @@
 #include "finish.inc"
 #include "metals.inc"
 #include "golds.inc"
+#include "woods.inc"
 #include "inc/BodyLengthes.inc"
 
 
@@ -28,7 +29,8 @@
 #declare T_Clothe_Armor = texture {
 	T_Chrome_1A
 	normal {
-		dents 2
+		dents 1
+		scale 0.2
 	}
 }
 
@@ -64,7 +66,7 @@
 
 #declare Clothe_Mail_Skirt = cone {
 	0
-	1
+	0.8
 	<0, -1, 0>
 	1.2
 	scale <0.7, 0.9, 0.5>
@@ -77,8 +79,36 @@
 		}
 		scale 0.1
 		rotate 90 * x
+		normal {
+			bumps 1
+			scale 0.1
+		}
 	}
 }
+
+
+/*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
+/*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
+/*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
+
+#declare Clothes_Shirt_Armor = sor {
+	5
+	<0.4, -1>
+	<0.8, 0>
+	<1,	0.8>
+	<0.8, 1> 
+	<0.4, 2>
+	sturm
+	scale <0.71, 1.25, 0.5>
+	texture {
+		T_Clothe_Armor
+		scale 0.25
+	}
+}
+
+
+
+
 
 /*** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ***/
 /*** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ****** BOOTS ***/
@@ -371,7 +401,9 @@
 
 
 
-
+/*** BELT ****** BELT ****** BELT ****** BELT ****** BELT ******/
+/*** BELT ****** BELT ****** BELT ****** BELT ****** BELT ******/
+/*** BELT ****** BELT ****** BELT ****** BELT ****** BELT ******/
 
 /* les ceintures sont basées sur des cylindres de diametre 2 */
 
@@ -406,5 +438,143 @@
 
 
 
+/*** HELMS ****** HELMS ****** HELMS ****** HELMS ****** HELMS ******/
+/*** HELMS ****** HELMS ****** HELMS ****** HELMS ****** HELMS ******/
+/*** HELMS ****** HELMS ****** HELMS ****** HELMS ****** HELMS ******/
 
+#declare Clothe_Helm_Extruder = union {
+	box {
+		<-0.666, 1, 0>
+		<0.666, 0.75, -2>
+	}
+	box {
+		<-0.25 / 2, 1, 0>
+		<0.25/2, 0, -2>
+	}
+}
+
+
+#declare Clothe_Helm_Type1 = difference {
+	sor {
+		7
+		<1, 0>
+		<1, 0.1>
+		<cos(radians(0)), 1 + sin(radians(0))>
+		<cos(radians(30)), 1 + sin(radians(30))>
+		<cos(radians(60)), 1 + sin(radians(60))>
+		<cos(radians(90)), 1 + sin(radians(90))>
+		<0, 2>
+		sturm
+	}
+	Clothe_Helm_Extruder
+	texture {
+		T_Clothe_Armor
+		scale 0.3
+	}
+}
+
+#declare Clothe_Helm_Horn = sphere_sweep {
+	linear_spline
+	3
+	<0, 0, 0>, 0.5
+	<-1, 1, 0>, 0.25
+	<-0.75, 2, 0>, 0.1
+	scale 0.4
+}
+
+
+#declare Clothe_Helm_Type2 = union {
+	object {
+		Clothe_Helm_Type1
+	}
+	object {
+		Clothe_Helm_Horn
+		translate <-0.8, 1.6, 0>
+		texture {
+			T_Copper_1A
+		}
+	}
+	object {
+		Clothe_Helm_Horn
+		scale <-1, 0, 0>
+		translate <0.8, 1.6, 0>
+		texture {
+			T_Copper_1A
+		}
+	}
+}
+
+
+
+/*** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ***/
+/*** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ***/
+/*** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ****** SHIELD ***/
+
+#declare Clothe_Shield_Type1_Base = prism {
+	linear_spline
+	0, 0.25, 6,
+    <-1, 1>, <1, 1>, <1, -1>, <0, -1.5>, <-1, -1>, <-1, 1>
+	rotate <-90, 0, 0>
+}
+
+#declare Clothe_Shield_Type1_Extruder = object {
+	Clothe_Shield_Type1_Base
+	scale <0.9, 0.9, 2>
+	translate <0, 0, 0>
+}
+
+#declare Clothe_Shield_Type1_WoodPanel = object {
+	Clothe_Shield_Type1_Base
+	scale <0.99, 0.99, 0.5>
+	translate <0, 0, -0.05>
+}
+
+#declare Clothe_Shield_Pattern_Cross = union {
+	box {
+		<-0.666, 0.25, 0>
+		<0.666, 0, -0.25>
+	}
+	box {
+		<-0.125, 0.666, 0>
+		<0.125, -1, -0.25>
+	}
+	
+}
+
+#declare Clothe_Shield_Type1 = union {
+	difference {
+		object {
+			Clothe_Shield_Type1_Base
+		}
+		object {
+			Clothe_Shield_Type1_Extruder
+		}
+		texture {
+			T_Brass_1A
+			normal {
+				bumps 0.25
+				scale 0.05
+			}
+		}
+	}
+	object {
+		Clothe_Shield_Pattern_Cross
+		texture {
+			T_Brass_1A
+			normal {
+				bumps 0.25
+				scale 0.05
+			}
+		}
+	}
+	object {
+		Clothe_Shield_Type1_WoodPanel
+		texture {
+			T_Wood22
+		}
+		
+	}
+	scale 2.333
+	translate <0.25, -0.25, 0>
+}
 

@@ -28,6 +28,8 @@
 	/* arm */
 	#declare A_ArmRight = 0;
 	#declare A_ForeArmRight = 0;
+	
+	/*  */
 #end
 
 #declare V_KneelPosLeft = <0, (-ThighLen) * cos(radians(A_LegLeft)), (-ThighLen) * sin(radians(A_LegLeft))>;
@@ -38,6 +40,8 @@
 #declare V_FootPosRight = V_KneelPosRight + <0, (-ShinLen) * cos(radians(A_KneelRight + A_LegRight)), (-ShinLen) * sin(radians(A_KneelRight + A_LegRight))>;
 #declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
 #declare V_HandPosRight = V_ElbowPosRight + <0, (-ForeArmLen) * cos(radians(A_ForeArmRight + A_ArmRight)), (-ForeArmLen) * sin(radians(A_ForeArmRight + A_ArmRight))>;
+
+
 
 #ifndef (B_FIST_INSTEAD_OF_HAND)
 	#declare B_FIST_INSTEAD_OF_HAND = 0;
@@ -82,6 +86,7 @@
 	}
 	object {
 		P_Legging
+		rotate <A_LegLeft, 0, 0>
 	}
 }
 
@@ -113,6 +118,7 @@
 	object {
 		P_Legging
 		scale <-1, 1, 1>
+		rotate <A_LegRight, 0, 0>
 	}
 }
 
@@ -284,7 +290,7 @@
 	}
 	object {
 		P_Belt
-		scale <1, 1, 0.5>
+		scale <1.1, 1.1, 0.75>
 		translate <0, 1.6, 0>
 	}
 }
@@ -424,28 +430,83 @@
 	}
 }
 
-#declare P_ArmGloveLeft = union {
-	object {
-		P_ArmLeft
+
+
+
+#declare B_Raise_Shield = 1;
+#if (B_Raise_Shield > 0)
+	#declare P_ArmGloveWithoutShieldLeft = union {
+		object {
+			P_ArmLeft
+		}
+		object {
+			P_Hand
+			rotate y * 300
+			rotate x * (A_ForeArmLeft + A_ArmLeft)
+			translate V_HandPosLeft
+		}
+		object {
+			P_Wrist_Left
+			rotate x * (A_ForeArmLeft + A_ArmLeft)
+			translate V_HandPosLeft
+		}
+		object {
+			P_Shoulder
+			rotate x * A_ArmLeft
+			translate V_ElbowPosLeft
+		}
+		rotate <-A_ArmLeft 90, 0>
+		rotate <60, 0, 0>
+		rotate <0, 0, 10>
+		
+		translate ArmShift * x
 	}
-	object {
-		P_Hand
-		rotate x * (A_ForeArmLeft + A_ArmLeft)
-		translate V_HandPosLeft
+	#ifndef (P_Shield)
+		#declare P_Shield = cylinder {
+			0
+			<0, 0, -1>
+			1
+			pigment {
+				Red
+			}
+		}	
+	#end
+	#declare P_ArmGloveLeft = union {
+		object {
+			P_ArmGloveWithoutShieldLeft
+		}
+		object {
+			P_Shield
+			translate <1, -1, -2.5>
+		}
 	}
-	object {
-		P_Wrist_Left
-		rotate x * (A_ForeArmLeft + A_ArmLeft)
-		translate V_HandPosLeft
+#else
+	#declare P_ArmGloveLeft = union {
+		object {
+			P_ArmLeft
+		}
+		object {
+			P_Hand
+			rotate x * (A_ForeArmLeft + A_ArmLeft)
+			translate V_HandPosLeft
+		}
+		object {
+			P_Wrist_Left
+			rotate x * (A_ForeArmLeft + A_ArmLeft)
+			translate V_HandPosLeft
+		}
+		object {
+			P_Shoulder
+			rotate x * A_ArmLeft
+			translate V_ElbowPosLeft
+		}
+		rotate z * 10
+		translate ArmShift * x
 	}
-	object {
-		P_Shoulder
-		rotate x * A_ArmLeft
-		translate V_ElbowPosLeft
-	}
-	rotate z * 10
-	translate ArmShift * x
-}
+
+#end
+
+
 
 #declare P_ArmRight = sphere_sweep {
 	linear_spline
@@ -457,6 +518,7 @@
 		T_Arms
 	}
 }
+
 
 #declare P_ArmGloveRight = union {
 	object {
@@ -483,6 +545,7 @@
 	rotate (-z) * 10
 	translate (-ArmShift) * x
 }
+
 
 
 #declare P_Arms = union {
