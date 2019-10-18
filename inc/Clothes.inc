@@ -496,7 +496,7 @@
 	}
 	object {
 		Clothe_Helm_Horn
-		scale <-1, 0, 0>
+		scale <-1, 1, 1>
 		translate <0.8, 1.6, 0>
 		texture {
 			T_Copper_1A
@@ -578,3 +578,56 @@
 	translate <0.25, -0.25, 0>
 }
 
+
+
+
+/*** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ***/
+/*** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ***/
+/*** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ****** WEAPON ***/
+
+#declare Weapon_Sword_Hilt = union {
+	box {
+		<(-ArmThickness) / 2, (-ArmThickness) / 6, ArmThickness / 6>
+		<ArmThickness / 2, 0, (-ArmThickness) / 6>
+	}
+	cylinder {
+		0
+		<0, -ArmThickness, 0>
+		(-ArmThickness) / 6
+	}
+	texture {
+		T_Brass_1A
+	}
+}
+
+#declare Weapon_Sword_HalfBlade = box {
+	0
+	1
+	translate <-0.5, 0, -0.5>
+	rotate 45 * y
+}
+
+#declare Weapon_Sword_Blade = union {
+	object {
+		Weapon_Sword_HalfBlade
+		translate <-0.15, 0, 0>
+	}
+	object {
+		Weapon_Sword_HalfBlade
+		translate <0.15, 0, 0>
+	}
+	scale <0.2, 1, 0.075>
+	texture {
+		T_Chrome_3D
+	}
+}
+
+#declare Weapon_Sword_Type1 = union {
+	object {
+		Weapon_Sword_Hilt
+	}
+	object {
+		Weapon_Sword_Blade
+	}
+	rotate <-90, 0, 0>
+}

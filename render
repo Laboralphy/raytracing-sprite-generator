@@ -35,13 +35,18 @@ renderPreview() {
 	if [ $bOrth == 1 ]
 	then
 		povray -I$sInput.pov -SR0.0 -ER0.60 -SC0.33 -EC0.67 -W1024 -H768 -D0 +UA +Q9 +A0.2 +K$fClock -D0 -Ooutput/$sOutput.png
-		crop output/$sOutput.png
-		display output/$sOutput.png
+		local nError=$?
+		if [ $nError -ne 0 ]
+		then
+			echo There was an error.
+		else
+			crop output/$sOutput.png
+			display output/$sOutput.png
+		fi
 	else
 		povray -I$sInput.pov -W1024 -H768 +UA +Q9 +A0.8 +K$fClock +P -Ooutput/$sOutput.png
 	fi
 }
-
 
 renderAllFrames() {
 	local sFile="$1"

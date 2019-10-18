@@ -59,3 +59,8 @@ union {
 	scale 0.85
 	translate OffsetBody * y
 }
+
+object {
+	Weapon_Sword_Type1
+	translate <2, 1, -3>
+}
