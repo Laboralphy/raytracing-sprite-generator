@@ -12,6 +12,8 @@
 #declare ArmShift = 2.35;
 #declare BoobPos = 0.75;
 
+#declare B_Raise_Shield = 1;
+
 #ifndef (A_LegLeft) 
 	/* left */
 	/* leg */
@@ -30,12 +32,30 @@
 	#declare A_ForeArmRight = 0;
 	
 	/*  */
+	
+#end
+
+#ifndef (A_ArmRightShield)
+	#declare A_ArmRightShield = 0;
+#end
+
+#ifndef (A_ArmRightShield_2)
+	#declare A_ArmRightShield_2 = 0;
 #end
 
 #declare V_KneelPosLeft = <0, (-ThighLen) * cos(radians(A_LegLeft)), (-ThighLen) * sin(radians(A_LegLeft))>;
 #declare V_FootPosLeft = V_KneelPosLeft + <0, (-ShinLen) * cos(radians(A_KneelLeft + A_LegLeft)), (-ShinLen) * sin(radians(A_KneelLeft + A_LegLeft))>;
 #declare V_ElbowPosLeft = <0, (-ArmLen) * cos(radians(A_ArmLeft)), (-ArmLen) * sin(radians(A_ArmLeft))>;
+
 #declare V_HandPosLeft = V_ElbowPosLeft + <0, (-ForeArmLen) * cos(radians(A_ForeArmLeft + A_ArmLeft)), (-ForeArmLen) * sin(radians(A_ForeArmLeft + A_ArmLeft))>;
+
+/*
+#declare V_HandPosLeft = V_ElbowPosLeft + <
+	(-ForeArmLen) * sin(radians(A_ArmRightShield_2)), 
+	(-ForeArmLen) * cos(radians(A_ForeArmLeft + A_ArmLeft)),
+	(-ForeArmLen) * sin(radians(A_ForeArmLeft + A_ArmLeft)) * cos(radians(A_ArmRightShield_2))
+>;*/
+
 #declare V_KneelPosRight = <0, (-ThighLen) * cos(radians(A_LegRight)), (-ThighLen) * sin(radians(A_LegRight))>;
 #declare V_FootPosRight = V_KneelPosRight + <0, (-ShinLen) * cos(radians(A_KneelRight + A_LegRight)), (-ShinLen) * sin(radians(A_KneelRight + A_LegRight))>;
 #declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
@@ -121,7 +141,6 @@
 		rotate <A_LegRight, 0, 0>
 	}
 }
-
 
 
 
@@ -433,34 +452,7 @@
 
 
 
-#declare B_Raise_Shield = 1;
 #if (B_Raise_Shield > 0)
-	#declare P_ArmGloveWithoutShieldLeft = union {
-		object {
-			P_ArmLeft
-		}
-		object {
-			P_Hand
-			rotate y * 300
-			rotate x * (A_ForeArmLeft + A_ArmLeft)
-			translate V_HandPosLeft
-		}
-		object {
-			P_Wrist_Left
-			rotate x * (A_ForeArmLeft + A_ArmLeft)
-			translate V_HandPosLeft
-		}
-		object {
-			P_Shoulder
-			rotate x * A_ArmLeft
-			translate V_ElbowPosLeft
-		}
-		rotate <-A_ArmLeft 90, 0>
-		rotate <60, 0, 0>
-		rotate <0, 0, 10>
-		
-		translate ArmShift * x
-	}
 	#ifndef (P_Shield)
 		#declare P_Shield = cylinder {
 			0
@@ -471,15 +463,39 @@
 			}
 		}	
 	#end
-	#declare P_ArmGloveLeft = union {
+	#declare P_Wrist_Left_WithShield = union {
 		object {
-			P_ArmGloveWithoutShieldLeft
+			P_Wrist_Left
 		}
 		object {
 			P_Shield
-			translate <1, -1, -2.5>
+			rotate <-90 + A_ArmRightShield, 0, 90>
+			translate <0.5, -0.5, 0>
 		}
 	}
+	#declare P_ArmGloveLeft = union {
+		object {
+			P_ArmLeft
+		}
+		object {
+			P_Hand
+			rotate x * (A_ForeArmLeft + A_ArmLeft)
+			translate V_HandPosLeft
+		}
+		object {
+			P_Wrist_Left_WithShield
+			rotate <A_ForeArmLeft + A_ArmLeft, 0, 0>
+			translate V_HandPosLeft
+		}
+		object {
+			P_Shoulder
+			rotate x * A_ArmLeft
+			translate V_ElbowPosLeft
+		}
+		rotate <0, 0, 10>
+		translate ArmShift * x
+	}
+
 #else
 	#declare P_ArmGloveLeft = union {
 		object {
@@ -500,7 +516,7 @@
 			rotate x * A_ArmLeft
 			translate V_ElbowPosLeft
 		}
-		rotate z * 10
+		rotate <0, 0, 10>
 		translate ArmShift * x
 	}
 

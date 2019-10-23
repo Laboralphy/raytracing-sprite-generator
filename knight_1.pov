@@ -25,6 +25,17 @@
 
 #declare P_Boot = Clothe_Boot_Soleret;
 #declare P_Wrist = Clothe_Wrist_Gauntlet;
+#declare P_Wrist_Right = union {
+	object {
+		P_Wrist
+	}
+	object {
+		Weapon_Sword_Type1
+		scale 3
+		rotate <-90, 0, 90>
+		translate <0.125, -0.6, -0.85>
+	}
+}
 #declare P_Shoulder = Clothe_Shoulder_Armor_Pad;
 #declare P_Legging = Clothe_Legging_Armor;
 #declare P_Belt = Clothe_Belt_Type1;
@@ -41,7 +52,10 @@
 	}
 }
 
+#declare A_ArmRightShield = 0;
+#declare A_ArmRightShield_2 = 90;
 #include "inc/Body.inc";
+
 
 union {
 	object {
@@ -58,9 +72,4 @@ union {
 	rotate AnimationAngle * y
 	scale 0.85
 	translate OffsetBody * y
-}
-
-object {
-	Weapon_Sword_Type1
-	translate <2, 1, -3>
 }

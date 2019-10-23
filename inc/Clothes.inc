@@ -607,16 +607,29 @@
 	rotate 45 * y
 }
 
-#declare Weapon_Sword_Blade = union {
-	object {
-		Weapon_Sword_HalfBlade
-		translate <-0.15, 0, 0>
+#declare Weapon_Sword_Blade = prism {
+    linear_spline
+    0,
+    1,
+    9,
+    <-1, 0>, <-0.2, 0.4>, <0, 0.2>, <0.2, 0.4>, 
+    <1, 0>, <0.2, -0.4>, <0, -0.2>, <-0.2, -0.4>, <-1, 0>
+    scale <ArmThickness / 4, 1, ArmThickness / 3>
+	texture {
+		T_Chrome_3D
 	}
-	object {
-		Weapon_Sword_HalfBlade
-		translate <0.15, 0, 0>
-	}
-	scale <0.2, 1, 0.075>
+}
+
+#declare Weapon_Sword_Blade_PointyEnd = prism {
+	conic_sweep
+    linear_spline
+    0,
+    1,
+    9,
+    <-1, 0>, <-0.2, 0.4>, <0, 0.2>, <0.2, 0.4>, 
+    <1, 0>, <0.2, -0.4>, <0, -0.2>, <-0.2, -0.4>, <-1, 0>
+    scale <ArmThickness / 4, (-ArmThickness) / 2, ArmThickness / 3>
+    translate <0, 1 + ArmThickness / 2, 0>
 	texture {
 		T_Chrome_3D
 	}
@@ -629,5 +642,23 @@
 	object {
 		Weapon_Sword_Blade
 	}
-	rotate <-90, 0, 0>
+	object {
+		Weapon_Sword_Blade_PointyEnd
+	}
+	rotate <0, 0, 0>
 }
+
+/*
+  prism {
+    conic_sweep
+    linear_spline
+    0, // height 1
+    1, // height 2
+    5, // the number of points making up the shape...
+    <4,4>,<-4,4>,<-4,-4>,<4,-4>,<4,4>
+    rotate <180, 0, 0>
+    translate <0, 1, 0>
+    scale <1, 4, 1>
+    pigment { gradient y scale .2 }
+  }
+*/

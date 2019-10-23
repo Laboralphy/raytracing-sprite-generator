@@ -4,8 +4,8 @@
 		#declare A_KneelLeft = 0;
 		#declare A_LegRight = 0;
 		#declare A_KneelRight = 0;
-		#declare A_ArmLeft = 45;
-		#declare A_ForeArmLeft = 90;
+		#declare A_ArmLeft = 70;
+		#declare A_ForeArmLeft = 0;
 		#declare A_ArmRight = 0;
 		#declare A_ForeArmRight = 0;
 		#declare OffsetBody = 0;
@@ -28,6 +28,18 @@
 		#declare A_KneelLeft = -30;
 		#declare A_LegRight = -15;
 		#declare A_KneelRight = -35;
+		#declare A_ArmLeft = 45;
+		#declare A_ForeArmLeft = 90;
+		#declare A_ArmRight = 50;
+		#declare A_ForeArmRight = 40;
+		#declare OffsetBody = -0.2;
+	#break
+
+	#case (3)
+		#declare A_LegLeft = 30;
+		#declare A_KneelLeft = -30;
+		#declare A_LegRight = -15;
+		#declare A_KneelRight = -35;
 		#declare A_ArmRight = -20;
 		#declare A_ForeArmRight = 10;
 		#declare A_ArmLeft = 45;
@@ -35,7 +47,7 @@
 		#declare OffsetBody = -0.2;
 	#break
 
-	#case (3)
+	#case (4)
 		#declare A_LegLeft = 15;
 		#declare A_KneelLeft = -30;
 		#declare A_LegRight = 10;
@@ -47,7 +59,7 @@
 		#declare OffsetBody = 0;
 	#break
 
-	#case (4)
+	#case (5)
 		#declare A_LegLeft = -15;
 		#declare A_KneelLeft = -35;
 		#declare A_LegRight = 30;
