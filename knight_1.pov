@@ -1,14 +1,15 @@
 /**
  * @description Knight with dull armor, shield, and a sword
  * 2 frames per attack, shield always on, except when attacking
- * @frames 4
+ * @frames 6
  */
 
 #include "colors.inc"
 #include "inc/Camera.inc"
 #include "inc/RunFramesKnight.inc"
 
-#declare B_FIST_INSTEAD_OF_HAND = 1;
+#declare B_Fist_Instead_Of_Hand = 1;
+#declare B_Equip_Shield = 1;
 
 #declare C_Skin = color rgb <0.1, 0.1, 0.1>;
 #declare T_Skin = texture {
@@ -25,6 +26,16 @@
 
 #declare P_Boot = Clothe_Boot_Soleret;
 #declare P_Wrist = Clothe_Wrist_Gauntlet;
+
+
+#if (B_Strike_Weapon > 0)
+	#declare A_Weapon_Angle = 45;
+	#declare V_Weapon_Offset = -0.7;
+#else
+	#declare A_Weapon_Angle = 0;
+	#declare V_Weapon_Offset = 0;
+#end
+
 #declare P_Wrist_Right = union {
 	object {
 		P_Wrist
@@ -32,8 +43,8 @@
 	object {
 		Weapon_Sword_Type1
 		scale 3
-		rotate <-90, 0, 90>
-		translate <0.125, -0.6, -0.85>
+		rotate <-90, A_Weapon_Angle, 90>
+		translate <0.125, -0.6 + V_Weapon_Offset, -0.85>
 	}
 }
 #declare P_Shoulder = Clothe_Shoulder_Armor_Pad;
@@ -52,8 +63,6 @@
 	}
 }
 
-#declare A_ArmRightShield = 0;
-#declare A_ArmRightShield_2 = 90;
 #include "inc/Body.inc";
 
 

@@ -9,6 +9,8 @@
 		#declare A_ArmRight = 0;
 		#declare A_ForeArmRight = 0;
 		#declare OffsetBody = 0;
+		#declare B_Raise_Shield = 1;
+		#declare B_Strike_Weapon = 0;
 	#break
 	
 	#case (1)
@@ -16,11 +18,13 @@
 		#declare A_KneelLeft = -30;
 		#declare A_LegRight = -15;
 		#declare A_KneelRight = -35;
-		#declare A_ArmLeft = 45;
+		#declare A_ArmLeft = 0;
 		#declare A_ForeArmLeft = 90;
-		#declare A_ArmRight = 50;
+		#declare A_ArmRight = 80;
 		#declare A_ForeArmRight = 40;
 		#declare OffsetBody = -0.2;
+		#declare B_Raise_Shield = 0;
+		#declare B_Strike_Weapon = 0;
 	#break
 
 	#case (2)
@@ -28,11 +32,13 @@
 		#declare A_KneelLeft = -30;
 		#declare A_LegRight = -15;
 		#declare A_KneelRight = -35;
-		#declare A_ArmLeft = 45;
+		#declare A_ArmLeft = 0;
 		#declare A_ForeArmLeft = 90;
-		#declare A_ArmRight = 50;
+		#declare A_ArmRight = 25;
 		#declare A_ForeArmRight = 40;
 		#declare OffsetBody = -0.2;
+		#declare B_Raise_Shield = 0;
+		#declare B_Strike_Weapon = 1;
 	#break
 
 	#case (3)
@@ -45,6 +51,8 @@
 		#declare A_ArmLeft = 45;
 		#declare A_ForeArmLeft = 90;
 		#declare OffsetBody = -0.2;
+		#declare B_Raise_Shield = 1;
+		#declare B_Strike_Weapon = 0;
 	#break
 
 	#case (4)
@@ -57,6 +65,8 @@
 		#declare A_ArmLeft = 45;
 		#declare A_ForeArmLeft = 90;
 		#declare OffsetBody = 0;
+		#declare B_Raise_Shield = 1;
+		#declare B_Strike_Weapon = 0;
 	#break
 
 	#case (5)
@@ -69,7 +79,7 @@
 		#declare A_ArmLeft = 45;
 		#declare A_ForeArmLeft = 90;
 		#declare OffsetBody = -0.2;
+		#declare B_Raise_Shield = 1;
+		#declare B_Strike_Weapon = 0;
 	#break
 #end
-
-#declare P_Raise_Shield = 1;
