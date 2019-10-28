@@ -35,6 +35,7 @@
 }
 
 #declare P_Legging = Clothe_Legging_Zombie_Pant;
+#declare P_Boot = Clothe_Boot_Zombie_Bare_Foot;
 
 #include "inc/Body.inc";
 
@@ -43,7 +44,7 @@ union {
 		BodyM
 	}
 	object {
-		Clothe_Upper_Pant
+		Clothe_Zombie_Pant_Upper
 		translate 2.55 * y
 	}
 	rotate AnimationAngle * y

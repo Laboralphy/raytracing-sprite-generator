@@ -87,22 +87,27 @@
 }
 
 
-#declare Clothe_Upper_Pant = cone {
+
+#declare T_Clothe_Zombie_Pant = texture {
+	pigment {
+		radial
+		color_map {
+			[0, Blue]
+			[0.5 Blue * 0.5]
+			[1 Blue * 0.25]
+		}
+		frequency 20
+	}
+}
+
+#declare Clothe_Zombie_Pant_Upper = cone {
 	0
 	1
 	<0, -1, 0>
 	0.75
 	scale <0.7, 0.9, 0.5>
 	texture {
-		pigment {
-			radial
-			color_map {
-				[0, Blue]
-				[0.5 Blue * 0.35]
-				[1 Blue]
-			}
-			frequency 24
-		}
+		T_Clothe_Zombie_Pant
 	}
 }
 
@@ -183,6 +188,50 @@
 		}
 	}
 }
+
+
+
+
+/* Zombie bare foot */
+
+#declare Clothe_Boot_Zombie_Bare_Foot = intersection {
+	union {
+		sphere {
+			<0, 0, 0>
+			LegThickness
+		}
+		sphere {
+			<0, LegThickness * 0.15, -LegThickness>
+			LegThickness * 0.3
+		}
+		sphere {
+			<-LegThickness * 0.4, LegThickness * 0.15, -LegThickness>
+			LegThickness * 0.3
+		}
+		sphere {
+			<LegThickness * 0.4, LegThickness * 0.15, -LegThickness>
+			LegThickness * 0.3
+		}
+		sphere {
+			<LegThickness * 0.8, LegThickness * 0.15, -LegThickness * 0.8>
+			LegThickness * 0.35
+		}
+		sphere {
+			<-LegThickness * 0.8, LegThickness * 0.15, -LegThickness * 0.8>
+			LegThickness * 0.25
+		}
+		scale <1, 1, 2>
+	}
+	box {
+		<-LegThickness * 2, 0, LegThickness * 0.75>
+		<LegThickness * 2, LegThickness * 2, -LegThickness * 3>
+	}
+	texture {
+		T_Legs
+	}
+	translate -LegThickness * y
+}
+
 
 
 
@@ -354,6 +403,7 @@
 }
 
 
+
 #declare Clothe_Legging_Zombie_Pant = difference {
 	cylinder {
 		<0, 0.5 * ShinLen, 0>
@@ -363,14 +413,8 @@
 	object {
 		Clothe_Legging_Zombie_Pant_Extruder_1
 	}
-	pigment {
-		radial
-		color_map {
-			[0, Blue]
-			[0.5 Blue * 0.35]
-			[1 Blue]
-		}
-		frequency 24
+	texture {
+		T_Clothe_Zombie_Pant
 	}
 }	
 
