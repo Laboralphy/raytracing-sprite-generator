@@ -202,7 +202,7 @@
 	#declare P_Belt = cylinder {
 		0
 		y
-		3
+		1.9
 		pigment {
 			Green
 		}

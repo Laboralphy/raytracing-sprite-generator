@@ -87,6 +87,27 @@
 }
 
 
+#declare Clothe_Upper_Pant = cone {
+	0
+	1
+	<0, -1, 0>
+	0.75
+	scale <0.7, 0.9, 0.5>
+	texture {
+		pigment {
+			radial
+			color_map {
+				[0, Blue]
+				[0.5 Blue * 0.35]
+				[1 Blue]
+			}
+			frequency 24
+		}
+	}
+}
+
+
+
 /*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
 /*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
 /*** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ****** SHIRTS ***/
@@ -295,6 +316,63 @@
 		T_Clothe_Armor
 	}
 }
+
+
+
+#declare Clothe_Legging_Zombie_Pant_Extruder_0 = box {
+	<-10, 0, 0>
+	<10, -20, 20>
+	rotate x * 45
+	scale z * 0.5
+}
+
+#declare Clothe_Legging_Zombie_Pant_Extruder_1 = union {
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_0
+		translate <0, -ShinLen * 0.8, 0>
+	}
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_0
+		rotate y * 30
+		translate <0, -ShinLen * 0.9, 0>
+	}
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_0
+		rotate y * 75
+		translate <0, -ShinLen * 0.8, 0>
+	}
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_0
+		rotate y * 100
+		translate <0, -ShinLen * 0.9, 0>
+	}
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_0
+		rotate y * 133
+		translate <0, -ShinLen * 0.8, 0>
+	}
+}
+
+
+#declare Clothe_Legging_Zombie_Pant = difference {
+	cylinder {
+		<0, 0.5 * ShinLen, 0>
+		<0, -ShinLen, 0>
+		LegThickness * 1.05
+	}
+	object {
+		Clothe_Legging_Zombie_Pant_Extruder_1
+	}
+	pigment {
+		radial
+		color_map {
+			[0, Blue]
+			[0.5 Blue * 0.35]
+			[1 Blue]
+		}
+		frequency 24
+	}
+}	
 
 
 
@@ -647,18 +725,3 @@
 	}
 	rotate <0, 0, 0>
 }
-
-/*
-  prism {
-    conic_sweep
-    linear_spline
-    0, // height 1
-    1, // height 2
-    5, // the number of points making up the shape...
-    <4,4>,<-4,4>,<-4,-4>,<4,-4>,<4,4>
-    rotate <180, 0, 0>
-    translate <0, 1, 0>
-    scale <1, 4, 1>
-    pigment { gradient y scale .2 }
-  }
-*/
