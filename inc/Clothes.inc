@@ -372,7 +372,7 @@
 	<-10, 0, 0>
 	<10, -20, 20>
 	rotate x * 45
-	scale z * 0.5
+	scale <1, 1, 0.5>
 }
 
 #declare Clothe_Legging_Zombie_Pant_Extruder_1 = union {
@@ -555,6 +555,40 @@
 	object {
 		Clothe_Belt_Type1_Buckle
 		translate <0, 0.3, -1.85>
+	}
+}
+
+
+
+
+
+
+#declare Clothe_Belt_Type2_Leather = cylinder {
+	0
+	y
+	2.1
+	pigment {
+		color rgb <0.1, 0.05, 0>
+	}
+}
+
+#declare Clothe_Belt_Type2_Buckle = torus {
+	0.9
+	0.3
+	rotate <90, 0, 0>
+	scale 0.66
+	texture {
+		T_Chrome_1B
+	}
+}
+
+#declare Clothe_Belt_Type2 = union {
+	object {
+		Clothe_Belt_Type2_Leather
+	}
+	object {
+		Clothe_Belt_Type2_Buckle
+		translate <0, 0.4, -2.1>
 	}
 }
 

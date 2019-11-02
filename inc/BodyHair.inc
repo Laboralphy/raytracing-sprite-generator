@@ -12,6 +12,17 @@
   	}
 }
 
+#declare T_Hair_Zombie = texture {
+	pigment {
+		radial
+		color_map {
+			[0.5 color rgb <0.2, 0.3, 0>]
+			[0.5 color rgb <0.15, 0.2, 0> ]
+		}
+		frequency 24
+  	}
+}
+
 #declare T_Hair_BlueViolet = texture {
 	pigment {
 		radial
@@ -161,4 +172,20 @@
 	}
 }
 
+#declare P_Hair_6 = sphere {
+	0
+	0
+}
+
+#declare P_Hair_7 = difference {
+	object {
+		P_Hair_Curve_Small_Egg
+	}
+	object {
+		P_Hair_Large_Extruder
+	}
+	texture {
+		T_Hair_Zombie
+	}
+}
 

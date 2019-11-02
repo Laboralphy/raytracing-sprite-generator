@@ -317,7 +317,7 @@
 	#declare P_Shoulder = union {
 		sphere {
 			<0, ArmLen, 0>
-			ArmThickness * 1.75
+			ArmThickness * 1.25
 			pigment {
 				Gray10
 			}
@@ -345,6 +345,12 @@
 		sphere {
 			<0, ForeArmLen, 0>
 			ArmThickness * 1.15
+		}
+		torus {
+			ArmThickness * 1
+			ArmThickness * 0.075
+			scale <1, 4, 1>
+			translate <0, 0.6, 0>
 		}
 		pigment {
 			Gray10
