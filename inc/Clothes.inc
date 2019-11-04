@@ -227,7 +227,7 @@
 		<LegThickness * 2, LegThickness * 2, -LegThickness * 3>
 	}
 	texture {
-		T_Legs
+		T_Skin
 	}
 	translate -LegThickness * y
 }

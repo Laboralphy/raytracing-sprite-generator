@@ -37,8 +37,12 @@
 	/* arm */
 	#declare A_ArmRight = 0;
 	#declare A_ForeArmRight = 0;
-	
 #end
+
+#ifndef (A_Hand)
+	#declare A_Hand = <0, 0, 0>;
+#end
+
 
 
 #declare V_KneelPosLeft = <0, (-ThighLen) * cos(radians(A_LegLeft)), (-ThighLen) * sin(radians(A_LegLeft))>;
@@ -56,6 +60,24 @@
 #declare V_FootPosRight = V_KneelPosRight + <0, (-ShinLen) * cos(radians(A_KneelRight + A_LegRight)), (-ShinLen) * sin(radians(A_KneelRight + A_LegRight))>;
 #declare V_ElbowPosRight = <0, (-ArmLen) * cos(radians(A_ArmRight)), (-ArmLen) * sin(radians(A_ArmRight))>;
 #declare V_HandPosRight = V_ElbowPosRight + <0, (-ForeArmLen) * cos(radians(A_ForeArmRight + A_ArmRight)), (-ForeArmLen) * sin(radians(A_ForeArmRight + A_ArmRight))>;
+
+
+
+#ifndef (T_ArmLeft)
+	#declare T_ArmLeft = T_Arms;
+#end
+
+#ifndef (T_ArmRight)
+	#declare T_ArmRight = T_Arms;
+#end
+
+#ifndef (T_LegLeft)
+	#declare T_LegLeft = T_Legs;
+#end
+
+#ifndef (T_LegRight)
+	#declare T_LegRight = T_Legs;
+#end
 
 
 
@@ -92,7 +114,7 @@
 		translate <ButtShift, 0, ButtShift>
 	}
 	texture {
-		T_Legs
+		T_LegLeft
 	}
 }
 
@@ -122,7 +144,7 @@
 		translate <-ButtShift, 0, ButtShift>
 	}
 	texture {
-		T_Legs
+		T_LegRight
 	}
 }
 
@@ -432,6 +454,7 @@
 #declare P_Hand = union {
 	object {
 		P_Fingers
+		rotate A_Hand
 		translate <ArmThickness * 0.5, -0.5, 0>
 	}
 	texture {
@@ -447,7 +470,7 @@
 	V_ElbowPosLeft, ArmThickness * 0.9
 	V_HandPosLeft, ArmThickness * 0.7
 	texture {
-		T_Arms
+		T_ArmLeft
 	}
 }
 
@@ -535,7 +558,7 @@
 	V_ElbowPosRight, ArmThickness * 0.9
 	V_HandPosRight, ArmThickness * 0.7
 	texture {
-		T_Arms
+		T_ArmRight
 	}
 }
 

@@ -15,13 +15,43 @@
 #declare C_Skin = color rgb <0.1, 0.1, 0.1>;
 #declare T_Skin = texture {
 	pigment {
-		C_Skin
+		agate
+		agate_turb 0.5
+		color_map {
+			[0 color rgb <0.15, 0, 0>]
+			[0.25 C_Skin * 0.1]
+			[0.95 C_Skin]
+		}
 	}
 }
 
 #declare P_Null = sphere { 0, 0 }
 
-#declare T_Legs = T_Skin;
+#declare T_LegRight = texture {
+	pigment {
+		agate
+		agate_turb 0.5
+		color_map {
+			[0 color rgb <0.15, 0, 0>]
+			[0.25 C_Skin * 0.1]
+			[0.95 C_Skin]
+		}
+		translate 10 * y
+	}
+}
+
+#declare T_LegLeft = texture {
+	pigment {
+		agate
+		agate_turb 0.5
+		color_map {
+			[0 color rgb <0.15, 0, 0>]
+			[0.25 C_Skin * 0.1]
+			[0.95 C_Skin]
+		}
+		translate 20 * y
+	}
+}
 #declare T_Arms = T_Skin;
 #declare T_Torso = T_Skin;
 
