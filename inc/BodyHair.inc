@@ -14,13 +14,16 @@
 
 #declare T_Hair_Zombie = texture {
 	pigment {
-		radial
+		bozo
 		color_map {
-			[0.5 color rgb <0.2, 0.3, 0>]
-			[0.5 color rgb <0.15, 0.2, 0> ]
+			[0 color rgb <0.06, 0.09, 0>]
+			[0.2 color rgb <0, 0, 0> ]
+			[0.4 color rgb <0.06, 0.09, 0>]
+			[0.6 color rgb <0.015, 0.02, 0> ]
+			[0.8 color rgb <0.06, 0.09, 0>]
 		}
-		frequency 24
   	}
+  	scale 0.2
 }
 
 #declare T_Hair_BlueViolet = texture {
@@ -178,8 +181,27 @@
 }
 
 #declare P_Hair_7 = difference {
-	object {
-		P_Hair_Curve_Small_Egg
+	union {
+		sphere {
+			<-0.15, 1.1, 0>
+			0.75
+		}
+		sphere {
+			<0.15, 0.9, -0.15>
+			0.75
+		}
+		sphere {
+			<0.17, 1.05, -0.12>
+			0.75
+		}
+		sphere {
+			<0.06, 1.05, 0.15>
+			0.75
+		}
+		sphere {
+			<-0.06, 0.95, 0.15>
+			0.75
+		}
 	}
 	object {
 		P_Hair_Large_Extruder
