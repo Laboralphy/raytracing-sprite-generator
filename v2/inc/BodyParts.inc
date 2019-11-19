@@ -8,6 +8,16 @@
 }
 
 
+
+
+//   _____                    
+//  |_   _|__  _ __ ___  ___  
+//    | |/ _ \| '__/ __|/ _ \ 
+//    | | (_) | |  \__ \ (_) |
+//    |_|\___/|_|  |___/\___/ 
+
+
+
 #declare O_BodyPart_Torso_M = blob {
 	threshold 0.3
 	/* bottom */
@@ -66,6 +76,15 @@
 		scale V_BodyPart_Torso_Scale
 	}
 
+	/* neck */
+	cylinder {
+		<0, N_Torso_Len, 0>
+		<0, 2 * N_Torso_Len, 0>
+		N_Shoulder_Len / 5
+		1
+		scale V_BodyPart_Torso_Scale
+	}
+
 	/* left shoulder */
 	sphere {
 		<N_Shoulder_Len / 2, N_Torso_Len, 0>
@@ -78,6 +97,11 @@
 		N_Shoulder_Len / 3
 		1
 	}
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Armored_Torso_M = union {
@@ -151,7 +175,16 @@
 		<0, 3 * N_Torso_Len / 4, 0>
 		<0, N_Torso_Len, 0>
 		N_Shoulder_Len / 2
-		3
+		2
+		scale V_BodyPart_Torso_Scale
+	}
+	
+	// neck
+	cylinder {
+		<0, N_Torso_Len, 0>
+		<0, 2 * N_Torso_Len, 0>
+		N_Shoulder_Len / 5
+		1
 		scale V_BodyPart_Torso_Scale
 	}
 
@@ -179,6 +212,11 @@
 		N_BodyPart_Boobs_Size 
 		2
 	}
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Armored_Torso_F = union {
@@ -204,11 +242,28 @@
 	#end
 }
 
+
+
+
+
+//     _                   
+//    | |    ___  __ _ ___ 
+//    | |   / _ \/ _` / __|
+//    | |__|  __/ (_| \__ \
+//    |_____\___|\__, |___/
+//               |___/     
+
+
 #declare O_BodyPart_Thigh = sphere_sweep {
 	linear_spline
 	2
 	<0, 0, 0>, N_Leg_Thickness
 	<0, -N_Thigh_Len, 0>, N_Leg_Thickness
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Armored_Thigh = union {
@@ -228,6 +283,11 @@
 	2
 	<0, 0, 0>, N_Leg_Thickness
 	<0, -N_Shin_Len, 0>, N_Leg_Thickness
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Armored_Shin = union {
@@ -273,11 +333,102 @@
 	rotate AV_Thigh_Right
 }
 
+
+
+
+
+//   _   _                 _ 
+//  | | | | __ _ _ __   __| |
+//  | |_| |/ _` | '_ \ / _` |
+//  |  _  | (_| | | | | (_| |
+//  |_| |_|\__,_|_| |_|\__,_|
+
+
+
+
+#declare O_BodyPart_Hand_Finger = sphere_sweep {
+	linear_spline
+	3
+	<0, 0, 0>, N_Finger_Thickness
+	<0, -N_Finger_Len, 0>, N_Finger_Thickness
+	<-N_Finger_Len, -N_Finger_Len, 0>, N_Finger_Thickness
+}
+
+#declare O_BodyPart_Hand_Thumb = sphere_sweep {
+	linear_spline
+	3
+	<N_Finger_Len * 0.4, N_Finger_Len * 0.3, N_Finger_Len * 0.3>, N_Finger_Thickness * 1.5
+	<0, 0, 0>, N_Finger_Thickness
+	<0, -N_Finger_Len * 0.75, 0>, N_Finger_Thickness
+}
+
+#declare O_BodyPart_Hand_Fingers = union {
+	object {
+		O_BodyPart_Hand_Finger
+	}
+	object {
+		O_BodyPart_Hand_Finger
+		translate <0, 0, -1.8 * N_Finger_Thickness>
+	}
+	object {
+		O_BodyPart_Hand_Finger
+		translate <0, 0, 1.8 * N_Finger_Thickness>
+	}
+	object {
+		O_BodyPart_Hand_Thumb
+		rotate <5, 0, 5>
+		translate <-2.5 * N_Finger_Thickness, N_Finger_Thickness, -2.5 * N_Finger_Thickness>
+	}
+	blob {
+		threshold 0.158
+		sphere {
+			<0, 0, -1.8 * N_Finger_Thickness>, N_Finger_Thickness * 1.6, 0.5
+		}
+		sphere {
+			<0, 0, 0>, N_Finger_Thickness * 1.6, 0.5
+		}
+		sphere {
+			<0, 0, 1.8 * N_Finger_Thickness>, N_Finger_Thickness * 1.6, 0.5
+		}
+		sphere {
+			<0, N_Arm_Thickness, 0>, N_Arm_Thickness * 1.2, 2
+			scale <0.5, 0.7, 1>
+		}
+	}
+}
+
+#declare O_BodyPart_Hand = object {
+	O_BodyPart_Hand_Fingers
+	//rotate A_Hand
+	translate <N_Arm_Thickness * 0.5, 0, 0>
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
+}
+
+
+
+
+//      _                                     _                 _     _   
+//     / \   _ __ _ __ ___     __ _ _ __   __| | __      ___ __(_)___| |_ 
+//    / _ \ | '__| '_ ` _ \   / _` | '_ \ / _` | \ \ /\ / / '__| / __| __|
+//   / ___ \| |  | | | | | | | (_| | | | | (_| |  \ V  V /| |  | \__ \ |_ 
+//  /_/   \_\_|  |_| |_| |_|  \__,_|_| |_|\__,_|   \_/\_/ |_|  |_|___/\__|
+
+
+
 #declare O_BodyPart_Arm = sphere_sweep {
 	linear_spline
 	2
 	<0, 0, 0>, N_Arm_Thickness * 1.5
 	<0, -N_Arm_Len, 0>, N_Arm_Thickness
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Wrist = sphere_sweep {
@@ -285,6 +436,11 @@
 	2
 	<0, 0, 0>, N_Arm_Thickness
 	<0, -N_Wrist_Len, 0>, N_Arm_Thickness
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
 
 #declare O_BodyPart_Armored_Arm = union {
@@ -294,6 +450,12 @@
 	#ifdef (P_BodyPart_ArmorPart_Arm)
 		object {
 			P_BodyPart_ArmorPart_Arm
+			translate <0, -N_Arm_Len, 0>
+		}
+	#end
+	#ifdef (P_BodyPart_ArmorPart_Shoulder)
+		object {
+			P_BodyPart_ArmorPart_Shoulder
 			translate <0, -N_Arm_Len, 0>
 		}
 	#end
@@ -314,14 +476,28 @@
 			P_BodyPart_ArmorPart_Elbow
 		}
 	#end
+	object {
+		O_BodyPart_Hand
+		translate <0, -N_Wrist_Len, 0>
+	}
 }
 
 #declare O_BodyPart_Arm_Left = union {
 	object {
 		O_BodyPart_Armored_Arm
 	}
-	object {
-		O_BodyPart_Armored_Wrist
+	union {
+		object {
+			O_BodyPart_Armored_Wrist
+		}
+		#ifdef (P_BodyPart_ArmorPart_Shield)
+			object {
+				P_BodyPart_ArmorPart_Shield
+				rotate <0, -90, 0>
+				rotate <-90, 0, 0>
+				translate <N_Arm_Thickness, -N_Wrist_Len, -0.25 * N_Wrist_Len>
+			}
+		#end
 		rotate AV_Wrist_Left
 		translate <0, -N_Arm_Len, 0>
 	}
@@ -333,15 +509,36 @@
 		O_BodyPart_Armored_Arm
 		scale <-1, 1, 1>
 	}
-	object {
-		O_BodyPart_Armored_Wrist
-		scale <-1, 1, 1>
+	union {
+		object {
+			O_BodyPart_Armored_Wrist
+			scale <-1, 1, 1>
+		}
+		#ifdef (P_BodyPart_ArmorPart_Weapon)
+			object {
+				P_BodyPart_ArmorPart_Weapon
+				rotate <-90, 0, 0>
+				translate <0, -N_Wrist_Len, 0>
+			}
+		#end
 		rotate AV_Wrist_Right
 		translate <0, -N_Arm_Len, 0>
 	}
 	rotate AV_Arm_Right
 }
 
+
+
+
+
+//   _   _                _                   _   _   _           _    
+//  | | | | ___  __ _  __| |   __ _ _ __   __| | | \ | | ___  ___| | __
+//  | |_| |/ _ \/ _` |/ _` |  / _` | '_ \ / _` | |  \| |/ _ \/ __| |/ /
+//  |  _  |  __/ (_| | (_| | | (_| | | | | (_| | | |\  |  __/ (__|   < 
+//  |_| |_|\___|\__,_|\__,_|  \__,_|_| |_|\__,_| |_| \_|\___|\___|_|\_\
+
+
+/*
 #declare O_BodyPart_Neck = sor {
 	7
 	<0.2 + 0, 		-1>
@@ -354,14 +551,58 @@
 	sturm
 	scale <1.2, -1, 0.5> * N_Neck_Len
 	translate <0, N_Neck_Len, 0>
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
 }
+*/
 
 #declare O_BodyPart_Head = ovus {
 	1
 	0.2
 	scale <1, -1, 1> * N_Head_Size
-	translate <0, N_Head_Size / 2, 0> 
+	rotate <30, 0, 0>
+	translate <0, 0.6 * N_Head_Size, 0> 
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
+	#ifdef (T_BodyPart_Face) 
+		texture {
+			T_BodyPart_Face
+			rotate <60, 0, 0>
+		}
+	#end
 }
+
+
+/*
+ _          _           
+| |__   ___| |_ __ ___  
+| '_ \ / _ \ | '_ ` _ \ 
+| | | |  __/ | | | | | |
+|_| |_|\___|_|_| |_| |_|
+
+*/
+
+#declare O_BodyPart_Armored_Head = union {
+	object {
+		O_BodyPart_Head
+	}
+	#ifdef (P_BodyPart_ArmorPart_Helm)
+		object {
+			P_BodyPart_ArmorPart_Helm
+			translate <0, -N_Head_Size / 2 + 0.1, 0>
+		}
+	#end
+}
+
+
+
+
 
 
 
@@ -370,12 +611,14 @@
 		O_BodyPart_Armored_Torso_F
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
+	/*
 	object {
 		O_BodyPart_Neck
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
+		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>		
 	}
+	*/
 	object {
-		O_BodyPart_Head
+		O_BodyPart_Armored_Head
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
 	}
 	object {
@@ -401,12 +644,14 @@
 		O_BodyPart_Armored_Torso_M
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
+	/*
 	object {
 		O_BodyPart_Neck
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
+	*/
 	object {
-		O_BodyPart_Head
+		O_BodyPart_Armored_Head
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
 	}
 	object {

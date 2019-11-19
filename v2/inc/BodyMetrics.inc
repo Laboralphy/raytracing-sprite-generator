@@ -35,6 +35,8 @@
 	#declare N_BodyPart_Boobs_Spacing = N_Shoulder_Len / 5;
 	#declare N_Leg_Thickness = N_BodyMetrics_Leg_Thickness;
 	#declare N_Arm_Thickness = N_BodyMetrics_Arm_Thickness;
+	#declare N_Finger_Thickness = N_BodyMetrics_Arm_Thickness * 0.35;
+	#declare N_Finger_Len = N_Arm_Thickness * 1.0;
 	#declare N_Belt_Height = N_Torso_Len / 10;
 
 	#ifndef (AV_Thigh_Left)

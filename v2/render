@@ -16,7 +16,7 @@ crop() {
 appendFileExtension() {
 	local sFileName="$1"
 	local sFileExt=".$2"
-	echo "${sFileName%$sFileExt}"
+	echo "${sFileName%$sFileExt}$sFileExt"
 }
 
 render() {
