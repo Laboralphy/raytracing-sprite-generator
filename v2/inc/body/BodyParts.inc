@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 
 #declare T_Default = texture {
@@ -257,7 +257,7 @@
 #declare O_BodyPart_Thigh = sphere_sweep {
 	linear_spline
 	2
-	<0, 0, 0>, N_Leg_Thickness
+	<0, 0, 0>, N_Leg_Thickness * 1.1
 	<0, -N_Thigh_Len, 0>, N_Leg_Thickness
 	#ifdef (T_BodyPart_Skin)
 		texture {
@@ -282,7 +282,7 @@
 	linear_spline
 	2
 	<0, 0, 0>, N_Leg_Thickness
-	<0, -N_Shin_Len, 0>, N_Leg_Thickness
+	<0, -N_Shin_Len, 0>, N_Leg_Thickness * 0.8
 	#ifdef (T_BodyPart_Skin)
 		texture {
 			T_BodyPart_Skin
@@ -671,3 +671,4 @@
 		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
 }
+

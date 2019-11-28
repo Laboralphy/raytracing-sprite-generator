@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 /* for a kneel, use N_BodyMetrics_Leg_Thickness */
 

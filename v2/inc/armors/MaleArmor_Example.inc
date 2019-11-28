@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 /* Armor goes from 0 to TorsoLen */
 

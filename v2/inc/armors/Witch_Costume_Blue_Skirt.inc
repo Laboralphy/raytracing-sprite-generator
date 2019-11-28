@@ -1,6 +1,19 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 #include "golds"
 #include "finish.inc"
+
+#declare T_Pleaded_Blue = texture {
+	pigment {
+		radial
+		color_map {
+			[0, Blue]
+			[0.5 Blue * 0.5]
+			[1 Blue]
+		}
+		frequency 16
+	}
+}
+
 
 #declare O_FemaleShirt_Base = blob {
 	threshold 0.3
@@ -151,73 +164,32 @@
 	scale <1, 0.9, 1.2>
 	scale V_BodyPart_Torso_Scale
 	translate 0.1 * y
-	texture {
-		pigment {
-			radial
-			color_map {
-				[0, Blue]
-				[0.5 Blue * 0.5]
-				[1 Blue]
-			}
-			frequency 16
-		}
-	}
+	texture { T_Pleaded_Blue }
 }
 
 #declare P_BodyPart_ArmorPart_Skirt = O_Skirt_Blue;
 
+
+
 /*
- _                 _   
-| |__   ___   ___ | |_ 
-| '_ \ / _ \ / _ \| __|
-| |_) | (_) | (_) | |_ 
-|_.__/ \___/ \___/ \__|
-                       
+     _                 _     _               
+ ___| |__   ___  _   _| | __| | ___ _ __ ___ 
+/ __| '_ \ / _ \| | | | |/ _` |/ _ \ '__/ __|
+\__ \ | | | (_) | |_| | | (_| |  __/ |  \__ \
+|___/_| |_|\___/ \__,_|_|\__,_|\___|_|  |___/
+
 */
 
-#declare O_Boot_Leather_Top = difference {
-	cylinder {
-		<0, 0, 0>
-		<0, N_Shin_Len * 0.7, 0>
-		N_Leg_Thickness * 0.9
-	}
-	box {
-		<0, 0, N_Leg_Thickness>
-		<N_Leg_Thickness, N_Leg_Thickness, -N_Leg_Thickness>
-		rotate z * 45
-		translate <0, (N_Shin_Len - N_Leg_Thickness) * 0.7, 0>
-	}
-}
-
-#declare O_Boot_Leather_Heel = intersection {
+#declare P_BodyPart_ArmorPart_Shoulder = union {
 	sphere {
-		<0, 0, 0>
-		N_Leg_Thickness
-		scale <1, 1, 2>
+		<0, N_Arm_Len, 0>
+		N_Arm_Thickness * 2.1
+		texture { T_Pleaded_Blue }
 	}
-	box {
-		<-N_Leg_Thickness * 2, 0, 0>
-		<N_Leg_Thickness * 2, N_Leg_Thickness * 2, -N_Leg_Thickness * 2>
-	}
-	translate -N_Leg_Thickness * y
-}
-
-// mauvais orthographe (majuscule errante)
-#declare P_BodyPart_ArmorPart_Shin = union {
-	object {
-		O_Boot_Leather_Top
-	}
-	object {
-		O_Boot_Leather_Heel
-	}
-	
-	texture {
-		pigment {
-			Gray05
-		}
-		finish {
-			Phong_Glossy
-		}
+	cylinder {
+		<0, N_Arm_Len, 0>
+		<0, N_Arm_Len * 0.5, 0>
+		N_Arm_Thickness * 1.5
+		texture { T_Pleaded_Blue }
 	}
 }
-

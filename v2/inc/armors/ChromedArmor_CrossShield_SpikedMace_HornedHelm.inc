@@ -21,7 +21,7 @@ weapon : mace with spherical spiked head
 #include "colors.inc"
 #include "metals.inc"
 #include "woods.inc"
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 #declare O_Armor_Spike = cone {
 	<0, 0, 0>

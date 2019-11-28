@@ -12,7 +12,7 @@
 */
 
 #include "inc/Camera.inc"
-#include "inc/RunFramesKnight.inc"
+#include "inc/frames/knight.inc"
 #include "inc/armors/ChromedArmor_CrossShield_SpikedMace_HornedHelm"
 #declare C_Skin = color rgb 0.1;
 #declare T_BodyPart_Skin = texture {
@@ -29,7 +29,7 @@
 		rotate <10, 0, 0>
 	}
 }
-#include "inc/BodyParts.inc"
+#include "inc/body/BodyParts.inc"
 
 #declare O_Character = object {
 	O_BodyPart_Body_M

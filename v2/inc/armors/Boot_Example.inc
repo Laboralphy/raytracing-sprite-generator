@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 /* for a boot, use N_BodyMetrics_Leg_Thickness and N_Shin_Len */
 

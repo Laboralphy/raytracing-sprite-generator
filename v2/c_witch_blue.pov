@@ -13,7 +13,7 @@
 
 #include "colors.inc"
 #include "inc/Camera.inc"
-#include "inc/RunFramesWitch.inc"
+#include "inc/frames/witch.inc"
 #include "inc/HairRepository.inc"
 #include "inc/armors/Wizard_Hat.inc"
 
@@ -33,6 +33,8 @@
 	}
 }
 #include "inc/armors/Witch_Costume_Blue_Skirt"
+#include "inc/armors/Wand_Ruby_Sphere"
+#include "inc/armors/Wrist_Golden_Bracers"
 
 #declare P_BodyPart_ArmorPart_Helm = union {
 	object {
@@ -47,7 +49,7 @@
 }
 
 
-#include "inc/BodyParts.inc"
+#include "inc/body/BodyParts.inc"
 
 #declare O_Character = object {
 	O_BodyPart_Body_F

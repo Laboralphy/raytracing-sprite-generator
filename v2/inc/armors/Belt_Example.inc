@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 /* Bel start at 0*y and goes above y plane / diameter is around  N_Shoulder_Len / 2.25 */
 

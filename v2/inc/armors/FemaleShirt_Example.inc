@@ -1,4 +1,4 @@
-#include "inc/BodyMetrics.inc"
+#include "inc/body/BodyMetrics.inc"
 
 #declare O_FemaleShirt_Base = blob {
 	threshold 0.3
