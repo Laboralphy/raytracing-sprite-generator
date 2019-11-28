@@ -14,18 +14,26 @@
 #include "inc/Camera.inc"
 #include "inc/frames/dummy.inc"
 #declare C_Skin = color rgb 0.1;
-#declare T_BodyPart_Skin = texture {
+
+#declare T_Skin_None = texture {
+	pigment {
+		color rgbt <0, 0, 0, 1>
+	}
+}
+
+#declare T_Skin_Blood = texture {
 	pigment {
 		agate
 		agate_turb 0.5
 		color_map {
 			[0 color rgb <0.15, 0, 0>]
-			[0.1 C_Skin * 0.1]
-			[0.5 C_Skin]
+			[0.25 C_Skin * 0.1]
+			[0.95 C_Skin]
 		}
 	}
-	translate <0, 0, -0.2>
 }
+
+#declare T_BodyPart_Skin = T_Skin_None
 
 #declare T_BodyPart_Face = texture {
 	pigment {
@@ -38,15 +46,27 @@
 }
 #include "inc/body/BodyParts.inc"
 
-#declare O_Character = object {
+#declare O_Character_1 = object {
+	O_BodyPart_Body_M
+}
+
+#declare T_BodyPart_Skin = T_Skin_Blood
+
+#declare O_Character_2 = object {
 	O_BodyPart_Body_M
 	texture {
 		T_Default
 	}
 }
 
-object {
-	O_Character
+
+union {
+	object {
+		O_Character_1
+	}
+	object {
+		O_Character_2
+	}
 	rotate y * N_Animation_Angle
 	translate y * N_OffsetBody
 }

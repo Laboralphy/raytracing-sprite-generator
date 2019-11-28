@@ -13,7 +13,12 @@
 #declare B_Raise_Shield = 0;
 
 #declare C_Skin = color rgb <0.1, 0.1, 0.1>;
-#declare T_Skin = texture {
+#declare T_Skin_None = texture {
+	pigment {
+		color rgbf <1, 0, 0, 0.5>
+	}
+}
+#declare T_Skin_Blood = texture {
 	pigment {
 		agate
 		agate_turb 0.5
