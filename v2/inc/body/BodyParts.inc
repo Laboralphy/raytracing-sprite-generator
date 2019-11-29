@@ -79,7 +79,7 @@
 	/* neck */
 	cylinder {
 		<0, N_Torso_Len, 0>
-		<0, 2 * N_Torso_Len, 0>
+		<0, N_Torso_Len + N_Neck_Len, 0>
 		N_Shoulder_Len / 5
 		1
 		scale V_BodyPart_Torso_Scale
@@ -611,12 +611,6 @@
 		O_BodyPart_Armored_Torso_F
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
-	/*
-	object {
-		O_BodyPart_Neck
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>		
-	}
-	*/
 	object {
 		O_BodyPart_Armored_Head
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
@@ -644,12 +638,6 @@
 		O_BodyPart_Armored_Torso_M
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
-	/*
-	object {
-		O_BodyPart_Neck
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
-	}
-	*/
 	object {
 		O_BodyPart_Armored_Head
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>

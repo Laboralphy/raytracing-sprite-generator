@@ -13,13 +13,7 @@
 
 #include "inc/Camera.inc"
 #include "inc/frames/dummy.inc"
-#declare C_Skin = color rgb 0.1;
-
-#declare T_Skin_None = texture {
-	pigment {
-		color rgbt <0, 0, 0, 1>
-	}
-}
+#declare C_Skin = color rgb <0.25, 0.1, 0.15>;
 
 #declare T_Skin_Blood = texture {
 	pigment {
@@ -33,8 +27,6 @@
 	}
 }
 
-#declare T_BodyPart_Skin = T_Skin_None
-
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
@@ -44,29 +36,20 @@
 		rotate <10, 0, 0>
 	}
 }
+
+#declare T_BodyPart_Skin = T_Skin_Blood
+
+#include "inc/armors/Short_Trousers_Ripped_Blueish"
+
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character_1 = object {
 	O_BodyPart_Body_M
 }
 
-#declare T_BodyPart_Skin = T_Skin_Blood
 
-#declare O_Character_2 = object {
-	O_BodyPart_Body_M
-	texture {
-		T_Default
-	}
-}
-
-
-union {
-	object {
-		O_Character_1
-	}
-	object {
-		O_Character_2
-	}
+object {
+	O_Character_1
 	rotate y * N_Animation_Angle
 	translate y * N_OffsetBody
 }
