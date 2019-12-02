@@ -44,7 +44,7 @@
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character_1 = object {
-	O_BodyPart_Body_M
+	O_BodyPart_Armored_Body_M
 }
 
 

@@ -99,7 +99,7 @@
 
 
 
-#declare P_LegLeftNaked = union {
+#declare P_LegLeft_Naked = union {
 	sphere_sweep {
 		linear_spline
 		3
@@ -118,9 +118,9 @@
 	}
 }
 
-#declare P_LegLeft = union {
+#declare P_LegLeft_Armored = union {
 	object {
-		P_LegLeftNaked
+		P_LegLeft_Naked
 	}
 	object {
 		P_Legging
@@ -129,7 +129,7 @@
 }
 
 
-#declare P_LegRightNaked = union {
+#declare P_LegRight_Naked = union {
 	sphere_sweep {
 		linear_spline
 		3
@@ -149,9 +149,9 @@
 }
 
 
-#declare P_LegRight = union {
+#declare P_LegRight_Armored = union {
 	object {
-		P_LegRightNaked
+		P_LegRight_Naked
 	}
 	object {
 		P_Legging
@@ -180,9 +180,9 @@
 	}
 #end
 
-#declare P_LegBootLeft = union {
+#declare P_LegBootLeft_Armored = union {
 	object {
-		P_LegLeft
+		P_LegLeft_Armored
 	}
 	object {
 		P_Boot
@@ -191,9 +191,9 @@
 	}
 }
 
-#declare P_LegBootRight = union {
+#declare P_LegBootRight_Armored = union {
 	object {
-		P_LegRight
+		P_LegRight_Armored
 	}
 	object {
 		P_Boot
@@ -205,13 +205,13 @@
 
 
 
-#declare P_Legs = union {
+#declare P_Legs_Armored = union {
 	object {
-		P_LegBootLeft
+		P_LegBootLeft_Armored
 		translate <-1.1, 0, 0>
 	}
 	object {
-		P_LegBootRight
+		P_LegBootRight_Armored
 		translate <1.1, 0, 0>
 	}
 }

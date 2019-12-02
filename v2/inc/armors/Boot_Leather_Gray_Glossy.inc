@@ -13,7 +13,7 @@
 	cylinder {
 		<0, -N_Leg_Thickness, 0>
 		<0, N_Shin_Len * 0.7, 0>
-		N_Leg_Thickness * 1.1
+		N_Leg_Thickness * 1.15
 	}
 	box {
 		<0, 0, N_Leg_Thickness>
@@ -26,7 +26,7 @@
 #declare O_Boot_Leather_Heel = intersection {
 	sphere {
 		<0, 0, 0>
-		N_Leg_Thickness * 1.1
+		N_Leg_Thickness * 1.15
 		scale <1, 1, 2>
 	}
 	box {

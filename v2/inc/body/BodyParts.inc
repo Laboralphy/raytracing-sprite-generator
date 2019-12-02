@@ -7,6 +7,8 @@
 	}
 }
 
+#declare NULL_OBJECT = sphere { 0, 0 }
+
 
 
 
@@ -104,10 +106,7 @@
 	#end
 }
 
-#declare O_BodyPart_Armored_Torso_M = union {
-	object {
-		O_BodyPart_Torso_M
-	}
+#declare O_BodyPart_Torso_M_Armor = union {
 	#ifdef (P_BodyPart_ArmorPart_Skirt)
 		object {
 			P_BodyPart_ArmorPart_Skirt
@@ -125,6 +124,16 @@
 			P_BodyPart_ArmorPart_Chest
 		}
 	#end
+}
+
+
+#declare O_BodyPart_Armored_Torso_M = union {
+	object {
+		O_BodyPart_Torso_M
+	}
+	object {
+		O_BodyPart_Torso_M_Armor
+	}
 }
 
 
@@ -219,10 +228,7 @@
 	#end
 }
 
-#declare O_BodyPart_Armored_Torso_F = union {
-	object {
-		O_BodyPart_Torso_F
-	}
+#declare O_BodyPart_Torso_F_Armor = union {
 	#ifdef (P_BodyPart_ArmorPart_Skirt)
 		object {
 			P_BodyPart_ArmorPart_Skirt
@@ -240,6 +246,15 @@
 			P_BodyPart_ArmorPart_Chest
 		}
 	#end
+}
+
+#declare O_BodyPart_Armored_Torso_F = union {
+	object {
+		O_BodyPart_Torso_F
+	}
+	object {
+		O_BodyPart_Torso_F_Armor
+	}
 }
 
 
@@ -266,16 +281,22 @@
 	#end
 }
 
+#declare O_BodyPart_Thigh_Armor = object {
+	#ifdef (P_BodyPart_ArmorPart_Thigh)
+		P_BodyPart_ArmorPart_Thigh
+	#else
+		NULL_OBJECT
+	#end
+	translate <0, -N_Thigh_Len, 0>
+}
+
 #declare O_BodyPart_Armored_Thigh = union {
 	object {
 		O_BodyPart_Thigh
 	}
-	#ifdef (P_BodyPart_ArmorPart_Thigh)
-		object {
-			P_BodyPart_ArmorPart_Thigh
-			translate <0, -N_Thigh_Len, 0>
-		}
-	#end
+	object {
+		O_BodyPart_Thigh_Armor
+	}
 }
 
 #declare O_BodyPart_Shin = sphere_sweep {
@@ -290,10 +311,7 @@
 	#end
 }
 
-#declare O_BodyPart_Armored_Shin = union {
-	object {
-		O_BodyPart_Shin
-	}
+#declare O_BodyPart_Shin_Armor = union {
 	#ifdef (P_BodyPart_ArmorPart_Shin)
 		object {
 			P_BodyPart_ArmorPart_Shin
@@ -307,7 +325,16 @@
 	#end
 }
 
-#declare O_BodyPart_Leg_Left = union {
+#declare O_BodyPart_Armored_Shin = union {
+	object {
+		O_BodyPart_Shin
+	}
+	object {
+		O_BodyPart_Shin_Armor
+	}
+}
+
+#declare O_BodyPart_Armored_Leg_Left = union {
 	object {
 		O_BodyPart_Armored_Thigh
 	}
@@ -319,7 +346,7 @@
 	rotate AV_Thigh_Left
 }
 
-#declare O_BodyPart_Leg_Right = union {
+#declare O_BodyPart_Armored_Leg_Right = union {
 	object {
 		O_BodyPart_Armored_Thigh
 		scale <-1, 1, 1>
@@ -431,22 +458,7 @@
 	#end
 }
 
-#declare O_BodyPart_Wrist = sphere_sweep {
-	linear_spline
-	2
-	<0, 0, 0>, N_Arm_Thickness
-	<0, -N_Wrist_Len, 0>, N_Arm_Thickness
-	#ifdef (T_BodyPart_Skin)
-		texture {
-			T_BodyPart_Skin
-		}
-	#end
-}
-
-#declare O_BodyPart_Armored_Arm = union {
-	object {
-		O_BodyPart_Arm
-	}
+#declare O_BodyPart_Arm_Armor = union {
 	#ifdef (P_BodyPart_ArmorPart_Arm)
 		object {
 			P_BodyPart_ArmorPart_Arm
@@ -461,10 +473,34 @@
 	#end
 }
 
-#declare O_BodyPart_Armored_Wrist = union {
+#declare O_BodyPart_Armored_Arm = union {
 	object {
-		O_BodyPart_Wrist
+		O_BodyPart_Arm
 	}
+	object {
+		O_BodyPart_Arm_Armor
+	}
+}
+
+#declare O_BodyPart_Wrist = union {
+	sphere_sweep {
+		linear_spline
+		2
+		<0, 0, 0>, N_Arm_Thickness
+		<0, -N_Wrist_Len, 0>, N_Arm_Thickness
+		#ifdef (T_BodyPart_Skin)
+		#end
+	}
+	object {
+		O_BodyPart_Hand
+		translate <0, -N_Wrist_Len, 0>
+	}
+	texture {
+		T_BodyPart_Skin
+	}
+}
+
+#declare O_BodyPart_Wrist_Armor = union {
 	#ifdef (P_BodyPart_ArmorPart_Wrist)
 		object {
 			P_BodyPart_ArmorPart_Wrist
@@ -476,13 +512,18 @@
 			P_BodyPart_ArmorPart_Elbow
 		}
 	#end
+}
+
+#declare O_BodyPart_Armored_Wrist = union {
 	object {
-		O_BodyPart_Hand
-		translate <0, -N_Wrist_Len, 0>
+		O_BodyPart_Wrist
+	}
+	object {
+		O_BodyPart_Wrist_Armor
 	}
 }
 
-#declare O_BodyPart_Arm_Left = union {
+#declare O_BodyPart_Armored_Arm_Left = union {
 	object {
 		O_BodyPart_Armored_Arm
 	}
@@ -504,7 +545,21 @@
 	rotate AV_Arm_Left
 }
 
-#declare O_BodyPart_Arm_Right = union {
+#declare O_BodyPart_Unarmored_Arm_Left = union {
+	object {
+		O_BodyPart_Arm
+	}
+	union {
+		object {
+			O_BodyPart_Wrist
+		}
+		rotate AV_Wrist_Left
+		translate <0, -N_Arm_Len, 0>
+	}
+	rotate AV_Arm_Left
+}
+
+#declare O_BodyPart_Armored_Arm_Right = union {
 	object {
 		O_BodyPart_Armored_Arm
 		scale <-1, 1, 1>
@@ -521,6 +576,22 @@
 				translate <0, -N_Wrist_Len, 0>
 			}
 		#end
+		rotate AV_Wrist_Right
+		translate <0, -N_Arm_Len, 0>
+	}
+	rotate AV_Arm_Right
+}
+
+#declare O_BodyPart_Unarmored_Arm_Right = union {
+	object {
+		O_BodyPart_Arm
+		scale <-1, 1, 1>
+	}
+	union {
+		object {
+			O_BodyPart_Wrist
+			scale <-1, 1, 1>
+		}
 		rotate AV_Wrist_Right
 		translate <0, -N_Arm_Len, 0>
 	}
@@ -606,7 +677,7 @@
 
 
 
-#declare O_BodyPart_Body_F = union {
+#declare O_BodyPart_Armored_Body_F = union {
 	object {
 		O_BodyPart_Armored_Torso_F
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
@@ -616,24 +687,24 @@
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
 	}
 	object {
-		O_BodyPart_Leg_Left
+		O_BodyPart_Armored_Leg_Left
 		translate <N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
 	object {
-		O_BodyPart_Leg_Right
+		O_BodyPart_Armored_Leg_Right
 		translate <-N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
 	object {
-		O_BodyPart_Arm_Left
+		O_BodyPart_Armored_Arm_Left
 		translate <N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
 	object {
-		O_BodyPart_Arm_Right
+		O_BodyPart_Armored_Arm_Right
 		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
 }
 
-#declare O_BodyPart_Body_M = union {
+#declare O_BodyPart_Armored_Body_M = union {
 	object {
 		O_BodyPart_Armored_Torso_M
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
@@ -643,19 +714,19 @@
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
 	}
 	object {
-		O_BodyPart_Leg_Left
+		O_BodyPart_Armored_Leg_Left
 		translate <N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
 	object {
-		O_BodyPart_Leg_Right
+		O_BodyPart_Armored_Leg_Right
 		translate <-N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
 	}
 	object {
-		O_BodyPart_Arm_Left
+		O_BodyPart_Armored_Arm_Left
 		translate <N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
 	object {
-		O_BodyPart_Arm_Right
+		O_BodyPart_Armored_Arm_Right
 		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
 }

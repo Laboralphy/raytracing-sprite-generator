@@ -32,7 +32,7 @@
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character = object {
-	O_BodyPart_Body_M
+	O_BodyPart_Armored_Body_M
 	texture {
 		T_Default
 	}

@@ -35,6 +35,7 @@
 #include "inc/armors/Witch_Costume_Blue_Skirt"
 #include "inc/armors/Wand_Ruby_Sphere"
 #include "inc/armors/Wrist_Golden_Bracers"
+#include "inc/armors/Boot_Leather_Gray_Glossy"
 
 #declare P_BodyPart_ArmorPart_Helm = union {
 	object {
@@ -52,7 +53,7 @@
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character = object {
-	O_BodyPart_Body_F
+	O_BodyPart_Armored_Body_F
 	texture {
 		T_Default
 	}
