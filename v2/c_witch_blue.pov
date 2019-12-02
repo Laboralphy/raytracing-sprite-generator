@@ -36,6 +36,7 @@
 #include "inc/armors/Wand_Ruby_Sphere"
 #include "inc/armors/Wrist_Golden_Bracers"
 #include "inc/armors/Boot_Leather_Gray_Glossy"
+#include "inc/armors/Belt_Brown_Leather_Gold_Round_Buckle"
 
 #declare P_BodyPart_ArmorPart_Helm = union {
 	object {

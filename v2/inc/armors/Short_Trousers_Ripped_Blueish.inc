@@ -20,7 +20,7 @@
 #declare O_Short_Trousers_Ripped_Blueish = union {
 	cone {
 		<0, 0, 0>
-		0.47 * N_Shoulder_Len
+		0.425 * N_Shoulder_Len
 		<0, -N_Thigh_Len / 3, 0>
 		0.5 * N_Shoulder_Len
 	}
@@ -40,9 +40,6 @@
 }
 
 
-
-
-
 #declare P_BodyPart_ArmorPart_Skirt = object {
 	O_Short_Trousers_Ripped_Blueish
 	texture {
@@ -56,3 +53,66 @@
 		T_Jeans
 	}
 }
+
+
+
+
+#declare O_Kneel_Trousers_Ripped_Blueish_Leg = sphere {
+	<0, 0, 0>
+	N_BodyMetrics_Leg_Thickness * 1.3
+	texture {
+		T_Jeans
+	}
+}
+
+#declare P_BodyPart_ArmorPart_Kneel = O_Kneel_Trousers_Ripped_Blueish_Leg;
+
+
+#declare O_Shin_Trousers_Ripped_Blueish_Extruder_0 = box {
+	<-10, 0, 0>
+	<10, -20, 20>
+	rotate x * 45
+	scale <1, 1, 0.5>
+}
+
+#declare O_Shin_Trousers_Ripped_Blueish_Extruder_1 = union {
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		translate <0, N_Shin_Len * 0.8, 0>
+	}
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		rotate y * 30
+		translate <0, N_Shin_Len * 0.9, 0>
+	}
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		rotate y * 75
+		translate <0, N_Shin_Len * 0.8, 0>
+	}
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		rotate y * 100
+		translate <0, N_Shin_Len * 0.9, 0>
+	}
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		rotate y * 133
+		translate <0, N_Shin_Len * 0.8, 0>
+	}
+}
+
+#declare P_BodyPart_ArmorPart_Shin = difference {
+	cylinder {
+		<0, N_Shin_Len, 0>
+		<0, N_Shin_Len * 0.7, 0>
+		N_Leg_Thickness * 1.3
+	}
+	object {
+		O_Shin_Trousers_Ripped_Blueish_Extruder_1
+	}
+	texture {
+		T_Jeans
+	}
+}
+
