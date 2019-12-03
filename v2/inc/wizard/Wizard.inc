@@ -74,14 +74,12 @@
 	object {
 		P_Hand
 		rotate <90, 0, 0>
-		scale <0.4, 0.4, 0.3>
 		translate <1.1, 1.45, -1.05>
 	}
 	object {
 		P_Hand
 		scale <-1, 1, 1>
 		rotate <90, 0, 0>
-		scale <0.4, 0.4, 0.3>
 		translate <-1.1, 1.45, -1.05>
 	}
 	object {

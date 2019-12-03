@@ -12,7 +12,7 @@
 */
 
 #include "inc/Camera.inc"
-#include "inc/frames/dummy.inc"
+#include "inc/frames/zombie.inc"
 #declare C_Skin = color rgb <0.25, 0.1, 0.15>;
 
 #declare T_Skin_Blood = texture {
@@ -41,6 +41,7 @@
 
 #include "inc/armors/Short_Trousers_Ripped_Blueish"
 #include "inc/armors/Belt_Thick_Dark_Leather_Iron_Round_Buckle"
+#include "inc/armors/Boot_Leather_Brown_Dirty"
 
 #include "inc/body/BodyParts.inc"
 

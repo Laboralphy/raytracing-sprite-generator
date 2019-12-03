@@ -495,9 +495,11 @@
 		O_BodyPart_Hand
 		translate <0, -N_Wrist_Len, 0>
 	}
+	#ifdef (T_BodyPart_Skin)
 	texture {
 		T_BodyPart_Skin
 	}
+	#end
 }
 
 #declare O_BodyPart_Wrist_Armor = union {
