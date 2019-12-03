@@ -646,7 +646,6 @@
 	#ifdef (T_BodyPart_Face) 
 		texture {
 			T_BodyPart_Face
-			rotate <60, 0, 0>
 		}
 	#end
 }

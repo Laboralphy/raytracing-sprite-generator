@@ -20,12 +20,12 @@
 		#declare A_KneelLeft = -30;
 		#declare A_LegRight = -15;
 		#declare A_KneelRight = -35;
-		
-		#declare A_ArmRight = 130;
-		#declare A_WristRight = 40;
-		
-		#declare A_ArmLeft = 0; // arm with shield
-		#declare A_WristLeft = 0;
+
+		#declare A_ArmRight = 90;
+		#declare A_WristRight = 20;
+		#declare A_ArmLeft = 85;
+		#declare A_WristLeft = 20;
+
 		#declare N_OffsetBody = -0.1;
 	#break
 
@@ -35,10 +35,12 @@
 		#declare A_KneelLeft = -40;
 		#declare A_LegRight = -30;
 		#declare A_KneelRight = -30;
-		#declare A_ArmRight = 15;
-		#declare A_WristRight = 45;
-		#declare A_ArmLeft = 90;
-		#declare A_WristLeft = 45;
+
+		#declare A_ArmRight = 85;
+		#declare A_WristRight = 15;
+		#declare A_ArmLeft = 70;
+		#declare A_WristLeft = 10;
+
 		#declare N_OffsetBody = -0.2;
 
 	#break

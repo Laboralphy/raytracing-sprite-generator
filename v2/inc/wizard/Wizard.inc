@@ -60,7 +60,8 @@
 		scale 0.25
 		rotate <100, 0, -20>
 		translate <0, 1.6, -1>
-	}	
+	}
+	scale 0.8
 }
 
 #declare O_Wizard_2 = union {
@@ -92,4 +93,5 @@
 		rotate <100, 0, -20>
 		translate <0, 1.55, -1>
 	}
+	scale 0.8
 }
