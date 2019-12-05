@@ -2,7 +2,7 @@
 
 /* Skirt start at 0*y and goes bellow y plane */
 
-#declare C_Jeans = color rgb <0.02, 0.04, 0.5>;
+#declare C_Jeans = color rgb <0.05, 0.09, 0.25>;
 
 #declare T_Jeans = texture {
 	pigment {
@@ -55,19 +55,6 @@
 }
 
 
-
-
-#declare O_Kneel_Trousers_Ripped_Blueish_Leg = sphere {
-	<0, 0, 0>
-	N_BodyMetrics_Leg_Thickness * 1.3
-	texture {
-		T_Jeans
-	}
-}
-
-#declare P_BodyPart_ArmorPart_Kneel = O_Kneel_Trousers_Ripped_Blueish_Leg;
-
-
 #declare O_Shin_Trousers_Ripped_Blueish_Extruder_0 = box {
 	<-10, 0, 0>
 	<10, -20, 20>
@@ -102,17 +89,41 @@
 	}
 }
 
-#declare P_BodyPart_ArmorPart_Shin = difference {
-	cylinder {
-		<0, N_Shin_Len, 0>
-		<0, N_Shin_Len * 0.7, 0>
+
+#declare O_Kneel_Trousers_Ripped_Blueish_Leg = sphere {
+	<0, 0, 0>
+	N_BodyMetrics_Leg_Thickness * 1.3
+	texture {
+		T_Jeans
+	}
+}
+
+
+#declare O_Shin_Trouser = difference {
+	cone {
+		<0, 0, 0>
 		N_Leg_Thickness * 1.3
+		<0, -N_Shin_Len * 0.4, 0>
+		N_Leg_Thickness * 1.1
 	}
 	object {
 		O_Shin_Trousers_Ripped_Blueish_Extruder_1
+		translate <0, -N_Shin_Len, 0>
 	}
 	texture {
 		T_Jeans
 	}
 }
+
+
+
+#declare P_BodyPart_ArmorPart_Kneel = union {
+	object {
+		O_Kneel_Trousers_Ripped_Blueish_Leg
+	}
+	object {
+		O_Shin_Trouser
+	}
+}
+
 

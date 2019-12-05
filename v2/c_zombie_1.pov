@@ -41,6 +41,7 @@
 #include "inc/armors/Short_Trousers_Ripped_Blueish"
 #include "inc/armors/Belt_Thick_Dark_Leather_Iron_Round_Buckle"
 #include "inc/armors/Boot_Leather_Brown_Dirty"
+#include "inc/armors/MaleShirt_Ripped_Dirty"
 
 #include "inc/body/BodyParts.inc"
 
