@@ -307,7 +307,7 @@ weapon : mace with spherical spiked head
 */
 
 
-#declare O_Helm_Extruder = union {
+#declare O_Helm_Cutter = union {
 	box {
 		<-0.666, 1, 0>
 		<0.666, 0.75, -2>
@@ -332,7 +332,7 @@ weapon : mace with spherical spiked head
 		sturm
 	}
 	object {
-		O_Helm_Extruder
+		O_Helm_Cutter
 	}
 	texture {
 		T_Armor
@@ -390,7 +390,7 @@ weapon : mace with spherical spiked head
 	rotate <-90, 0, 0>
 }
 
-#declare O_Shield_Extruder = object {
+#declare O_Shield_Cutter = object {
 	O_Shield_Base
 	scale <0.9, 0.9, 2>
 	translate <0, 0, 0>
@@ -420,7 +420,7 @@ weapon : mace with spherical spiked head
 			O_Shield_Base
 		}
 		object {
-			O_Shield_Extruder
+			O_Shield_Cutter
 		}
 		texture {
 			T_Brass_1A

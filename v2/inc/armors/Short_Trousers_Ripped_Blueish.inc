@@ -55,35 +55,35 @@
 }
 
 
-#declare O_Shin_Trousers_Ripped_Blueish_Extruder_0 = box {
+#declare O_Shin_Trousers_Ripped_Blueish_Cutter_0 = box {
 	<-10, 0, 0>
 	<10, -20, 20>
 	rotate x * 45
 	scale <1, 1, 0.5>
 }
 
-#declare O_Shin_Trousers_Ripped_Blueish_Extruder_1 = union {
+#declare O_Shin_Trousers_Ripped_Blueish_Cutter_1 = union {
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		O_Shin_Trousers_Ripped_Blueish_Cutter_0
 		translate <0, N_Shin_Len * 0.8, 0>
 	}
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		O_Shin_Trousers_Ripped_Blueish_Cutter_0
 		rotate y * 30
 		translate <0, N_Shin_Len * 0.9, 0>
 	}
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		O_Shin_Trousers_Ripped_Blueish_Cutter_0
 		rotate y * 75
 		translate <0, N_Shin_Len * 0.8, 0>
 	}
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		O_Shin_Trousers_Ripped_Blueish_Cutter_0
 		rotate y * 100
 		translate <0, N_Shin_Len * 0.9, 0>
 	}
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_0
+		O_Shin_Trousers_Ripped_Blueish_Cutter_0
 		rotate y * 133
 		translate <0, N_Shin_Len * 0.8, 0>
 	}
@@ -107,7 +107,7 @@
 		N_Leg_Thickness * 1.1
 	}
 	object {
-		O_Shin_Trousers_Ripped_Blueish_Extruder_1
+		O_Shin_Trousers_Ripped_Blueish_Cutter_1
 		translate <0, -N_Shin_Len, 0>
 	}
 	texture {

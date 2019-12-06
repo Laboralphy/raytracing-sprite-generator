@@ -1,6 +1,6 @@
 #include "inc/body/BodyMetrics.inc"
 
-#declare C_Shirt_Dirty = color rgb <0.2, 0.28, 0.2>;
+#declare C_Shirt_Dirty = color rgb <0.15, 0.35, 0.15>;
 
 #declare T_Shirt_Dirty = texture {
 	pigment {

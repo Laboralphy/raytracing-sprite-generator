@@ -23,7 +23,7 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/k_face.png"
+			png "png/face_zombie.png"
 			map_type 1
 		}
 		rotate <10, 0, 0>

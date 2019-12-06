@@ -21,7 +21,7 @@
 
 
 #declare O_BodyPart_Torso_M = blob {
-	threshold 0.3
+	threshold N_BodyMetrics_Blob_Threshold
 	/* bottom */
 	sphere {
 		0
@@ -138,7 +138,7 @@
 
 
 #declare O_BodyPart_Torso_F = blob {
-	threshold 0.3
+	threshold N_BodyMetrics_Blob_Threshold
 	/* bottom */
 	sphere {
 		0

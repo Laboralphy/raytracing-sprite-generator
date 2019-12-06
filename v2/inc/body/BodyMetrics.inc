@@ -1,5 +1,9 @@
 #ifndef (BODY_METRICS_INCLUDED)
 	#declare BODY_METRICS_INCLUDED = 1;
+	
+	#ifndef (N_BodyMetrics_Blob_Threshold)
+		#declare N_BodyMetrics_Blob_Threshold = 0.3;
+	#end
 
 	/* global size of the body */
 	#ifndef (N_BodyMetrics_Value) 

@@ -14,7 +14,8 @@
 #include "colors.inc"
 #include "inc/Camera.inc"
 #include "inc/frames/witch.inc"
-#include "inc/HairRepository.inc"
+#include "inc/hair/Egg_Long_Curl"
+#include "inc/hair/Texture_Red"
 #include "inc/armors/Wizard_Hat.inc"
 
 // human skin color
@@ -27,7 +28,7 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/w_face.png"
+			png "png/face_witch.png"
 			map_type 1
 		}
 	}
@@ -40,9 +41,9 @@
 
 #declare P_BodyPart_ArmorPart_Helm = union {
 	object {
-		P_HairRepository_Egg_Long_Curl
+		P_Hair_Egg_Long_Curl
 		texture {
-			T_HairRepository_Red
+			T_Hair_Red
 		}
 	}
 	object {
