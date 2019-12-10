@@ -18,7 +18,7 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/face_zombie.png"
+			png "png/face_skull.png"
 			map_type 1
 		}
 	}
@@ -35,7 +35,14 @@
 
 #declare N_BodyMetrics_Arm_Thickness = 0.08;
 #declare N_BodyMetrics_Leg_Thickness = 0.10;
-#declare N_BodyMetrics_Blob_Threshold = 0.95;
+#declare N_BodyMetrics_Blob_Threshold = 3;
+
+#include "inc/skeleton/Body.inc"
+
+#declare P_BodyPart_Torso_Replace = object {
+	O_Skel_Spine
+	texture { T_BodyPart_Skin }
+}
 
 #include "inc/body/BodyParts.inc"
 

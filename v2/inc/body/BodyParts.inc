@@ -128,9 +128,15 @@
 
 
 #declare O_BodyPart_Armored_Torso_M = union {
-	object {
-		O_BodyPart_Torso_M
-	}
+	#ifdef (P_BodyPart_Torso_Replace)
+		object {
+			P_BodyPart_Torso_Replace
+		}
+	#else
+		object {
+			O_BodyPart_Torso_M
+		}
+	#end
 	object {
 		O_BodyPart_Torso_M_Armor
 	}
@@ -249,9 +255,15 @@
 }
 
 #declare O_BodyPart_Armored_Torso_F = union {
-	object {
-		O_BodyPart_Torso_F
-	}
+	#ifdef (P_BodyPart_Torso_Replace)
+		object {
+			P_BodyPart_Torso_Replace
+		}
+	#else
+		object {
+			O_BodyPart_Torso_F
+		}
+	#end
 	object {
 		O_BodyPart_Torso_F_Armor
 	}
@@ -661,9 +673,15 @@
 */
 
 #declare O_BodyPart_Armored_Head = union {
-	object {
-		O_BodyPart_Head
-	}
+	#ifdef (P_BodyPart_Head_Replace) 
+		object {
+			P_BodyPart_Head_Replace
+		}
+	#else
+		object {
+			O_BodyPart_Head
+		}
+	#end
 	#ifdef (P_BodyPart_ArmorPart_Helm)
 		object {
 			P_BodyPart_ArmorPart_Helm
