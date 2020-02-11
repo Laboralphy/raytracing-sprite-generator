@@ -1,5 +1,4 @@
 /*
-
                     _     _      
  _______  _ __ ___ | |__ (_) ___ 
 |_  / _ \| '_ ` _ \| '_ \| |/ _ \
@@ -30,9 +29,23 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/face_zombie.png"
-			map_type 1
+			png "png/zombie_face.png"
+			map_type 2
 		}
+		scale <1, 1.25, 1> 
+		translate -y * 0.5
+		rotate <-45, 0, 0>
+	}
+}
+
+#declare T_BodyPart_Torso = texture {
+	pigment {
+		image_map {
+			png "png/zombie_torso.png"
+			map_type 2
+		}
+		scale <1, 1.25, 1>
+		translate y * 0.25
 	}
 }
 

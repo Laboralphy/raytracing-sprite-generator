@@ -11,7 +11,6 @@
 
 
 
-
 //   _____                    
 //  |_   _|__  _ __ ___  ___  
 //    | |/ _ \| '__/ __|/ _ \ 
@@ -102,6 +101,11 @@
 	#ifdef (T_BodyPart_Skin)
 		texture {
 			T_BodyPart_Skin
+		}
+	#end
+	#ifdef (T_BodyPart_Torso)
+		texture {
+			T_BodyPart_Torso
 		}
 	#end
 }
@@ -230,6 +234,11 @@
 	#ifdef (T_BodyPart_Skin)
 		texture {
 			T_BodyPart_Skin
+		}
+	#end
+	#ifdef (T_BodyPart_Torso)
+		texture {
+			T_BodyPart_Torso
 		}
 	#end
 }
