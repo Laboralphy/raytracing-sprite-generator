@@ -23,10 +23,12 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/k_face.png"
-			map_type 1
+			png "png/knight_face.png"
+			map_type 2
 		}
-		rotate <10, 0, 0>
+		scale <1, 1.25, 1> 
+		translate -y * 0.5
+		rotate <-45, 0, 0>
 	}
 }
 #include "inc/body/BodyParts.inc"

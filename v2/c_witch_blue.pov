@@ -27,7 +27,7 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/w_face.png"
+			png "png/witch_face.png"
 			map_type 1
 		}
 	}
