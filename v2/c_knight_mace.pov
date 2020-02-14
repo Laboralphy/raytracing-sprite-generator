@@ -24,11 +24,8 @@
 	pigment {
 		image_map {
 			png "png/knight_face.png"
-			map_type 2
+			map_type 1
 		}
-		scale <1, 1.25, 1> 
-		translate -y * 0.5
-		rotate <-45, 0, 0>
 	}
 }
 #include "inc/body/BodyParts.inc"

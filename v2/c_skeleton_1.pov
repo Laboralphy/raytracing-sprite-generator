@@ -15,41 +15,61 @@
 	}
 }
 
+
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/face_skull.png"
-			map_type 1
+			png "png/skull_face_blue_eyes.png"
+			map_type 2
 		}
+		scale <1, 2, 1>
+		translate <0, -0.6, -0.25>
 	}
 }
 
 #declare T_BodyPart_Skin = T_Skin_Bones
 
-//#include "inc/armors/Short_Trousers_Ripped_Blueish"
-//#include "inc/armors/Belt_Thick_Dark_Leather_Iron_Round_Buckle"
-//#include "inc/armors/Boot_Leather_Brown_Dirty"
-//#include "inc/armors/MaleShirt_Ripped_Dirty"
-//#include "inc/hair/Zombie_Black"
-//#include "inc/hair/Texture_Black_Gray"
-
-#declare N_BodyMetrics_Arm_Thickness = 0.08;
-#declare N_BodyMetrics_Leg_Thickness = 0.10;
-#declare N_BodyMetrics_Blob_Threshold = 3;
-
 #include "inc/skeleton/Body.inc"
+#include "inc/skeleton/Waist"
+#include "inc/skeleton/Skull"
+#include "inc/skeleton/Shin_1"
 
-#declare P_BodyPart_Torso_Replace = object {
-	O_Skel_Spine
+#declare P_BodyPart_Torso_Replace = union {
+	object {
+		O_Skel_Spine
+	}
+	object {
+		P_Skel_Waist
+		scale 0.25
+	}
 	texture { T_BodyPart_Skin }
 }
 
+#declare P_BodyPart_Head_Replace = object {
+	object {
+		O_Skel_Skull
+	}
+	#ifdef (T_BodyPart_Skin)
+		texture {
+			T_BodyPart_Skin
+		}
+	#end
+	#ifdef (T_BodyPart_Face) 
+		texture {
+			T_BodyPart_Face
+		}
+	#end
+	scale N_Head_Size
+}
+
+#include "inc/armors/MaleShirt_Ripped_Dirty_Brownish"
+#include "inc/skeleton/Leg"
+#include "inc/skeleton/Wrist_1"
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character_1 = object {
 	O_BodyPart_Armored_Body_M
 }
-
 
 object {
 	O_Character_1
