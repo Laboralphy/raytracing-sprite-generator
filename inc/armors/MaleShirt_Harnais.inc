@@ -1,14 +1,9 @@
 #include "inc/body/BodyMetrics.inc"
+#include "metals"
+#include "finish"
 
-#declare O_MaleShirt_Base = blob {
+#local Harnais_Base = blob {
 	threshold 0.3
-	/* bottom */
-	sphere {
-		0
-		N_Shoulder_Len / 2
-		2
-		scale <1, 0.8, 0.55>
-	}
 	
 	/* bottom left */
 	sphere {
@@ -72,9 +67,77 @@
 	translate <0, -N_Torso_Len / 2, 0>
 	scale 1.05
 	translate <0, N_Torso_Len / 2, 0>
-	pigment {
-		color rgb <1, 0, 0>
+	texture {
+		pigment {
+			color rgb 0.05
+		}
 	}
 }
 
-#declare P_BodyPart_ArmorPart_Chest = O_MaleShirt_Base;
+#local Digger1 = box {
+	<0, 0, -10>
+	<10, -10, 10>
+	rotate 45 * z
+}
+
+#local Digger2 = union {
+	object {
+		Digger1
+	}
+	object {
+		Digger1
+		rotate 180 * z
+		translate <-0.2, 0, 0>
+	}
+	translate <0.1, 0, 0>
+} 
+
+#local Digger3 = union {
+	object {
+		Digger2
+	}
+	object {
+		Digger2
+		rotate 90 * z
+	}
+	cylinder {
+		<0, 0, -10>
+		<0, 0, 10>
+		0.1
+	}
+} 
+
+#local Harnais_Ring = torus {
+	0.11
+	0.025
+	rotate 90 * x
+	texture {
+		T_Brass_1A
+	}
+}
+
+#local Hanais1 = difference {
+	object {
+		Harnais_Base
+	}
+	object {
+		Digger3
+		translate y * 0.8
+	}
+}
+
+#local Harnais2 = union {
+	object {
+		Hanais1
+	}
+	object {
+		Harnais_Ring
+		translate <0, 0.81, -0.3>
+	}
+	object {
+		Harnais_Ring
+		translate <0, 0.81, 0.3>
+	}
+}
+
+#declare P_BodyPart_ArmorPart_Chest = Harnais2;

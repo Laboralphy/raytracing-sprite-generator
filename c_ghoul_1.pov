@@ -79,7 +79,7 @@
 }
 
 #include "inc/armors/Helm_Chaos_Horns"
-
+#include "inc/armors/MaleShirt_Harnais"
 #include "inc/body/BodyParts"
 
 #declare O_Character_1 = object {

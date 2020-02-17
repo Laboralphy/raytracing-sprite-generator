@@ -1,14 +1,10 @@
-/*
 
 
-@frames 5
-
-*/
-
-#include "inc/Camera.inc"
 #include "inc/MyShapes"
 #include "colors"
 #include "inc/body/BodyParts"
+
+#local N_Offset = 0.2;
 
 #declare WizardRobeTint = color rgb 0.05;
 #declare T_WizardHatFabric = texture {
@@ -94,7 +90,7 @@
 	scale 0.5
 }
 
-#local O_Razor_2 = union {
+#local O_Razor_2_1 = union {
 	object {
 		O_Razor_1
 	}
@@ -102,9 +98,52 @@
 		O_Razor_1
 		rotate <0, 39, 0>
 	}
+	object {
+		P_WizardRobeGarb
+		scale 0.99
+	}
+}
+
+#local O_Razor_2_2 = union {
+	object {
+		O_Razor_1
+	}
+	object {
+		O_Razor_1
+		rotate <0, 39, 0>
+	}
+	object {
+		P_WizardRobeGarb_2
+		scale 0.99
+	}
 }
 
 #local Ripped_Wizard_Robe = union {
+	difference {	
+		object {
+			P_WizardRobeGarb
+			scale <1, 1.5, 1>
+			texture { T_FabricWizardRobe }
+		}
+		object {
+			O_Razor_2_1
+			translate <0, -0.225, 0>
+		}
+	}
+	object {
+		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
+		translate <0.6, 1.1 + N_Offset / 2.25, -0.6>
+	}
+	object {
+		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
+		translate <-0.6, 1.1 + N_Offset / 2.25, -0.6>
+	}
+	scale <1.75, 2.25, 1.75>
+}
+
+#local Ripped_Wizard_Robe_2 = union {
 	difference {	
 		object {
 			P_WizardRobeGarb_2
@@ -112,7 +151,7 @@
 			texture { T_FabricWizardRobe }
 		}
 		object {
-			O_Razor_2
+			O_Razor_2_2
 			translate <0, -0.225, 0>
 		}
 	}
@@ -245,13 +284,35 @@
 	}
 }
 
-#local O_JackOLantern = union {
+#declare O_JackOLantern = union {
 	object {
 		Pumpkin_Head_3
-		translate y * 3.7
+		translate <0, 3.7 + N_Offset, 0>
 	}
 	object {
 		Ripped_Wizard_Robe
+	}
+	object {
+		P_Hand
+		rotate <90, 0, 80>
+		translate <1, 2.5 + N_Offset, -1>
+	}
+	object {
+		P_Hand
+		rotate <90, 0, 0>
+		translate <1, 2.5 + N_Offset, -1>
+		scale <-1, 0, 0>
+	}
+	scale 0.8
+}
+
+#declare O_JackOLantern_2 = union {
+	object {
+		Pumpkin_Head_3
+		translate <0, 3.7, 0>
+	}
+	object {
+		Ripped_Wizard_Robe_2
 	}
 	object {
 		P_Hand
@@ -265,11 +326,4 @@
 		scale <-1, 0, 0>
 	}
 	scale 0.8
-}
-
-#declare O_Object_1 = O_JackOLantern;
-
-object {
-	O_Object_1
-	rotate y * N_Animation_Angle
 }
