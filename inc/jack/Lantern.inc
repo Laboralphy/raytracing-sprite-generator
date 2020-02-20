@@ -1,11 +1,4 @@
-/*
-
-
-@frames 5
-
-*/
-
-#include "inc/Camera.inc"
+#include "inc/Animation.inc"
 #include "colors"
 #include "metals"
 #include "glass"
@@ -67,6 +60,22 @@
 
 #local O_Lantern_LightBulb = sphere {
 	0, 0.3
+	#switch (mod(N_Animation_Frame + 2, 4))
+		#case (1)
+			scale <0.8, 1.5, 0.8>
+			translate 0.1 * y
+		#break
+
+		#case (2)
+			scale <0.6, 2, 0.6>
+			translate 0.2 * y
+		#break
+
+		#case (3)
+			scale <0.8, 1.5, 0.8>
+			translate 0.1 * y
+		#break
+	#end
 	texture {
 		pigment {
 			C_LanternLight
@@ -98,14 +107,5 @@
 			O_Lantern_LightBulb
 		}
 	}
-	//translate <0, -7, 0>
-}
-
-
-
-#declare O_Object_1 = O_Lantern;
-
-object {
-	O_Object_1
-	rotate y * N_Animation_Angle
+	translate <0, -7, 0>
 }

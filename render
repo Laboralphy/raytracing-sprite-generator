@@ -86,7 +86,10 @@ renderAllDirections() {
 	local i
 	local nFrame
 	local nFrames=`expr 8 "*" "(" $nStop + 1 ")"`
-	echo "rendering $sFile - last frame : $nStop - total frames : $nFrames"
+	echo "rendering : $sFile"
+	echo "first frame : 0"
+	echo "last frame : $nStop"
+	echo "total frames : $nFrames"
 	for i in `seq 1 $nFrames`
 	do
 		echo -en "▷"

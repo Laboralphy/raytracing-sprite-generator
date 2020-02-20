@@ -3,8 +3,7 @@
 #include "inc/MyShapes"
 #include "colors"
 #include "inc/body/BodyParts"
-
-#local N_Offset = 0.2;
+#include "inc/jack/Lantern"
 
 #declare WizardRobeTint = color rgb 0.05;
 #declare T_WizardHatFabric = texture {
@@ -133,12 +132,37 @@
 	object {
 		P_WizardRobeManche
 		texture { T_FabricWizardRobe }
-		translate <0.6, 1.1 + N_Offset / 2.25, -0.6>
+		translate <0.6, 1.2, -0.6>
 	}
 	object {
 		P_WizardRobeManche
 		texture { T_FabricWizardRobe }
-		translate <-0.6, 1.1 + N_Offset / 2.25, -0.6>
+		translate <-0.6, 1.2, -0.6>
+	}
+	scale <1.75, 2.25, 1.75>
+}
+
+#local Ripped_Wizard_Robe_15 = union {
+	difference {	
+		object {
+			P_WizardRobeGarb_2
+			scale <0.98, 1.55, 0.98>
+			texture { T_FabricWizardRobe }
+		}
+		object {
+			O_Razor_2_1
+			translate <0, -0.225, 0>
+		}
+	}
+	object {
+		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
+		translate <0.6, 1.15, -0.6>
+	}
+	object {
+		P_WizardRobeManche
+		texture { T_FabricWizardRobe }
+		translate <-0.6, 1.15, -0.6>
 	}
 	scale <1.75, 2.25, 1.75>
 }
@@ -287,7 +311,7 @@
 #declare O_JackOLantern = union {
 	object {
 		Pumpkin_Head_3
-		translate <0, 3.7 + N_Offset, 0>
+		translate <0, 3.9, 0>
 	}
 	object {
 		Ripped_Wizard_Robe
@@ -295,13 +319,45 @@
 	object {
 		P_Hand
 		rotate <90, 0, 80>
-		translate <1, 2.5 + N_Offset, -1>
+		translate <1, 2.7, -1>
 	}
 	object {
 		P_Hand
 		rotate <90, 0, 0>
-		translate <1, 2.5 + N_Offset, -1>
+		translate <1, 2.7, -1>
 		scale <-1, 0, 0>
+	}
+	object {
+		O_Lantern
+		scale 0.2
+		translate <1, 2.75, -1.2>
+	}
+	scale 0.8
+}
+
+#declare O_JackOLantern_15 = union {
+	object {
+		Pumpkin_Head_3
+		translate <0, 3.8, 0>
+	}
+	object {
+		Ripped_Wizard_Robe_15
+	}
+	object {
+		P_Hand
+		rotate <90, 0, 80>
+		translate <1, 2.6, -1>
+	}
+	object {
+		P_Hand
+		rotate <90, 0, 0>
+		translate <1, 2.6, -1>
+		scale <-1, 0, 0>
+	}
+	object {
+		O_Lantern
+		scale 0.2
+		translate <1, 2.65, -1.2>
 	}
 	scale 0.8
 }
@@ -324,6 +380,11 @@
 		rotate <90, 0, 0>
 		translate <1, 2.5, -1>
 		scale <-1, 0, 0>
+	}
+	object {
+		O_Lantern
+		scale 0.2
+		translate <1, 2.55, -1.2>
 	}
 	scale 0.8
 }
