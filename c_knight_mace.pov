@@ -13,7 +13,10 @@
 
 #include "inc/Camera.inc"
 #include "inc/frames/knight.inc"
-#include "inc/armors/ChromedArmor_CrossShield_SpikedMace_HornedHelm"
+#include "inc/armors/ChromedArmor_1"
+#include "inc/weapons/Weapon_Crossed_Shield"
+#include "inc/weapons/Weapon_Spiked_Mace"
+
 #declare C_Skin = color rgb 0.1;
 #declare T_BodyPart_Skin = texture {
 	pigment {

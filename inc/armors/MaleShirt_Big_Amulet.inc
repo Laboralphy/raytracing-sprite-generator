@@ -135,20 +135,35 @@
 	}
 }
 
-#local MegaGem = sphere {
-  <0, 0.8, -0.3>
-  0.1
-  texture {
-    pigment {
-      Col_Glass_Ruby
-    }
-    finish {
-      F_Glass5
-    }
+#local T_Ruby_Gem = texture {
+  pigment {
+    Col_Glass_Ruby
+  }
+  finish {
+    F_Glass5
   }
 }
 
-#local HarnaisCollarGold = intersection {
+
+#local MegaGem = sphere {
+  <0, 0.8, -0.3>
+  0.1
+}
+
+#local MegaGem_Ecrin = difference {
+  sphere {
+    <0, 0.8, -0.2>
+    0.13
+  }
+  object {
+    MegaGem
+  }
+  texture {
+    T_Amulet_Gold
+  }
+}
+
+#local HarnaisCollarGold_1 = intersection {
 	object {
 		Harnais_Base
     texture {
@@ -158,6 +173,15 @@
 	object {
 		Digger1
 		translate y * 0.8
+	}
+}
+
+#local HarnaisCollarGold = difference {
+	object {
+    HarnaisCollarGold_1
+	}
+	object {
+    MegaGem
 	}
 }
 
@@ -174,9 +198,6 @@
 	}
 }
 
-
-
-
 #local Harnais2 = union {
 	object {
 		HarnaisCollarGold
@@ -185,7 +206,13 @@
 		HarnaisCollarLapis
 	}
   object {
+    MegaGem_Ecrin
+  }
+  object {
     MegaGem
+    texture {
+      T_Ruby_Gem
+    }
   }
 }
 

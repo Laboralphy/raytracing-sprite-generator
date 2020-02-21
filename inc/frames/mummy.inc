@@ -22,10 +22,10 @@
 		#declare A_LegRight = 8;
 		#declare A_KneelRight = -20;
 
-		#declare A_ArmRight = 90;
-		#declare A_WristRight = 20;
-		#declare A_ArmLeft = 85;
-		#declare A_WristLeft = 20;
+		#declare A_ArmRight = 130;
+		#declare A_WristRight = 40;
+		#declare A_ArmLeft = -30;
+		#declare A_WristLeft = 110;
 
 		#declare N_OffsetBody = 0;
 	#break
@@ -37,54 +37,70 @@
 		#declare A_LegRight = 8;
 		#declare A_KneelRight = -20;
 
-		#declare A_ArmRight = 85;
-		#declare A_WristRight = 15;
-		#declare A_ArmLeft = 70;
-		#declare A_WristLeft = 10;
+		#declare A_ArmRight = 15;
+		#declare A_WristRight = 45;
+		#declare A_ArmLeft = -40;
+		#declare A_WristLeft = 130;
 
 		#declare N_OffsetBody = 0;
 
 	#break
 
-	#case (3)
+  #case (3)
+		// ATTACK 3
+		#declare A_LegLeft = 10;
+		#declare A_KneelLeft = -20;
+		#declare A_LegRight = 8;
+		#declare A_KneelRight = -20;
+
+		#declare A_ArmRight = 10;
+		#declare A_WristRight = 35;
+		#declare A_ArmLeft = 85;
+		#declare A_WristLeft = 5;
+
+		#declare N_OffsetBody = 0;
+
+	#break
+
+	#case (4)
 		// WALK 1
 		#declare A_LegLeft = 15;
 		#declare A_KneelLeft = -20;
 		#declare A_LegRight = 5;
 		#declare A_KneelRight = -20;
 		
-		#declare A_ArmRight = 90;
+		#declare A_ArmRight = 10;
 		#declare A_WristRight = 10;
-		#declare A_ArmLeft = 95;
+		#declare A_ArmLeft = -10;
 		#declare A_WristLeft = 10;
 		#declare N_OffsetBody = 0;
 
 	#break
 
-	#case (4)
+	#case (5)
 		// WALK 2
 		#declare A_LegLeft = 10;
 		#declare A_KneelLeft = -20;
 		#declare A_LegRight = 8;
 		#declare A_KneelRight = -20;
 
-		#declare A_ArmRight = 85;
+		#declare A_ArmRight = 0;
 		#declare A_WristRight = 5;
-		#declare A_ArmLeft = 100;
+		#declare A_ArmLeft = 0;
 		#declare A_WristLeft = 5;
 		#declare N_OffsetBody = 0.025;
 	#break
 
-	#case (5)
+	#case (6)
 		// WALK 3
 		#declare A_LegLeft = 7;
 		#declare A_KneelLeft = -20;
 		#declare A_LegRight = 13;
 		#declare A_KneelRight = -20;
 
-		#declare A_ArmRight = 90;
+		#declare A_ArmRight = -10;
 		#declare A_WristRight = 10;
-		#declare A_ArmLeft = 90;
+		#declare A_ArmLeft = 10;
 		#declare A_WristLeft = 0;
 		#declare N_OffsetBody = 0;
 	#break
