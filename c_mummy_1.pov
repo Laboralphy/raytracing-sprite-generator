@@ -23,6 +23,16 @@
 }
 
 
+#declare T_BodyPart_Face = texture {
+  pigment {
+    image_map {
+			png "png/mummy_face.png"
+			map_type 2
+    }
+  }
+  translate -0.2 * y
+}
+
 #declare T_BodyPart_Skin = T_Skin_Blood
 
 #declare N_BodyMetrics_Member_Factor = 1.1;
