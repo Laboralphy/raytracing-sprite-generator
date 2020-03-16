@@ -58,7 +58,7 @@
 
 
 #declare O_Skel_Spine = union {
-	#for (I_Vertebre, 0, N_Skel_Vertebre_Count + N_Skel_Vertebre_Count / 2, 1)
+	#for (I_Vertebre, 2, N_Skel_Vertebre_Count + N_Skel_Vertebre_Count / 2, 1)
 		#local N_Cond = 0;
 		#if (mod(I_Vertebre, 2))
 			#local N_Cond = N_Cond + 1;

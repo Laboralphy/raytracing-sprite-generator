@@ -46,11 +46,16 @@
 #declare P_Skel_BoneRings_Upper = union {
 	object {
 		P_Skel_BoneRing_One
-		scale <-1, 1, 1>
+		scale <-1, 1, 1> * 1.1
+    rotate <0, -35, 0>
+    translate <0, 0, 0.2>
 		translate <-N_Skel_BoneRing_Radius_Ext * 0.75, N_Skel_BoneRing_Radius_Ext, 0>
 	}
 	object {
 		P_Skel_BoneRing_One
+		scale <1, 1, 1> * 1.1
+    rotate <0, 35, 0>
+    translate <0, 0, 0.2>
 		translate <N_Skel_BoneRing_Radius_Ext * 0.75, N_Skel_BoneRing_Radius_Ext, 0>
 	}
 }
