@@ -29,7 +29,7 @@
 #declare T_BodyPart_Face = texture {
 	pigment {
 		image_map {
-			png "png/zombie_face.png"
+			png "png/zombie_face_gray.png"
 			map_type 1
 		}
 	}

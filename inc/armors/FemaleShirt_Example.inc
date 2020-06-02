@@ -61,17 +61,17 @@
 		N_Shoulder_Len / 3
 		1
 	}
-	/* left boob */
+  /* left boob */
 	sphere {
-		<N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3.2
 	}
 	/* right boob */
 	sphere {
-		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3.2
 	}
 	translate <0, -N_Torso_Len / 2 0>
 	scale 1.05

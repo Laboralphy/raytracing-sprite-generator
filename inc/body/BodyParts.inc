@@ -221,15 +221,15 @@
 	}
 	/* left boob */
 	sphere {
-		<N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3
 	}
 	/* right boob */
 	sphere {
-		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3
 	}
 	#ifdef (T_BodyPart_Skin)
 		texture {
@@ -699,6 +699,16 @@
 	#end
 }
 
+#declare O_BodyPart_Choker = object {
+  #ifdef (P_BodyPart_ArmorPart_Choker)
+    P_BodyPart_ArmorPart_Choker
+  #else
+    NULL_OBJECT
+  #end
+  translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len / 2, 0>
+}
+
+
 
 
 
@@ -730,6 +740,9 @@
 		O_BodyPart_Armored_Arm_Right
 		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
+  object {
+    O_BodyPart_Choker
+  }
 }
 
 #declare O_BodyPart_Armored_Body_M = union {
@@ -757,5 +770,8 @@
 		O_BodyPart_Armored_Arm_Right
 		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
 	}
+  object {
+    O_BodyPart_Choker
+  }
 }
 

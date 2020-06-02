@@ -1,6 +1,6 @@
 #ifndef (BODY_METRICS_INCLUDED)
 	#declare BODY_METRICS_INCLUDED = 1;
-	
+  	
 	#ifndef (N_BodyMetrics_Blob_Threshold)
 		#declare N_BodyMetrics_Blob_Threshold = 0.3;
 	#end
@@ -35,45 +35,45 @@
 	#declare N_Shin_Len = N_Lower_Member_Len; // distance from kneel to foot
 	#declare N_Neck_Len = N_Torso_Len * 0.666; 
 	#declare N_Head_Size = N_Shoulder_Len / 1.75;
-	#declare N_BodyPart_Boobs_Size = N_Shoulder_Len / 3;
-	#declare N_BodyPart_Boobs_Spacing = N_Shoulder_Len / 5;
+	#declare N_BodyPart_Boobs_Size = N_Shoulder_Len / 4;
+	#declare N_BodyPart_Boobs_Spacing = N_Shoulder_Len / 6;
 	#declare N_Leg_Thickness = N_BodyMetrics_Leg_Thickness;
 	#declare N_Arm_Thickness = N_BodyMetrics_Arm_Thickness;
 	#declare N_Finger_Thickness = N_BodyMetrics_Arm_Thickness * 0.35;
 	#declare N_Finger_Len = N_Arm_Thickness * 1.0;
 	#declare N_Belt_Height = N_Torso_Len / 10;
 
-	#ifndef (AV_Thigh_Left)
-		#declare AV_Thigh_Left = <0, 0, 0>;
-	#end
-	
-	#ifndef (AV_Shin_Left)
-		#declare AV_Shin_Left = <0, 0, 0>;
-	#end
-	
-	#ifndef (AV_Thigh_Right)
-		#declare AV_Thigh_Right = <0, 0, 0>;
-	#end
-	
-	#ifndef (AV_Shin_Right)
-		#declare AV_Shin_Right = <0, 0, 0>;
-	#end
+  #ifndef (AV_Thigh_Left)
+    #declare AV_Thigh_Left = <0, 0, 0>;
+  #end
+  
+  #ifndef (AV_Shin_Left)
+    #declare AV_Shin_Left = <0, 0, 0>;
+  #end
+  
+  #ifndef (AV_Thigh_Right)
+    #declare AV_Thigh_Right = <0, 0, 0>;
+  #end
+  
+  #ifndef (AV_Shin_Right)
+    #declare AV_Shin_Right = <0, 0, 0>;
+  #end
 
-	#ifndef (AV_Arm_Left)
-		#declare AV_Arm_Left = <0, 0, 10>;
-	#end
-	
-	#ifndef (AV_Wrist_Left)
-		#declare AV_Wrist_Left = <15, 0, 0>;
-	#end
-	
-	#ifndef (AV_Arm_Right)
-		#declare AV_Arm_Right = <0, 0, -10>;
-	#end
-	
-	#ifndef (AV_Wrist_Right)
-		#declare AV_Wrist_Right = <15, 0, 0>;
-	#end
+  #ifndef (AV_Arm_Left)
+    #declare AV_Arm_Left = <0, 0, 10>;
+  #end
+  
+  #ifndef (AV_Wrist_Left)
+    #declare AV_Wrist_Left = <15, 0, 0>;
+  #end
+  
+  #ifndef (AV_Arm_Right)
+    #declare AV_Arm_Right = <0, 0, -10>;
+  #end
+  
+  #ifndef (AV_Wrist_Right)
+    #declare AV_Wrist_Right = <15, 0, 0>;
+  #end
 
 	#declare V_BodyPart_Torso_Scale = <1, 1, 0.65>;
 #end

@@ -39,6 +39,7 @@
 #declare N_BodyMetrics_Leg_Thickness = 0.15;
 #declare N_BodyMetrics_Arm_Thickness = 0.11;
 #include "inc/armors/MaleShirt_Big_Amulet"
+#include "inc/armors/Belt_Golden_Baudrier"
 #include "inc/weapons/Weapon_Ornate_Mace"
 #include "inc/armors/Boot_Mummy_Ragged"
 #include "inc/body/BodyParts.inc"

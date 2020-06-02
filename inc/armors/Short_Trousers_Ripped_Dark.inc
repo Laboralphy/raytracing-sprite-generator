@@ -17,17 +17,19 @@
 	}
 }
 
+#local N_PELVISH = 0.5;
 #declare O_Short_Trousers_Ripped_Blueish = union {
 	cone {
 		<0, 0, 0>
 		0.425 * N_Shoulder_Len
 		<0, -N_Thigh_Len / 3, 0>
-		0.5 * N_Shoulder_Len
+		N_PELVISH * N_Shoulder_Len
 	}
-	sphere {
+	cone {
 		0
-		0.5 * N_Shoulder_Len
-		scale <1, 0.5, 1>
+		N_PELVISH * N_Shoulder_Len
+		<0, -N_Thigh_Len / 4, 0>
+    0
 		translate <0, -N_Thigh_Len / 3, 0>
 	}
 	scale V_BodyPart_Torso_Scale

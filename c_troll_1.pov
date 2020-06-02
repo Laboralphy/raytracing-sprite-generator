@@ -1,18 +1,11 @@
 /*
 
-     _                                 
-  __| |_   _ _ __ ___  _ __ ___  _   _ 
- / _` | | | | '_ ` _ \| '_ ` _ \| | | |
-| (_| | |_| | | | | | | | | | | | |_| |
- \__,_|\__,_|_| |_| |_|_| |_| |_|\__, |
-                                 |___/ 
-
 @frames 5
 
 */
 
 #include "inc/Camera.inc"
-#include "inc/frames/dummy.inc"
+#include "inc/frames/troll.inc"
 #declare C_Skin = color rgb <0.25, 0.1, 0.15>;
 
 #declare T_BodyPart_Skin = texture {
@@ -26,6 +19,11 @@
 		color rgb <0.5, 0.5, 0.5>
   }
 }
+
+
+#declare N_BodyMetrics_Member_Factor = 1.1;
+#declare N_BodyMetrics_Leg_Thickness = 0.2;
+#declare N_BodyMetrics_Arm_Thickness = 0.14;
 
 #include "inc/body/BodyParts.inc"
 

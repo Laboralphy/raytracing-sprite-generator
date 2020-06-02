@@ -76,31 +76,31 @@
 		N_Shoulder_Len / 3
 		1
 	}
-	/* left boob */
+  /* left boob */
 	sphere {
-		<N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3.2
 	}
 	/* right boob */
 	sphere {
-		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - (N_Torso_Len / 6), -N_Shoulder_Len / 6>
+		<-N_BodyPart_Boobs_Spacing, N_Torso_Len - 0.1 * N_Torso_Len, -N_Shoulder_Len / 5>
 		N_BodyPart_Boobs_Size 
-		2
+		3.2
 	}
 	translate <0, -N_Torso_Len / 2 0>
 	scale 1.05
 	translate <0, N_Torso_Len / 2 0>
 }
 
-#declare O_FemaleShirt_Extruded = difference {
+#declare O_FemaleShirt_Croped = difference {
 	object {
 		O_FemaleShirt_Base
 	}
 	cylinder {
-		<0, 1.2 * N_Torso_Len, 10>
-		<0, 1.2 * N_Torso_Len, -10>
-		N_Shoulder_Len / 2.75
+		<0, 1.5 * N_Torso_Len, 2>
+		<0, 1.2 * N_Torso_Len,  -10>
+		N_Shoulder_Len / 2.5
 	}
 	texture {
 		pigment {
@@ -118,7 +118,7 @@
 
 
 
-#declare P_BodyPart_ArmorPart_Chest = O_FemaleShirt_Extruded;
+#declare P_BodyPart_ArmorPart_Chest = O_FemaleShirt_Croped;
 
 
 #declare O_Skirt_Blue = sor {
