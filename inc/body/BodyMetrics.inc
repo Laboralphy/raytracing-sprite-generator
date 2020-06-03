@@ -24,6 +24,19 @@
 	#ifndef (N_BodyMetrics_Arm_Thickness) 
 		#declare N_BodyMetrics_Arm_Thickness = 0.125;
 	#end
+  
+  /* Nose */
+  #ifndef (N_BodyMetrics_Nose_Angle)
+    #declare N_BodyMetrics_Nose_Angle = 35;
+  #end
+  #ifndef (N_BodyMetrics_Nose_Length)
+    #declare N_BodyMetrics_Nose_Length = 0.6;
+  #end
+  
+  /* Troll Head */
+  #ifndef (AV_Head_Offset)
+    #declare AV_Head_Offset = <0, 0, 0>;
+  #end
 	
 	#declare N_Torso_Len = N_BodyMetrics_Value; // size of torso from shoulder to legs
 	#declare N_Shoulder_Len = N_Torso_Len; // distance between two shoulders

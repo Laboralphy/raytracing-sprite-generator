@@ -1,3 +1,4 @@
+#include "shapes3.inc"
 #include "inc/body/BodyMetrics.inc"
 
 
@@ -653,22 +654,42 @@
 }
 */
 
-#declare O_BodyPart_Head = ovus {
+#declare O_BodyPart_Head_Without_Nose = ovus {
 	1
 	0.2
-	scale <1, -1, 1> * N_Head_Size
-	rotate <30, 0, 0>
-	translate <0, 0.6 * N_Head_Size, 0> 
-	#ifdef (T_BodyPart_Skin)
-		texture {
-			T_BodyPart_Skin
-		}
-	#end
-	#ifdef (T_BodyPart_Face) 
-		texture {
-			T_BodyPart_Face
-		}
-	#end
+}
+
+#declare O_BodyPart_Nose = object {
+  box {
+    <-1, 0, -0.9>
+    <1, 0.29, 0>
+  }
+  rotate <0, 45, 0>
+  rotate <N_BodyMetrics_Nose_Angle, 0, 0>
+  scale <0.5, 1.05, N_BodyMetrics_Nose_Length>
+}
+
+#declare O_BodyPart_Head = union {
+  object {
+    O_BodyPart_Head_Without_Nose
+  }
+  object {
+    O_BodyPart_Nose
+  }
+  scale <1, -1, 1> * N_Head_Size
+  rotate <30, 0, 0>
+  translate <0, 0.6 * N_Head_Size, 0> 
+  #ifdef (T_BodyPart_Skin)
+    texture {
+      T_BodyPart_Skin
+    }
+  #end
+  #ifdef (T_BodyPart_Face) 
+    texture {
+      T_BodyPart_Face
+    }
+  #end
+  
 }
 
 
@@ -727,6 +748,7 @@
 	object {
 		O_BodyPart_Armored_Leg_Left
 		translate <N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
+    translate AV_Head_Offset
 	}
 	object {
 		O_BodyPart_Armored_Leg_Right
@@ -753,6 +775,7 @@
 	object {
 		O_BodyPart_Armored_Head
 		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
+    translate AV_Head_Offset
 	}
 	object {
 		O_BodyPart_Armored_Leg_Left
