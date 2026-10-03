@@ -1,0 +1,17 @@
+{
+	"name": "sprite-viewer",
+	"private": true,
+	"type": "module",
+	"description": "Displays the sprite sheets from output/ in raycaster-386, to check directions and animations.",
+	"scripts": {
+		"dev": "vite",
+		"snapshot": "node snapshot.mjs"
+	},
+	"dependencies": {
+		"@laboralphy/raycaster386": "file:../../raycaster-386"
+	},
+	"devDependencies": {
+		"@napi-rs/canvas": "^1.0.8",
+		"vite": "^7.0.0"
+	}
+}

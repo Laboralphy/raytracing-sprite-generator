@@ -13,15 +13,26 @@ Projet POV-Ray qui génère des personnages animés. Les rendus servent de sprit
 ## Environnement
 
 - POV-Ray **3.7** (testé avec 3.7.0.10, paquet Ubuntu). La primitive `ovus` utilisée par le projet existe depuis la 3.7. La 3.8 n'est jamais sortie en version stable (dernière bêta : août 2021).
-- Commande de rendu : **TODO** (exemple : `povray +Ifichier.pov +Osortie.png +W256 +H256 +UA +A +Kc<clock>`).
+- Planche de sprites : `tools/sprites.py sprites/<perso>.json [--preview]` (Python 3 + ImageMagick `convert`, rendu en parallèle).
+- Image isolée : `povray +Ic_zombie_1.pov +O<sortie>.png +W256 +H192 +UA -A +K<clock> -D -GA`, avec `clock = 100 × direction POV + pose` (décodé dans `inc/Camera.inc`, +1000 = mode dev).
+- Ancien script `render` (`-r` / `-p`) : conservé, mais remplacé par `tools/sprites.py` pour le jeu.
+- Contrôle dans le moteur (`viewer/`, lié à `../raycaster-386` par `file:` ; après un changement du moteur, y relancer `npm run build`) :
+	- `cd viewer && node snapshot.mjs <perso> [animation]` → `output/<perso>.engine.png`, 8 vues sans navigateur.
+	- `cd viewer && npx vite` → visionneuse interactive (`?sheet=<perso>&anim=<id>`).
+	- Le personnage regarde vers +x : il doit toujours regarder vers la bande sombre du sol.
 - Le canal alpha (`+UA`) est nécessaire pour les sprites : fond transparent.
-- Sorties dans : **TODO** (ne pas committer les PNG générés, sauf demande explicite).
+- Sorties dans : `output/` (ignoré par git ; ne pas committer les PNG générés, sauf demande explicite).
 
 ## Structure du dépôt
 
 - `inc/body/BodyMetrics.inc` : mensurations et poses par défaut (variables `N_*`, `AV_*`).
 - `inc/body/` : parties du corps (torse M/F, jambes, bras, main, tête, casque).
-- **TODO** : décrire les autres dossiers (personnages, armures, textures, scènes, scripts de rendu).
+- `c_*.pov` (racine) : fichiers de personnage (une scène par personnage).
+- `inc/frames/` : poses par personnage (`#switch (N_Animation_Frame)`), `inc/Camera.inc` : décodage de `clock`, caméra, lumière.
+- `inc/armors/`, `inc/hair/`, `inc/weapons/` : pièces `P_*` et textures interchangeables.
+- `inc/wizard/`, `inc/jack/`, `inc/skeleton/` : modèles hors corps de base (mage, Jack-o'-lantern) et pièces du squelette.
+- `png/` : textures de visage et de torse (sources, à garder). `xcf/` : sources GIMP. `materials/` : essais de textures bois.
+- `sprites/<perso>.json` : spécification d'une planche (scène, cadre, animations). `tools/sprites.py` : générateur de planches.
 
 ## Conventions de nommage
 
@@ -66,7 +77,7 @@ Gabarit d'un fichier de personnage :
 #declare AV_Arm_Left = <0, 0, 10>;
 
 // 5. Corps de base, puis placement dans la scène
-#include "inc/body/BodyParts.inc"   // TODO : vérifier le nom réel
+#include "inc/body/BodyParts.inc"
 object { O_BodyPart_Armored_Body_M }
 ```
 
@@ -89,7 +100,15 @@ object { O_BodyPart_Armored_Body_M }
 ## Animation
 
 - L'animation passe par la variable `clock` et par les `AV_*`.
-- **TODO** : nombre d'images par cycle, liste des animations (marche, attaque, idle…), nombre de directions de vue (8 ?), convention de nommage des fichiers de sortie.
+
+### Cible : moteur raycaster-386 (`../raycaster-386`)
+
+- **Planche** : une seule bande PNG horizontale (le moteur découpe par `sx / largeur_tuile`), cadres 64×96 par défaut, réglables dans la spec (`frame.width/height`). Le moteur limite un canvas à ~32 000 px de large.
+- **Échelle** : fixe pour tous les personnages (`frame.units_height` = 6 unités POV pour 96 px), pieds sur la ligne de base (`frame.baseline`). Un humain fait ~72 px, le troll ~91 px.
+- **Sortie** : `output/<perso>.png` + `output/<perso>.json` (fragment de tileset RCE-100 : `width`, `height`, `animations[{id, start[8], length, duration, loop}]`). Ordre dans la bande : animation, puis direction, puis image.
+- **8 directions, pas de miroir.** Convention du moteur (`src/render/spriteFacing.ts`) : 0 = dos, 2 = nez vers la droite de l'écran, 4 = face, 6 = nez vers la gauche. Côté POV, 0 = face : `direction POV = (direction moteur + 4) mod 8`.
+- **Animations visées** : idle 2 (yoyo), marche 4, attaque 3, douleur 2, mort 6 (une seule direction, `start` répété 8 fois). Environ 94 images, ~4,6 Mo résidents par type dans le moteur ; viser 8 à 10 types de personnages par niveau.
+- Le moteur assombrit les sprites à la volée (shading paresseux + cache partagé de 4 Mo). Les projectiles et explosions marqués `FX_LIGHT_SOURCE` ne sont pas assombris.
 
 ## Points d'attention connus
 
