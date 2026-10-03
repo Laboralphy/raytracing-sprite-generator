@@ -73,17 +73,19 @@ Gabarit d'un fichier de personnage :
 // 3. Pièces d'armure (optionnelles)
 #declare P_BodyPart_ArmorPart_Helm = union { /* ... */ }
 
-// 4. Pose
-#declare AV_Arm_Left = <0, 0, 10>;
+// 4. Poses : pas de AV_* ici (Pose_Reset() les écraserait), mais un fichier de poses
+#include "inc/Camera.inc"
+#include "inc/frames/zombie.inc"
 
 // 5. Corps de base, puis placement dans la scène
 #include "inc/body/BodyParts.inc"
-object { O_BodyPart_Armored_Body_M }
+object { O_BodyPart_Armored_Body_M rotate y * N_Animation_Angle }
 ```
 
 ## Géométrie et repères
 
-- Axe Y vers le haut. Les pieds sont à peu près à `y = 0` : le torse est translaté de `N_Shin_Len + N_Thigh_Len + N_Leg_Thickness`.
+- Axe Y vers le haut. Les pieds sont à peu près à `y = 0` : le torse est translaté de `N_Hip_Height` (`N_Shin_Len + N_Thigh_Len + N_Leg_Thickness`). Le personnage regarde vers `-z`.
+- Assemblage (`BodyPart_Body` dans `BodyParts.inc`) : le haut du corps (torse, tête, bras, collier) est construit autour des hanches et pivote avec `AV_Torso` ; la tête pivote avec `AV_Head` autour du haut du cou ; `AV_Body` puis `V_Body_Offset` déplacent tout le corps autour du point au sol entre les pieds.
 - Le côté **gauche** du personnage est en `+x`, le droit en `-x`. Le côté droit est obtenu par miroir (`scale <-1, 1, 1>`) de la pièce gauche : écris les pièces d'armure pour le côté gauche seulement.
 - Les membres pendent vers `-y` depuis leur articulation. Les `AV_*` sont appliqués autour de cette articulation (épaule, coude, hanche, genou).
 - Le torse est un `blob` : attention au `threshold` et aux rayons d'influence (3e valeur de chaque sphère). Change-les par petites touches et regarde le rendu.
@@ -99,7 +101,13 @@ object { O_BodyPart_Armored_Body_M }
 
 ## Animation
 
-- L'animation passe par la variable `clock` et par les `AV_*`.
+- `clock = 100 × direction POV + pose` (`inc/Animation.inc`). La pose peut aussi être donnée en ligne de commande : `Declare=N_Pose_From=3 Declare=N_Pose_To=4 Declare=N_Pose_Blend=0.5` (interpolation linéaire de tous les `AV_*` et de `V_Body_Offset`).
+- **Poses** : `inc/frames/<perso>.inc` définit `#macro Pose_Define(N_Pose)` (un `#switch` qui ne déclare que ce qui diffère de `Pose_Reset()`), puis inclut `inc/Pose.inc`. `zombie.inc` sert aussi à la goule et au squelette ; c'est le modèle du format (`AV_*` déclarés directement).
+- **Signes des angles** : membres (pendent vers le bas) : `x > 0` = vers l'avant. `AV_Torso`, `AV_Head`, `AV_Body` (pointent vers le haut) : `x < 0` = penché en avant, `x > 0` = en arrière. `z` : sur le côté.
+- **Poses du zombie** : 0 STAND, 1-2 ATTACK, 3-5 WALK, 6 IDLE, 7 PAIN, 8-12 DEATH (chute sur le côté, genoux pliés, pour tenir en largeur vue de face).
+- **Spec `sprites/<perso>.json`** : une pose = un numéro, ou `[de, vers, mélange]`. Par animation : `directions` (8 ou 1), `duration` (ms), `loop`, et si besoin `camera_elevation` (degrés) et `shift_x` (unités POV, décale le personnage dans le cadre, ex. un cadavre qui déborde).
+- **Mort sur une seule direction** : rendue de face. Un corps tombé en arrière est vu par la tranche (invisible) ; une caméra plongeante le fait ressembler à un personnage tassé : d'où la chute sur le côté.
+- **Non-régression des fichiers de base** : `tools/regress.py save` avant, `tools/regress.py check` après (comparaison pixel à pixel, toutes poses × 8 directions). Quelques pixels d'écart sur des textures procédurales (bouclier du chevalier) viennent d'arrondis et sont normaux.
 
 ### Cible : moteur raycaster-386 (`../raycaster-386`)
 
@@ -118,7 +126,8 @@ object { O_BodyPart_Armored_Body_M }
 - Jupe et ceinture ne sont pas positionnées de la même façon en M (`N_Belt_Height`) et en F (`N_Torso_Len / 4`).
 - Dans `BodyMetrics.inc`, les mesures dérivées (`N_Shoulder_Len`, `N_Neck_Len`, `N_Head_Size`, `N_Leg_Thickness`, etc.) ne sont pas protégées par `#ifndef`, donc non surchargeables. C'est le principal frein à la variété des personnages.
 - Les épaisseurs (bras, jambes) ne suivent pas `N_BodyMetrics_Value` : un grand personnage paraît filiforme.
-- Pas de pose pour le tronc, le cou ni la tête (pas d'`AV_Torso`, `AV_Head`, `AV_Neck`).
+- Pas d'`AV_Neck` : le cou fait partie du `blob` du torse et ne peut pas plier séparément (`AV_Head` suffit pour l'instant).
+- Fichiers de poses encore à l'ancien format (variables `A_*` puis `AV_*`) : dummy (n'applique en fait aucune pose), knight, mummy, troll, witch. Ils n'ont ni idle, ni douleur, ni mort.
 - Bloc `#ifdef (T_BodyPart_Skin) #end` vide dans `O_BodyPart_Wrist` : code mort.
 
 ## À ne pas faire

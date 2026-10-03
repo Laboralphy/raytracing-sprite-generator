@@ -55,6 +55,9 @@
 	#declare N_Finger_Thickness = N_BodyMetrics_Arm_Thickness * 0.35;
 	#declare N_Finger_Len = N_Arm_Thickness * 1.0;
 	#declare N_Belt_Height = N_Torso_Len / 10;
+	#declare N_Hip_Height = N_Shin_Len + N_Thigh_Len + N_Leg_Thickness; // height of the hips (bottom of the torso) above the feet
+
+  /* Pose. Same defaults as Pose_Reset() in inc/Pose.inc */
 
   #ifndef (AV_Thigh_Left)
     #declare AV_Thigh_Left = <0, 0, 0>;
@@ -86,6 +89,26 @@
   
   #ifndef (AV_Wrist_Right)
     #declare AV_Wrist_Right = <15, 0, 0>;
+  #end
+
+  /* upper body (torso, head, arms), around the hips */
+  #ifndef (AV_Torso)
+    #declare AV_Torso = <0, 0, 0>;
+  #end
+
+  /* head, around the top of the neck */
+  #ifndef (AV_Head)
+    #declare AV_Head = <0, 0, 0>;
+  #end
+
+  /* whole body, around the ground point between the feet (falls) */
+  #ifndef (AV_Body)
+    #declare AV_Body = <0, 0, 0>;
+  #end
+
+  /* whole body translation, applied after AV_Body (crouching, sliding) */
+  #ifndef (V_Body_Offset)
+    #declare V_Body_Offset = <0, 0, 0>;
   #end
 
 	#declare V_BodyPart_Torso_Scale = <1, 1, 0.65>;

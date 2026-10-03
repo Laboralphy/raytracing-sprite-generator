@@ -74,5 +74,4 @@
 object {
 	O_Character_1
 	rotate y * N_Animation_Angle
-	translate y * N_OffsetBody
 }

@@ -721,80 +721,73 @@
 }
 
 #declare O_BodyPart_Choker = object {
-  #ifdef (P_BodyPart_ArmorPart_Choker)
-    P_BodyPart_ArmorPart_Choker
-  #else
-    NULL_OBJECT
-  #end
-  translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len / 2, 0>
+	#ifdef (P_BodyPart_ArmorPart_Choker)
+		P_BodyPart_ArmorPart_Choker
+	#else
+		NULL_OBJECT
+	#end
+	translate <0, N_Torso_Len + N_Neck_Len / 2, 0>
 }
 
 
 
+/*
+ _               _       
+| |__   ___   __| |_   _ 
+| '_ \ / _ \ / _` | | | |
+| |_) | (_) | (_| | |_| |
+|_.__/ \___/ \__,_|\__, |
+                   |___/ 
 
+	Assembly. The upper body is built around the hips (origin = bottom of the
+	torso) so that AV_Torso bends it there; the head turns with AV_Head around
+	the top of the neck. AV_Body and V_Body_Offset move the whole body, around
+	the ground point between the feet.
+*/
 
+#macro BodyPart_Upper_Body(O_Torso)
+	union {
+		object {
+			O_Torso
+		}
+		object {
+			O_BodyPart_Armored_Head
+			rotate AV_Head
+			translate <0, N_Torso_Len + N_Neck_Len, 0>
+			translate AV_Head_Offset
+		}
+		object {
+			O_BodyPart_Armored_Arm_Left
+			translate <N_Shoulder_Len / 2, N_Torso_Len, 0>
+		}
+		object {
+			O_BodyPart_Armored_Arm_Right
+			translate <-N_Shoulder_Len / 2, N_Torso_Len, 0>
+		}
+		object {
+			O_BodyPart_Choker
+		}
+		rotate AV_Torso
+		translate <0, N_Hip_Height, 0>
+	}
+#end
 
+#macro BodyPart_Body(O_Torso)
+	union {
+		BodyPart_Upper_Body(O_Torso)
+		object {
+			O_BodyPart_Armored_Leg_Left
+			translate <N_Shoulder_Len / 4, N_Hip_Height, 0>
+		}
+		object {
+			O_BodyPart_Armored_Leg_Right
+			translate <-N_Shoulder_Len / 4, N_Hip_Height, 0>
+		}
+		rotate AV_Body
+		translate V_Body_Offset
+	}
+#end
 
+#declare O_BodyPart_Armored_Body_F = BodyPart_Body(O_BodyPart_Armored_Torso_F)
 
-#declare O_BodyPart_Armored_Body_F = union {
-	object {
-		O_BodyPart_Armored_Torso_F
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-	}
-	object {
-		O_BodyPart_Armored_Head
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
-	}
-	object {
-		O_BodyPart_Armored_Leg_Left
-		translate <N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-    translate AV_Head_Offset
-	}
-	object {
-		O_BodyPart_Armored_Leg_Right
-		translate <-N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-	}
-	object {
-		O_BodyPart_Armored_Arm_Left
-		translate <N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
-	}
-	object {
-		O_BodyPart_Armored_Arm_Right
-		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
-	}
-  object {
-    O_BodyPart_Choker
-  }
-}
-
-#declare O_BodyPart_Armored_Body_M = union {
-	object {
-		O_BodyPart_Armored_Torso_M
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-	}
-	object {
-		O_BodyPart_Armored_Head
-		translate <0, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len + N_Neck_Len, 0>
-    translate AV_Head_Offset
-	}
-	object {
-		O_BodyPart_Armored_Leg_Left
-		translate <N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-	}
-	object {
-		O_BodyPart_Armored_Leg_Right
-		translate <-N_Shoulder_Len / 4, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness, 0>
-	}
-	object {
-		O_BodyPart_Armored_Arm_Left
-		translate <N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
-	}
-	object {
-		O_BodyPart_Armored_Arm_Right
-		translate <-N_Shoulder_Len / 2, N_Shin_Len + N_Thigh_Len + N_Leg_Thickness + N_Torso_Len, 0>
-	}
-  object {
-    O_BodyPart_Choker
-  }
-}
-
+#declare O_BodyPart_Armored_Body_M = BodyPart_Body(O_BodyPart_Armored_Torso_M)

@@ -1,11 +1,11 @@
 {
-	"scene": "c_zombie_1.pov",
+	"scene": "c_ghoul_1.pov",
 	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
 	"animations": [
 		{ "id": "idle", "poses": [0, 6], "duration": 400, "loop": "@LOOP_YOYO" },
 		{ "id": "walk", "poses": [3, 4, 5, [5, 3, 0.5]], "duration": 150, "loop": "@LOOP_FORWARD" },
 		{ "id": "attack", "poses": [[0, 1, 0.5], 1, 2], "duration": 150, "loop": "@LOOP_NONE" },
 		{ "id": "pain", "poses": [7, [7, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
-		{ "id": "death", "poses": [8, 9, 10, [10, 11, 0.5], 11, 12], "directions": 1, "duration": 120, "loop": "@LOOP_NONE" }
+		{ "id": "death", "poses": [8, 9, 10, [10, 11, 0.5], 11, 12], "directions": 1, "shift_x": 0.25, "duration": 120, "loop": "@LOOP_NONE" }
 	]
 }

@@ -1,5 +1,5 @@
 {
-	"scene": "c_zombie_1.pov",
+	"scene": "c_skeleton_1.pov",
 	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
 	"animations": [
 		{ "id": "idle", "poses": [0, 6], "duration": 400, "loop": "@LOOP_YOYO" },
