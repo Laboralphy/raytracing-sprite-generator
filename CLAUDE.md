@@ -104,7 +104,7 @@ object { O_BodyPart_Armored_Body_M rotate y * N_Animation_Angle }
 - `clock = 100 × direction POV + pose` (`inc/Animation.inc`). La pose peut aussi être donnée en ligne de commande : `Declare=N_Pose_From=3 Declare=N_Pose_To=4 Declare=N_Pose_Blend=0.5` (interpolation linéaire de tous les `AV_*` et de `V_Body_Offset`).
 - **Poses** : `inc/frames/<perso>.inc` définit `#macro Pose_Define(N_Pose)` (un `#switch` qui ne déclare que ce qui diffère de `Pose_Reset()`), puis inclut `inc/Pose.inc`. `zombie.inc` sert aussi à la goule et au squelette ; c'est le modèle du format (`AV_*` déclarés directement).
 - **Signes des angles** : membres (pendent vers le bas) : `x > 0` = vers l'avant. `AV_Torso`, `AV_Head`, `AV_Body` (pointent vers le haut) : `x < 0` = penché en avant, `x > 0` = en arrière. `z` : sur le côté.
-- **Poses du zombie** : 0 STAND, 1-2 ATTACK, 3-5 WALK, 6 IDLE, 7 PAIN, 8-12 DEATH (chute sur le côté, genoux pliés, pour tenir en largeur vue de face).
+- **Poses du zombie et du chevalier** (même numérotation) : 0 STAND, 1-2 ATTACK, 3-5 WALK, 6 IDLE, 7 PAIN, 8-12 DEATH (chute sur le côté droit, genoux pliés, pour tenir en largeur vue de face).
 - **Spec `sprites/<perso>.json`** : une pose = un numéro, ou `[de, vers, mélange]`. Par animation : `directions` (8 ou 1), `duration` (ms), `loop`, et si besoin `camera_elevation` (degrés) et `shift_x` (unités POV, décale le personnage dans le cadre, ex. un cadavre qui déborde).
 - **Mort sur une seule direction** : rendue de face. Un corps tombé en arrière est vu par la tranche (invisible) ; une caméra plongeante le fait ressembler à un personnage tassé : d'où la chute sur le côté.
 - **Non-régression des fichiers de base** : `tools/regress.py save` avant, `tools/regress.py check` après (comparaison pixel à pixel, toutes poses × 8 directions). Quelques pixels d'écart sur des textures procédurales (bouclier du chevalier) viennent d'arrondis et sont normaux.
@@ -127,7 +127,7 @@ object { O_BodyPart_Armored_Body_M rotate y * N_Animation_Angle }
 - Dans `BodyMetrics.inc`, les mesures dérivées (`N_Shoulder_Len`, `N_Neck_Len`, `N_Head_Size`, `N_Leg_Thickness`, etc.) ne sont pas protégées par `#ifndef`, donc non surchargeables. C'est le principal frein à la variété des personnages.
 - Les épaisseurs (bras, jambes) ne suivent pas `N_BodyMetrics_Value` : un grand personnage paraît filiforme.
 - Pas d'`AV_Neck` : le cou fait partie du `blob` du torse et ne peut pas plier séparément (`AV_Head` suffit pour l'instant).
-- Fichiers de poses encore à l'ancien format (variables `A_*` puis `AV_*`) : dummy (n'applique en fait aucune pose), knight, mummy, troll, witch. Ils n'ont ni idle, ni douleur, ni mort.
+- Fichiers de poses encore à l'ancien format (variables `A_*` puis `AV_*`) : dummy (n'applique en fait aucune pose), mummy, troll, witch. Ils n'ont ni idle, ni douleur, ni mort.
 - Bloc `#ifdef (T_BodyPart_Skin) #end` vide dans `O_BodyPart_Wrist` : code mort.
 
 ## À ne pas faire
