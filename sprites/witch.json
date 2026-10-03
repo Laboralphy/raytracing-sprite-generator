@@ -1,0 +1,11 @@
+{
+	"scene": "c_witch_blue.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"animations": [
+		{ "id": "idle", "poses": [0, 6], "duration": 400, "loop": "@LOOP_YOYO" },
+		{ "id": "walk", "poses": [2, 3, 4, [4, 2, 0.5]], "duration": 150, "loop": "@LOOP_FORWARD" },
+		{ "id": "attack", "poses": [5, [5, 0, 0.75]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "pain", "poses": [7, [7, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "death", "poses": [8, 9, 10, [10, 11, 0.5], 11, 12], "directions": 1, "duration": 120, "loop": "@LOOP_NONE" }
+	]
+}

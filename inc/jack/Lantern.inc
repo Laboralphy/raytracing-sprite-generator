@@ -58,6 +58,15 @@
 	}
 }
 
+/*
+	Flame, from V_Pose_Extra.y when the pose sets it (inc/jack/Jack.inc):
+	0 = normal, 1 = out, < 0 = blazing (casting a fireball).
+*/
+#local N_Lantern_Flame = 1;
+#ifdef (V_Pose_Extra)
+	#local N_Lantern_Flame = 1 - V_Pose_Extra.y;
+#end
+
 #local O_Lantern_LightBulb = sphere {
 	0, 0.3
 	#switch (mod(N_Animation_Frame + 2, 4))
@@ -75,6 +84,9 @@
 			scale <0.8, 1.5, 0.8>
 			translate 0.1 * y
 		#break
+	#end
+	#if (N_Lantern_Flame != 1)
+		scale <1, 1 + 0.5 * (N_Lantern_Flame - 1), 1> * max(N_Lantern_Flame, 0.001)
 	#end
 	texture {
 		pigment {
@@ -100,12 +112,18 @@
 			I_Glass_Caustics2
 		}
 	}
-	light_source {
-		2 * y
-		color C_LanternLight
-		looks_like {
-			O_Lantern_LightBulb
+	#if (N_Lantern_Flame > 0)
+		light_source {
+			2 * y
+			#if (N_Lantern_Flame != 1)
+				color C_LanternLight * min(N_Lantern_Flame, 2)
+			#else
+				color C_LanternLight
+			#end
+			looks_like {
+				O_Lantern_LightBulb
+			}
 		}
-	}
+	#end
 	translate <0, -7, 0>
 }

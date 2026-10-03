@@ -5,7 +5,9 @@
 |  __/ (_) \__ \  __/
 |_|   \___/|___/\___|
 
-	Sets the pose variables (AV_*, V_Body_Offset) for the body.
+	Sets the pose variables (AV_*, V_Body_Offset) for the body, and
+	V_Pose_Extra: free for a character's own needs (the body ignores it;
+	see inc/jack/Jack.inc), interpolated like the others.
 
 	The including file (inc/frames/<character>.inc) first defines
 		#macro Pose_Define(N_Pose) ... #end
@@ -31,15 +33,17 @@
 	#declare AV_Head = <0, 0, 0>;
 	#declare AV_Body = <0, 0, 0>;
 	#declare V_Body_Offset = <0, 0, 0>;
+	#declare V_Pose_Extra = <0, 0, 0>;
 #end
 
-#declare N_Pose_Vector_Count = 12;
+#declare N_Pose_Vector_Count = 13;
 
 #macro Pose_Store()
 	array[N_Pose_Vector_Count] {
 		AV_Thigh_Left, AV_Shin_Left, AV_Thigh_Right, AV_Shin_Right,
 		AV_Arm_Left, AV_Wrist_Left, AV_Arm_Right, AV_Wrist_Right,
-		AV_Torso, AV_Head, AV_Body, V_Body_Offset
+		AV_Torso, AV_Head, AV_Body, V_Body_Offset,
+		V_Pose_Extra
 	}
 #end
 
@@ -56,6 +60,7 @@
 	#declare AV_Head = A_Pose[9];
 	#declare AV_Body = A_Pose[10];
 	#declare V_Body_Offset = A_Pose[11];
+	#declare V_Pose_Extra = A_Pose[12];
 #end
 
 #if (N_Pose_Blend = 0)

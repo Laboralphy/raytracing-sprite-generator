@@ -28,9 +28,10 @@ Projet POV-Ray qui génère des personnages animés. Les rendus servent de sprit
 - `inc/body/BodyMetrics.inc` : mensurations et poses par défaut (variables `N_*`, `AV_*`).
 - `inc/body/` : parties du corps (torse M/F, jambes, bras, main, tête, casque).
 - `c_*.pov` (racine) : fichiers de personnage (une scène par personnage).
+- `p_*.pov` (racine) : décors (props) ; objets réutilisables dans `inc/props/` (`Props.inc` : hauteur du plafond `N_Prop_Ceiling` pour les objets suspendus).
 - `inc/frames/` : poses par personnage (`#switch (N_Animation_Frame)`), `inc/Camera.inc` : décodage de `clock`, caméra, lumière.
 - `inc/armors/`, `inc/hair/`, `inc/weapons/` : pièces `P_*` et textures interchangeables.
-- `inc/wizard/`, `inc/jack/`, `inc/skeleton/` : modèles hors corps de base (mage, Jack-o'-lantern) et pièces du squelette.
+- `inc/wizard/`, `inc/jack/`, `inc/skeleton/` : modèles hors corps de base (mage, Jack-o'-lantern) et pièces du squelette. Jack (`inc/jack/Jack.inc`, `O_JackOLantern_Posed`) est piloté par les mêmes variables de pose (`inc/frames/jack.inc`) : bras de la lanterne, citrouille, corps, et `V_Pose_Extra` (effondrement de la robe, flamme, forme de la robe). Sa lanterne (`inc/jack/Lantern.inc`) est distincte de celle des décors (`inc/props/Lantern.inc`). Le mage (`inc/wizard/Wizard.inc`, `O_Wizard_Posed`, poses dans `inc/frames/wizard.inc`, variantes `c_wizard_blue` / `c_wizard_red` par `WizardRobeTint`) suit le même principe ; `V_Pose_Extra.y` règle le flash du tir au bout de la baguette (porté par `inc/armors/Wand_Ruby_Sphere.inc`, donc partagé avec la sorcière). Sa marche vient de la robe seule : `V_Pose_Extra.z` (0 à 1) transforme point par point l'une en l'autre les 2 surfaces de révolution de la robe (`P_WizardRobeGarb`, `P_WizardRobeGarb_2`), et la tête, les mains et les manches suivent sa hauteur ; pas de dandinement. `inc/wizard/frames.inc` est du code mort (variables `AnimationFrame` jamais définies, inclus nulle part).
 - `png/` : textures de visage et de torse (sources, à garder). `xcf/` : sources GIMP. `materials/` : essais de textures bois.
 - `sprites/<perso>.json` : spécification d'une planche (scène, cadre, animations). `tools/sprites.py` : générateur de planches.
 
@@ -102,7 +103,9 @@ object { O_BodyPart_Armored_Body_M rotate y * N_Animation_Angle }
 ## Animation
 
 - `clock = 100 × direction POV + pose` (`inc/Animation.inc`). La pose peut aussi être donnée en ligne de commande : `Declare=N_Pose_From=3 Declare=N_Pose_To=4 Declare=N_Pose_Blend=0.5` (interpolation linéaire de tous les `AV_*` et de `V_Body_Offset`).
+- **`V_Pose_Extra`** : vecteur libre, interpolé comme les autres, ignoré par le corps de base ; un modèle hors corps l'utilise pour ses propres réglages (Jack).
 - **Poses** : `inc/frames/<perso>.inc` définit `#macro Pose_Define(N_Pose)` (un `#switch` qui ne déclare que ce qui diffère de `Pose_Reset()`), puis inclut `inc/Pose.inc`. `zombie.inc` sert aussi à la goule et au squelette ; c'est le modèle du format (`AV_*` déclarés directement).
+- **Attaques à distance (style Heretic)** : 2 images, le tir (arme légèrement relevée par le recul, flash) puis une récupération interpolée vers le repos (`[tir, 0, 0.75]`). Mage, sorcière et Jack suivent ce modèle.
 - **Signes des angles** : membres (pendent vers le bas) : `x > 0` = vers l'avant. `AV_Torso`, `AV_Head`, `AV_Body` (pointent vers le haut) : `x < 0` = penché en avant, `x > 0` = en arrière. `z` : sur le côté.
 - **Poses du zombie, du chevalier et du troll** (même numérotation ; la momie et la sorcière ont leur propre numérotation, voir l'en-tête de `mummy.inc` et `witch.inc`) : 0 STAND, 1-2 ATTACK, 3-5 WALK, 6 IDLE, 7 PAIN, 8-12 DEATH (chute sur le côté droit, genoux pliés, pour tenir en largeur vue de face).
 - **Spec `sprites/<perso>.json`** : une pose = un numéro, ou `[de, vers, mélange]`. Par animation : `directions` (8 ou 1), `duration` (ms), `loop`, et si besoin `camera_elevation` (degrés) et `shift_x` (unités POV, décale le personnage dans le cadre, ex. un cadavre qui déborde).

@@ -1,0 +1,7 @@
+{
+	"scene": "p_lantern.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"animations": [
+		{ "id": "default", "poses": [0], "directions": 1, "duration": 1000, "loop": "@LOOP_NONE" }
+	]
+}

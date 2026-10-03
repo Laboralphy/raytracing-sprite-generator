@@ -79,6 +79,8 @@ export function createScene({ walls, flats, sheet, tileset, width = 320, height 
 			a.id
 		);
 	}
+	// Without a current group, Sprite.facings is 0 and faceCamera never turns the sprite.
+	sprite.setCurrentAnimation(tileset.animations[0].id);
 	sprite.x = SPRITE.x;
 	sprite.y = SPRITE.y;
 

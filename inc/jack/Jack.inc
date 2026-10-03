@@ -117,58 +117,12 @@
 	}
 }
 
-#local Ripped_Wizard_Robe = union {
-	difference {	
-		object {
-			P_WizardRobeGarb
-			scale <1, 1.5, 1>
-			texture { T_FabricWizardRobe }
-		}
-		object {
-			O_Razor_2_1
-			translate <0, -0.225, 0>
-		}
-	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <0.6, 1.2, -0.6>
-	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <-0.6, 1.2, -0.6>
-	}
-	scale <1.75, 2.25, 1.75>
-}
-
-#local Ripped_Wizard_Robe_15 = union {
-	difference {	
-		object {
-			P_WizardRobeGarb_2
-			scale <0.98, 1.55, 0.98>
-			texture { T_FabricWizardRobe }
-		}
-		object {
-			O_Razor_2_1
-			translate <0, -0.225, 0>
-		}
-	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <0.6, 1.15, -0.6>
-	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <-0.6, 1.15, -0.6>
-	}
-	scale <1.75, 2.25, 1.75>
-}
-
-#local Ripped_Wizard_Robe_2 = union {
-	difference {	
+/*
+	The ripped robe, in 3 shapes (index 0 to 2) that make it ripple. The
+	sleeves are apart, they move with the arms.
+*/
+#local A_Jack_Robe = array[3] {
+	difference {
 		object {
 			P_WizardRobeGarb_2
 			scale <1, 1.5, 1>
@@ -178,18 +132,41 @@
 			O_Razor_2_2
 			translate <0, -0.225, 0>
 		}
+		scale <1.75, 2.25, 1.75>
+	},
+	difference {
+		object {
+			P_WizardRobeGarb_2
+			scale <0.98, 1.55, 0.98>
+			texture { T_FabricWizardRobe }
+		}
+		object {
+			O_Razor_2_1
+			translate <0, -0.225, 0>
+		}
+		scale <1.75, 2.25, 1.75>
+	},
+	difference {
+		object {
+			P_WizardRobeGarb
+			scale <1, 1.5, 1>
+			texture { T_FabricWizardRobe }
+		}
+		object {
+			O_Razor_2_1
+			translate <0, -0.225, 0>
+		}
+		scale <1.75, 2.25, 1.75>
 	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <0.6, 1.1, -0.6>
-	}
-	object {
-		P_WizardRobeManche
-		texture { T_FabricWizardRobe }
-		translate <-0.6, 1.1, -0.6>
-	}
-	scale <1.75, 2.25, 1.75>
+}
+
+/* height of the sleeves (before the robe scale) and rise of the head and the hands, per robe shape */
+#local A_Jack_Sleeve_Height = array[3] { 1.1, 1.15, 1.2 }
+#local A_Jack_Rise = array[3] { 0, 0.1, 0.2 }
+
+#local O_Jack_Sleeve = object {
+	P_WizardRobeManche
+	texture { T_FabricWizardRobe }
 }
 
 #local Pumpkin_Face_Digger0 = box {
@@ -308,83 +285,114 @@
 	}
 }
 
-#declare O_JackOLantern = union {
+/*
+   _            _    
+  (_) __ _  ___| | __
+  | |/ _` |/ __| |/ /
+  | | (_| | (__|   < 
+ _/ |\__,_|\___|_|\_\
+|__/                 
+
+	Assembly, driven by the pose (inc/frames/jack.inc, through inc/Pose.inc):
+		AV_Arm_Left    lantern arm (sleeve, hand, lantern), around the shoulder; x > 0 = forward
+		AV_Arm_Right   other arm
+		AV_Head        pumpkin, around its centre
+		AV_Body        whole body, around the ground point
+		V_Body_Offset  whole body translation (floating)
+		V_Pose_Extra   x: collapse of the robe (0 = standing, 1 = empty robe on the ground)
+		               y: flame (0 = normal, 1 = out, < 0 = blazing), see inc/jack/Lantern.inc
+		               z: robe shape, 0 to 2
+	Distances before the final scale 0.8.
+*/
+
+/* rotation around a pivot, only when there is one (keeps the unposed render exact) */
+#macro Jack_Rotate_Around(V_Angles, V_Pivot)
+	#if (vlength(V_Angles) > 0)
+		translate -V_Pivot
+		rotate V_Angles
+		translate V_Pivot
+	#end
+#end
+
+#local N_Robe = min(2, max(0, int(V_Pose_Extra.z + 0.5)));
+#local N_Rise = A_Jack_Rise[N_Robe];
+#local N_Collapse = V_Pose_Extra.x;
+#local V_Shoulder = <1.05, 3.0 + N_Rise, -0.8>;
+#local V_Lantern_Hand = <1, 2.55 + N_Rise, -1.2>;
+
+#local O_Jack_Arm_Left = union {
 	object {
-		Pumpkin_Head_3
-		translate <0, 3.9, 0>
-	}
-	object {
-		Ripped_Wizard_Robe
+		O_Jack_Sleeve
+		translate <0.6, A_Jack_Sleeve_Height[N_Robe], -0.6>
+		scale <1.75, 2.25, 1.75>
 	}
 	object {
 		P_Hand
 		rotate <90, 0, 80>
-		translate <1, 2.7, -1>
+		translate <1, 2.5 + N_Rise, -1>
 	}
-	object {
-		P_Hand
-		rotate <90, 0, 0>
-		translate <1, 2.7, -1>
-		scale <-1, 0, 0>
-	}
-	object {
-		O_Lantern
-		scale 0.2
-		translate <1, 2.75, -1.2>
-	}
-	scale 0.8
+	#if (N_Collapse = 0)
+		object {
+			O_Lantern
+			scale 0.2
+			translate V_Lantern_Hand
+		}
+	#end
+	Jack_Rotate_Around(AV_Arm_Left, V_Shoulder)
 }
 
-#declare O_JackOLantern_15 = union {
+#local O_Jack_Arm_Right = union {
 	object {
-		Pumpkin_Head_3
-		translate <0, 3.8, 0>
-	}
-	object {
-		Ripped_Wizard_Robe_15
-	}
-	object {
-		P_Hand
-		rotate <90, 0, 80>
-		translate <1, 2.6, -1>
+		O_Jack_Sleeve
+		translate <-0.6, A_Jack_Sleeve_Height[N_Robe], -0.6>
+		scale <1.75, 2.25, 1.75>
 	}
 	object {
 		P_Hand
 		rotate <90, 0, 0>
-		translate <1, 2.6, -1>
-		scale <-1, 0, 0>
+		translate <1, 2.5 + N_Rise, -1>
+		scale <-1, 1, 1>
 	}
-	object {
-		O_Lantern
-		scale 0.2
-		translate <1, 2.65, -1.2>
-	}
-	scale 0.8
+	Jack_Rotate_Around(AV_Arm_Right, V_Shoulder * <-1, 1, 1>)
 }
 
-#declare O_JackOLantern_2 = union {
+#declare O_JackOLantern_Posed = union {
 	object {
 		Pumpkin_Head_3
-		translate <0, 3.7, 0>
+		#if (vlength(AV_Head) > 0)
+			rotate AV_Head
+		#end
+		translate <0, 3.7 + N_Rise, 0>
+		#if (N_Collapse > 0)
+			// falls to the ground, in front of the robe
+			translate <0.7, 0.75 - (3.7 + N_Rise), -1.3> * N_Collapse
+		#end
 	}
 	object {
-		Ripped_Wizard_Robe_2
+		A_Jack_Robe[N_Robe]
+		#if (N_Collapse > 0)
+			scale <1 + 0.25 * N_Collapse, 1 - 0.88 * N_Collapse, 1 + 0.25 * N_Collapse>
+		#end
 	}
-	object {
-		P_Hand
-		rotate <90, 0, 80>
-		translate <1, 2.5, -1>
+	union {
+		object { O_Jack_Arm_Left }
+		object { O_Jack_Arm_Right }
+		#if (N_Collapse > 0)
+			translate -y * 2.4 * N_Collapse
+		#end
 	}
-	object {
-		P_Hand
-		rotate <90, 0, 0>
-		translate <1, 2.5, -1>
-		scale <-1, 0, 0>
-	}
-	object {
-		O_Lantern
-		scale 0.2
-		translate <1, 2.55, -1.2>
-	}
+	#if (N_Collapse > 0)
+		// the lantern drops and tips over, in front of the robe
+		object {
+			O_Lantern
+			scale 0.2
+			rotate z * 90 * N_Collapse
+			translate V_Lantern_Hand + (<-0.9, 0.3, -1.8> - V_Lantern_Hand) * N_Collapse
+		}
+	#end
 	scale 0.8
+	#if (vlength(AV_Body) > 0)
+		rotate AV_Body
+	#end
+	translate V_Body_Offset
 }

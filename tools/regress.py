@@ -30,6 +30,9 @@ SCENES = {
     "c_mummy_1": 7,
     "c_troll_1": 6,
     "c_witch_blue": 5,
+    "c_jack": 3,
+    "c_wizard_blue": 2,
+    "c_wizard_red": 2,
 }
 FRAME = {**DEFAULT_FRAME, "width": 128, "height": 192}
 BASE = os.path.join(ROOT, "output", "regress")
