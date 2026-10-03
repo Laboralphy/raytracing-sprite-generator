@@ -1,0 +1,11 @@
+{
+	"scene": "c_mummy_1.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"animations": [
+		{ "id": "idle", "poses": [0, 7], "duration": 500, "loop": "@LOOP_YOYO" },
+		{ "id": "walk", "poses": [4, 5, 6, [6, 4, 0.5]], "duration": 200, "loop": "@LOOP_FORWARD" },
+		{ "id": "attack", "poses": [1, 2, 3], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "pain", "poses": [8, [8, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "death", "poses": [9, 10, 11, [11, 12, 0.5], 12, 13], "directions": 1, "duration": 120, "loop": "@LOOP_NONE" }
+	]
+}
