@@ -1,6 +1,7 @@
 {
 	"scene": "c_wizard_red.pov",
 	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 1.5, "opacity": 0.45 },
 	"animations": [
 		{ "id": "idle", "poses": [0, [0, 1, 0.3]], "duration": 600, "loop": "@LOOP_YOYO" },
 		{ "id": "walk", "poses": [0, [0, 1, 0.5], 1, [1, 0, 0.5]], "duration": 150, "loop": "@LOOP_FORWARD" },

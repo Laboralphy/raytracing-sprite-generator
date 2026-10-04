@@ -16,9 +16,14 @@ for example to see a corpse on the ground from slightly above, and "shift_x"
 (POV-Ray units, default 0) to move the character right in the frame, for
 example when a fallen body sticks out of it.
 
+"shadow" (optional, for the whole sheet): {"radius": 0.8, "height": 0.1,
+"opacity": 0.45}, a translucent ellipse on the ground under the character
+(POV-Ray units).
+
 Strip order: animation, then direction, then frame. An animation with
-"directions": 1 is rendered once (facing the camera) and its start is repeated
-for all 8 facings.
+"directions": 1 is rendered once and its start is repeated for all 8 facings;
+it is seen from engine direction "view" (default 4: facing the camera; 3 or 5:
+three-quarter front, for a body falling backward).
 
 Directions follow raycaster-386 (src/render/spriteFacing.ts):
     0 = back, 2 = nose to the right of the screen, 4 = face, 6 = nose to the left.
@@ -72,11 +77,33 @@ def clock_value(pov_dir, pose):
     return pov_dir * 100 + int(pose[0])
 
 
-def write_wrapper(path, scene, frame, elevation=0, shift_x=0):
+def shadow_pov(shadow):
+    """
+    A translucent black ellipse on the ground under the character. Flat, it
+    would be invisible from a camera at eye level, so it is a squashed
+    sphere: its front half passes in front of the feet. A ray crosses two
+    surfaces, hence the transmit of each one: sqrt(1 - opacity).
+    """
+    radius = shadow.get("radius", 0.8)
+    height = shadow.get("height", 0.1)
+    transmit = math.sqrt(1 - shadow.get("opacity", 0.45))
+    return (
+        "sphere {\n"
+        "\t0, 1\n"
+        f"\tscale <{radius}, {height}, {radius}>\n"
+        f"\tpigment {{ rgbt <0, 0, 0, {transmit}> }}\n"
+        "\tfinish { ambient 0 diffuse 0 }\n"
+        "\tno_shadow\n"
+        "}\n"
+    )
+
+
+def write_wrapper(path, scene, frame, elevation=0, shift_x=0, shadow=None):
     """
     elevation: camera angle above the horizon, in degrees. The ground point
     under the character (origin) stays on the baseline of the frame.
     shift_x: moves the character to the right in the frame, in POV-Ray units.
+    shadow: {"radius", "height", "opacity"} for a shadow on the ground, or None.
     """
     units_w = frame["units_height"] * frame["width"] / frame["height"]
     e = math.radians(elevation)
@@ -95,6 +122,8 @@ def write_wrapper(path, scene, frame, elevation=0, shift_x=0):
             f"\tup y * {frame['units_height']}\n"
             "}\n"
         )
+        if shadow:
+            f.write(shadow_pov(shadow))
 
 
 def render(wrapper, frame, pov_dir, pose, out_png):
@@ -123,7 +152,7 @@ def build_layout(animations):
         starts = []
         for d in range(directions):
             starts.append(len(tiles))
-            pov_dir = pov_direction(d if directions > 1 else 4)
+            pov_dir = pov_direction(d if directions > 1 else anim.get("view", 4))
             camera = (anim.get("camera_elevation", 0), anim.get("shift_x", 0))
             tiles.extend((pov_dir, pose, camera) for pose in poses)
         if directions == 1:
@@ -158,7 +187,7 @@ def main():
         wrappers = {}
         for camera in sorted({t[2] for t in tiles}):
             wrappers[camera] = os.path.join(work, f"wrapper_{len(wrappers)}.pov")
-            write_wrapper(wrappers[camera], spec["scene"], frame, *camera)
+            write_wrapper(wrappers[camera], spec["scene"], frame, *camera, shadow=spec.get("shadow"))
 
         # Several tiles may share a pose and a direction: render each once.
         unique = sorted(set(tiles))

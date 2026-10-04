@@ -22,7 +22,12 @@
 	scale 1.5
 	texture {
 		pigment {
-			color rgb 0.3
+			#if (N_Wizard_Fade > 0)
+				// dying: fades out with the head (inc/wizard/Head.inc)
+				color rgbt <0.3, 0.3, 0.3, N_Wizard_Fade>
+			#else
+				color rgb 0.3
+			#end
 		}
 	}
 }
@@ -45,7 +50,9 @@ __      _(_)______ _ _ __ __| |
 		AV_Head        head and hat, around the neck
 		AV_Body        whole body, around the ground point
 		V_Body_Offset  whole body translation
-		V_Pose_Extra   x: collapse of the robe (0 = standing, 1 = empty robe on the ground)
+		V_Pose_Extra   x: death (0 = standing, 1 = empty robe on the ground): the head and the
+		                  hands fade out in the first half, the robe sinks, the hat falls
+		                  on it, the wand drops in front
 		               y: flash of a shot at the tip of the wand (0 = none, 1 = full)
 		               z: robe shape, from 0 to 1: the 2 surfaces of revolution of the robe
 		                  (P_WizardRobeGarb, P_WizardRobeGarb_2) are morphed point by point,
@@ -106,6 +113,7 @@ __      _(_)______ _ _ __ __| |
 #local N_Rise = -0.05 * N_Shape;
 #local N_Collapse = V_Pose_Extra.x;
 #local V_Shoulder_Right = <-1.05, 1.8 + N_Rise, -0.7>;
+#local V_Wand_Hand = <-1.1, 1.6 + N_Rise, -1.05>;
 
 #local O_Wizard_Arm_Right = union {
 	object {
@@ -113,16 +121,20 @@ __      _(_)______ _ _ __ __| |
 		translate <-0.6, N_Sleeve_Height, -0.6>
 		scale <1.75, 2.25, 1.75>
 	}
-	object {
-		P_Hand
-		scale <-1, 1, 1>
-		rotate <90, 0, 0>
-		translate <-1.1, 1.5 + N_Rise, -1.05>
-	}
-	object {
-		O_Wand // its flash comes from V_Pose_Extra.y, see inc/armors/Wand_Ruby_Sphere.inc
-		translate <-1.1, 1.6 + N_Rise, -1.05>
-	}
+	#if (N_Wizard_Fade < 1)
+		object {
+			P_Hand
+			scale <-1, 1, 1>
+			rotate <90, 0, 0>
+			translate <-1.1, 1.5 + N_Rise, -1.05>
+		}
+	#end
+	#if (N_Collapse = 0)
+		object {
+			O_Wand // its flash comes from V_Pose_Extra.y, see inc/armors/Wand_Ruby_Sphere.inc
+			translate V_Wand_Hand
+		}
+	#end
 	Wizard_Rotate_Around(AV_Arm_Right, V_Shoulder_Right)
 }
 
@@ -132,26 +144,57 @@ __      _(_)______ _ _ __ __| |
 		translate <0.6, N_Sleeve_Height, -0.6>
 		scale <1.75, 2.25, 1.75>
 	}
-	object {
-		P_Hand
-		rotate <90, 0, 0>
-		translate <1.1, 1.5 + N_Rise, -1.05>
-	}
+	#if (N_Wizard_Fade < 1)
+		object {
+			P_Hand
+			rotate <90, 0, 0>
+			translate <1.1, 1.5 + N_Rise, -1.05>
+		}
+	#end
 	Wizard_Rotate_Around(AV_Arm_Left, V_Shoulder_Right * <-1, 1, 1>)
 }
 
 #declare O_Wizard_Posed = union {
-	object {
-		P_WizardHead
-		#if (vlength(AV_Head) > 0)
-			rotate AV_Head
-		#end
-		translate (2.7 + N_Rise) * y
-		#if (N_Collapse > 0)
-			// falls to the ground, in front of the robe
-			translate <0.5, 0.9 - (2.7 + N_Rise), -1.4> * N_Collapse
-		#end
-	}
+	#if (N_Collapse = 0)
+		object {
+			P_WizardHead
+			#if (vlength(AV_Head) > 0)
+				rotate AV_Head
+			#end
+			translate (2.7 + N_Rise) * y
+		}
+	#else
+		/*
+			Dying: the hat (and the fading head) come down with the top of the
+			robe, and the hat ends up lying on it.
+		*/
+		#local N_Robe_Top_End = 2.25 * (1 - 0.05 * N_Shape) * (1 - 0.85);
+		#local N_Head_Y = (2.7 + N_Rise) * (1 - N_Collapse) + (N_Robe_Top_End - 0.15) * N_Collapse;
+		union {
+			object {
+				O_WizardHatBrown
+				scale 0.95
+				rotate 15 * x
+				translate 0.15 * y
+			}
+			#if (N_Wizard_Fade < 1)
+				object {
+					O_BlackMageHead
+				}
+			#end
+			#if (vlength(AV_Head) > 0)
+				rotate AV_Head
+			#end
+			rotate z * 10 * N_Collapse
+			translate N_Head_Y * y
+		}
+		// the wand drops in front of the robe
+		object {
+			O_Wand
+			rotate y * 30 * N_Collapse
+			translate V_Wand_Hand + (<-0.5, 0.12, -1.7> - V_Wand_Hand) * N_Collapse
+		}
+	#end
 	object {
 		Wizard_Robe_Garb(N_Shape)
 		texture { T_FabricWizardRobe }

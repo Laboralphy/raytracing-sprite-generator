@@ -41,40 +41,36 @@
 		#case (4)
 			// DEATH 1: shudder
 			#declare AV_Body = <8, 0, 0>;
-			#declare AV_Head = <20, 0, 15>;
+			#declare AV_Head = <10, 0, 0>;
 			#declare AV_Arm_Right = <40, 0, 0>;
 			#declare AV_Arm_Left = <40, 0, 0>;
 			#declare V_Pose_Extra = <0.05, 0, 1>;
 		#break
 
 		#case (5)
-			// DEATH 2: the robe starts to empty
-			#declare AV_Head = <0, 0, 30>;
-			#declare AV_Arm_Right = <30, 0, 0>;
+			// DEATH 2: the robe starts to sink, the head and the hands fade
+						#declare AV_Arm_Right = <30, 0, 0>;
 			#declare AV_Arm_Left = <30, 0, 0>;
 			#declare V_Pose_Extra = <0.3, 0, 0>;
 		#break
 
 		#case (6)
-			// DEATH 3: collapsing, the head falls
-			#declare AV_Head = <0, 0, 60>;
-			#declare AV_Arm_Right = <20, 0, 0>;
+			// DEATH 3: collapsing, the head and the hands fading out
+						#declare AV_Arm_Right = <20, 0, 0>;
 			#declare AV_Arm_Left = <20, 0, 0>;
 			#declare V_Pose_Extra = <0.6, 0, 0>;
 		#break
 
 		#case (7)
 			// DEATH 4: on the ground
-			#declare AV_Head = <0, 0, 85>;
-			#declare AV_Arm_Right = <10, 0, 0>;
+						#declare AV_Arm_Right = <10, 0, 0>;
 			#declare AV_Arm_Left = <10, 0, 0>;
 			#declare V_Pose_Extra = <0.9, 0, 0>;
 		#break
 
 		#case (8)
-			// DEATH 5: empty robe, hat and head on the ground
-			#declare AV_Head = <0, 0, 95>;
-			#declare V_Pose_Extra = <1, 0, 0>;
+			// DEATH 5: empty robe, the hat lying on it
+						#declare V_Pose_Extra = <1, 0, 0>;
 		#break
 	#end
 #end

@@ -1,6 +1,7 @@
 {
 	"scene": "c_jack.pov",
 	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 1.5, "opacity": 0.45 },
 	"animations": [
 		{ "id": "idle", "poses": [0, 1, 2], "duration": 250, "loop": "@LOOP_YOYO" },
 		{ "id": "walk", "poses": [3, 4, 5, 4], "duration": 150, "loop": "@LOOP_FORWARD" },

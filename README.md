@@ -45,6 +45,17 @@ node snapshot.mjs witch death   # output/witch.engine.png : 8 vues dans le moteu
 npx vite                        # visionneuse interactive : http://localhost:5173/?sheet=witch&anim=walk
 ```
 
+GIF animés de chaque animation, vue de face, à la vitesse du jeu :
+
+```bash
+tools/gifs.py zombie witch        # output/gif/zombie_idle.gif, zombie_walk.gif, ...
+tools/gifs.py --all               # toutes les planches de output/
+```
+
+Options : `--scale 3` (agrandissement), `--background '#3a3632'` (fond uni : un GIF
+ne gère pas la semi-transparence de l'ombre), `--hold 100` (pause en 1/100 s sur la
+dernière image d'une animation qui ne boucle pas, comme l'attaque ou la mort).
+
 Dans les deux cas, le personnage regarde vers la bande sombre du sol : s'il lui
 tourne le dos, l'ordre des directions est faux.
 
@@ -64,6 +75,7 @@ Un personnage, c'est trois fichiers :
 {
 	"scene": "c_witch_blue.pov",
 	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 0.8, "opacity": 0.45 },
 	"animations": [
 		{ "id": "idle", "poses": [0, 7], "duration": 400, "loop": "@LOOP_YOYO" },
 		{ "id": "walk", "poses": [2, 3, 4, [4, 2, 0.5]], "duration": 150, "loop": "@LOOP_FORWARD" },
@@ -74,6 +86,7 @@ Un personnage, c'est trois fichiers :
 
 - Le nom de la planche est celui du fichier : `sprites/witch.json` donne `output/witch.png`.
 - `frame` : taille du cadre en pixels. `units_height` fixe l'échelle (6 unités POV pour 96 px) : à garder identique pour tous les personnages pour qu'ils restent à la même échelle en jeu. Un grand monstre peut avoir un cadre plus large (`troll.json` : 96×96).
+- `shadow` (facultatif) : ombre translucide au sol sous le personnage, une ellipse noire aplatie (`radius` en unités POV, `opacity` de 0 à 1, `height` 0,1 par défaut). Elle reste centrée sur la position du personnage dans le jeu, quelle que soit sa pose. Rayon conseillé : 0,8 pour un humanoïde, plus pour un grand monstre ou une robe ample. À omettre pour un décor suspendu.
 - `poses` : numéros de pose du fichier `inc/frames/`, ou `[de, vers, mélange]` pour une pose intermédiaire (`[4, 2, 0.5]` = à mi-chemin entre 4 et 2).
 - `directions` : 8 (par défaut) ou 1 (rendue de face, répétée pour les 8 directions : pour la mort).
 - `duration` en millisecondes par image ; `loop` : `@LOOP_NONE`, `@LOOP_FORWARD`, `@LOOP_YOYO`.
