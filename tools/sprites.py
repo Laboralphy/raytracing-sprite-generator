@@ -20,6 +20,12 @@ example when a fallen body sticks out of it.
 "opacity": 0.45}, a translucent ellipse on the ground under the character
 (POV-Ray units).
 
+"supersample" (optional, for the whole sheet, default 1; overridden by
+--supersample N): each frame is rendered N times larger, then reduced to the
+frame size by averaging each NxN block (box filter, alpha included). Thin
+parts (fingers, weapons, edges) come out smoother, at about N*N times the
+render time.
+
 Strip order: animation, then direction, then frame. An animation with
 "directions": 1 is rendered once and its start is repeated for all 8 facings;
 it is seen from engine direction "view" (default 4: facing the camera; 3 or 5:
@@ -126,18 +132,26 @@ def write_wrapper(path, scene, frame, elevation=0, shift_x=0, shadow=None):
             f.write(shadow_pov(shadow))
 
 
-def render(wrapper, frame, pov_dir, pose, out_png):
+def render(wrapper, frame, pov_dir, pose, out_png, supersample=1):
     clock = clock_value(pov_dir, pose)
+    big_png = out_png[:-4] + ".big.png" if supersample > 1 else out_png
     cmd = [
-        "povray", f"+I{wrapper}", f"+L{ROOT}", f"+O{out_png}",
-        f"+W{frame['width']}", f"+H{frame['height']}",
+        "povray", f"+I{wrapper}", f"+L{ROOT}", f"+O{big_png}",
+        f"+W{frame['width'] * supersample}", f"+H{frame['height'] * supersample}",
         "+UA", "+A0.1", "+R3", "+Q9", f"+K{clock}",
         "-D", "-GA", "+WT1",
         f"Declare=N_Pose_From={pose[0]}", f"Declare=N_Pose_To={pose[1]}", f"Declare=N_Pose_Blend={pose[2]}",
     ]
     result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    if result.returncode != 0 or not os.path.exists(out_png):
+    if result.returncode != 0 or not os.path.exists(big_png):
         raise RuntimeError(f"povray failed (direction {pov_dir}, pose {pose}):\n{result.stderr[-2000:]}")
+    if supersample > 1:
+        # The orthographic camera covers the same units whatever the size: an
+        # integer factor maps each NxN block onto one pixel of the frame.
+        subprocess.run(
+            ["convert", big_png, "-filter", "box", "-resize", f"{frame['width']}x{frame['height']}!", out_png],
+            check=True,
+        )
 
 
 def build_layout(animations):
@@ -173,6 +187,7 @@ def main():
     parser.add_argument("--preview", action="store_true", help="also write a grid for checking")
     parser.add_argument("--jobs", type=int, default=os.cpu_count() or 4)
     parser.add_argument("--out", default=os.path.join(ROOT, "output"))
+    parser.add_argument("--supersample", type=int, help="render N times larger, then reduce (default: spec, or 1)")
     args = parser.parse_args()
 
     with open(args.spec) as f:
@@ -180,6 +195,9 @@ def main():
     name = spec.get("name") or os.path.splitext(os.path.basename(args.spec))[0]
     frame = {**DEFAULT_FRAME, **spec.get("frame", {})}
     tiles, defs = build_layout(spec["animations"])
+    supersample = args.supersample or spec.get("supersample", 1)
+    if supersample < 1:
+        raise ValueError("supersample must be 1 or more")
 
     os.makedirs(args.out, exist_ok=True)
     work = tempfile.mkdtemp(prefix=f"sprites-{name}-")
@@ -192,9 +210,11 @@ def main():
         # Several tiles may share a pose and a direction: render each once.
         unique = sorted(set(tiles))
         pngs = {key: os.path.join(work, f"tile_{i}.png") for i, key in enumerate(unique)}
-        print(f"{name}: {len(tiles)} tiles, {len(unique)} renders, {frame['width']}x{frame['height']}")
+        print(f"{name}: {len(tiles)} tiles, {len(unique)} renders, {frame['width']}x{frame['height']}"
+              + (f" (supersample x{supersample})" if supersample > 1 else ""))
         with ThreadPoolExecutor(max_workers=args.jobs) as pool:
-            jobs = [pool.submit(render, wrappers[key[2]], frame, key[0], key[1], pngs[key]) for key in unique]
+            jobs = [pool.submit(render, wrappers[key[2]], frame, key[0], key[1], pngs[key], supersample)
+                    for key in unique]
             for job in jobs:
                 job.result()
 

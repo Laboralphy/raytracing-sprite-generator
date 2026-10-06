@@ -13,7 +13,7 @@ Projet POV-Ray qui génère des personnages animés. Les rendus servent de sprit
 ## Environnement
 
 - POV-Ray **3.7** (testé avec 3.7.0.10, paquet Ubuntu). La primitive `ovus` utilisée par le projet existe depuis la 3.7. La 3.8 n'est jamais sortie en version stable (dernière bêta : août 2021).
-- Planche de sprites : `tools/sprites.py sprites/<perso>.json [--preview]` (Python 3 + ImageMagick `convert`, rendu en parallèle).
+- Planche de sprites : `tools/sprites.py sprites/<perso>.json [--preview] [--supersample N]` (Python 3 + ImageMagick `convert`, rendu en parallèle). `--supersample N` (ou `"supersample"` dans la spec) rend N fois plus grand puis réduit (filtre box) : bords plus lisses, ~N² fois plus lent.
 - Image isolée : `povray +Ic_zombie_1.pov +O<sortie>.png +W256 +H192 +UA -A +K<clock> -D -GA`, avec `clock = 100 × direction POV + pose` (décodé dans `inc/Camera.inc`, +1000 = mode dev).
 - Ancien script `render` (`-r` / `-p`) : conservé, mais remplacé par `tools/sprites.py` pour le jeu.
 - Contrôle dans le moteur (`viewer/`, lié à `../raycaster-386` par `file:` ; après un changement du moteur, y relancer `npm run build`) :
