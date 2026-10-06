@@ -61,6 +61,8 @@
 #include "inc/hair/Saiyan"
 #include "inc/hair/Texture_Black_Gray"
 #include "inc/armors/Short_Trousers_Pagne_Troll"
+#declare N_Muscles_Bulk = 1.3;
+#include "inc/armors/Muscles"
 
 
 #declare O_Wart = sphere {
@@ -133,14 +135,23 @@
   }
 }
 
-#declare P_BodyPart_ArmorPart_Thigh = object {
-  O_Warts
-  rotate <0, -45, 0>
-  scale 0.75
-  texture {
-    T_Wart_Green
+#declare P_BodyPart_ArmorPart_Thigh = union {
+  object {
+    O_Warts
+    rotate <0, -45, 0>
+    scale 0.75
+    texture {
+      T_Wart_Green
+    }
+  }
+  object {
+    O_Muscles_Thigh
   }
 }
+
+#declare P_BodyPart_ArmorPart_Arm = object { O_Muscles_Arm }
+#declare P_BodyPart_ArmorPart_Elbow = object { O_Muscles_Forearm }
+#declare P_BodyPart_ArmorPart_Kneel = object { O_Muscles_Calf }
 
 #declare P_BodyPart_ArmorPart_Chest = object {
   O_Warts
