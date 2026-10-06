@@ -6,7 +6,7 @@
 */
 
 #include "inc/Camera.inc"
-#include "inc/frames/zombie.inc"
+#include "inc/frames/skeleton.inc"
 #declare C_Skin = color rgb <0.8, 0.8, 0.6>;
 
 #declare T_Skin_Bones = texture {
@@ -65,6 +65,7 @@
 #include "inc/armors/MaleShirt_Ripped_Dirty_Brownish"
 #include "inc/skeleton/Leg"
 #include "inc/skeleton/Wrist_1"
+#include "inc/weapons/Weapon_Sword"
 #include "inc/body/BodyParts.inc"
 
 #declare O_Character_1 = object {

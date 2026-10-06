@@ -206,7 +206,7 @@ Scène `c_mummy_1.pov`, poses `inc/frames/mummy.inc`. Cadre 64×96, 94 images (6
 
 ## skeleton
 
-Scène `c_skeleton_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (6016 px de large).
+Scène `c_skeleton_1.pov`, poses `inc/frames/skeleton.inc`. Cadre 64×96, 94 images (6016 px de large).
 
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
@@ -218,19 +218,19 @@ Scène `c_skeleton_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 image
 
 <details><summary>Poses</summary>
 
-- **0** : STAND
-- **1** : ATTACK 1
-- **2** : ATTACK 2
-- **3** : WALK 1
-- **4** : WALK 2
-- **5** : WALK 3
-- **6** : IDLE: swaying, head hanging
-- **7** : PAIN: thrown backward
+- **0** : STAND: sword held low, pointing forward
+- **1** : ATTACK 1: sword raised over the shoulder
+- **2** : ATTACK 2: slash
+- **3** : WALK 1: left leg forward, right arm forward
+- **4** : WALK 2: passing
+- **5** : WALK 3: right leg forward, left arm forward
+- **6** : IDLE: head tilted, sword lowered
+- **7** : PAIN: thrown backward, arms flung out
 - **8** : DEATH 1: hit, head snapping back, arms flung forward
 - **9** : DEATH 2: tipping backward, knees giving way
 - **10** : DEATH 3: falling on the back
 - **11** : DEATH 4: hitting the ground, knees up
-- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, skull turned aside
 
 </details>
 
