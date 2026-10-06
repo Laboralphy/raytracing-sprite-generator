@@ -229,6 +229,9 @@ def main():
             f.write("\n")
         print(f"  {sheet} ({len(tiles) * frame['width']}x{frame['height']})")
 
+        from catalog import write_catalog  # here: catalog imports this module
+        print(f"  {write_catalog()}")
+
         if args.preview:
             preview = os.path.join(args.out, f"{name}.preview.png")
             rows = []
