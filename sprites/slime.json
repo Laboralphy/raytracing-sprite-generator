@@ -1,0 +1,12 @@
+{
+	"scene": "c_slime.pov",
+	"frame": { "width": 96, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 1.6, "opacity": 0.35 },
+	"animations": [
+		{ "id": "idle", "poses": [0, 1], "duration": 400, "loop": "@LOOP_YOYO" },
+		{ "id": "walk", "poses": [2, 3, 4, 5], "duration": 150, "loop": "@LOOP_FORWARD" },
+		{ "id": "attack", "poses": [6, 7, 8], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "pain", "poses": [9, [9, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "death", "poses": [10, 11, 12, 13, 14, 15], "directions": 1, "view": 3, "camera_elevation": 20, "duration": 120, "loop": "@LOOP_NONE" }
+	]
+}

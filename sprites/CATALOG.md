@@ -20,6 +20,7 @@
 | [lantern](#lantern) | 64×96 | 1 | `default` |
 | [mummy](#mummy) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [skeleton](#skeleton) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [slime](#slime) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [troll](#troll) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [witch](#witch) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_blue](#wizard_blue) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -230,6 +231,39 @@ Scène `c_skeleton_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 image
 - **10** : DEATH 3: falling on the back
 - **11** : DEATH 4: hitting the ground, knees up
 - **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## slime
+
+Scène `c_slime.pov`, poses `inc/frames/slime.inc`. Cadre 96×96, 94 images (9024 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 IDLE 1 · 1 IDLE 2 |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 2 WALK 1 · 3 WALK 2 · 4 WALK 3 · 5 WALK 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 6 ATTACK 1 · 7 ATTACK 2 · 8 ATTACK 3 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (caméra 20°) | 88 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 14 DEATH 5 · 15 DEATH 6 |
+
+<details><summary>Poses</summary>
+
+- **0** : IDLE 1
+- **1** : IDLE 2: swells a little
+- **2** : WALK 1
+- **3** : WALK 2
+- **4** : WALK 3
+- **5** : WALK 4
+- **6** : ATTACK 1: rears up, leaning back
+- **7** : ATTACK 2: spits, thrown forward
+- **8** : ATTACK 3: settles back
+- **9** : PAIN: squashed and knocked aside
+- **10** : DEATH 1: shudders and stretches up
+- **11** : DEATH 2: sags
+- **12** : DEATH 3: crushed flat
+- **13** : DEATH 4: wobbles back up
+- **14** : DEATH 5: settles
+- **15** : DEATH 6: puddle
 
 </details>
 

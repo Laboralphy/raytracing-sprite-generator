@@ -777,11 +777,11 @@
 		BodyPart_Upper_Body(O_Torso)
 		object {
 			O_BodyPart_Armored_Leg_Left
-			translate <N_Shoulder_Len / 4, N_Hip_Height, 0>
+			translate <N_Hip_Spacing, N_Hip_Height, 0>
 		}
 		object {
 			O_BodyPart_Armored_Leg_Right
-			translate <-N_Shoulder_Len / 4, N_Hip_Height, 0>
+			translate <-N_Hip_Spacing, N_Hip_Height, 0>
 		}
 		rotate AV_Body
 		translate V_Body_Offset

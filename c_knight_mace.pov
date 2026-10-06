@@ -11,6 +11,10 @@
 
 */
 
+// sturdier: thicker legs, wider stance (before any include: the armor reads them)
+#declare N_BodyMetrics_Leg_Thickness = 0.2;
+#declare N_Hip_Spacing = 0.35;
+
 #include "inc/Camera.inc"
 #include "inc/frames/knight.inc"
 #include "inc/armors/ChromedArmor_1"

@@ -145,6 +145,32 @@ weapon : mace with spherical spiked head
 
 */
 
+// knee guard: a dome over the front of the knee, a wing on the outer side
+#declare O_Poleyn = union {
+	sphere {
+		0, N_Leg_Thickness * 1.15
+	}
+	sphere {
+		0, N_Leg_Thickness * 1.25
+		scale <1, 1.1, 0.75>
+		translate <0, 0, -N_Leg_Thickness * 0.55>
+	}
+	// outer wing
+	sphere {
+		0, N_Leg_Thickness * 0.9
+		scale <0.35, 1, 1>
+		translate <N_Leg_Thickness * 0.95, 0, -N_Leg_Thickness * 0.2>
+	}
+	object {
+		O_Armor_Spike
+		rotate x * (-90)
+		translate <0, 0, -N_Leg_Thickness * 0.9>
+	}
+	texture {
+		T_Armor
+	}
+}
+
 #declare P_BodyPart_ArmorPart_Shin = union {
 	object {
 		O_Soleret_Top
@@ -163,20 +189,9 @@ weapon : mace with spherical spiked head
 			T_Armor
 		}
 	}
-	sphere {
-		<0, N_Shin_Len, 0>
-		N_Leg_Thickness * 1.15
-		texture {
-			T_Armor
-		}
-	}
 	object {
-		O_Armor_Spike
-		rotate x * (-90)
+		O_Poleyn
 		translate <0, N_Shin_Len, 0>
-		texture {
-			T_Armor
-		}
 	}
 }
 
@@ -210,20 +225,39 @@ weapon : mace with spherical spiked head
 */
 
 
-#declare P_BodyPart_ArmorPart_Shoulder = union {
+// pauldron: three overlapping plates, each lower one further out
+#declare O_Pauldron = union {
 	sphere {
-		<0, N_Arm_Len, 0>
-		N_Arm_Thickness * 1.85
+		0, 1
+		scale <2.8, 1.8, 2.6> * N_Arm_Thickness
+		translate <0.9, 0.2, 0> * N_Arm_Thickness
+	}
+	sphere {
+		0, 1
+		scale <2.7, 1, 2.5> * N_Arm_Thickness
+		translate <1.2, -0.6, 0> * N_Arm_Thickness
+	}
+	sphere {
+		0, 1
+		scale <2.4, 0.9, 2.3> * N_Arm_Thickness
+		translate <1.5, -1.3, 0> * N_Arm_Thickness
 	}
 	/* first shoulder pike */
 	object {
 		O_Armor_Spike
-		translate y * N_Arm_Len
+		translate <0.9, 1.7, 0> * N_Arm_Thickness
 	}
 	/* second shoulder pike */
 	object {
 		O_Armor_Spike
 		rotate <0, 0, -60>
+		translate <2.2, 1.2, 0> * N_Arm_Thickness
+	}
+}
+
+#declare P_BodyPart_ArmorPart_Shoulder = union {
+	object {
+		O_Pauldron
 		translate y * N_Arm_Len
 	}
 	cone {

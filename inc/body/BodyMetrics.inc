@@ -56,6 +56,10 @@
 	#declare N_Finger_Len = N_Arm_Thickness * 1.0;
 	#declare N_Belt_Height = N_Torso_Len / 10;
 	#declare N_Hip_Height = N_Shin_Len + N_Thigh_Len + N_Leg_Thickness; // height of the hips (bottom of the torso) above the feet
+	/* distance from the middle of the hips to each leg */
+	#ifndef (N_Hip_Spacing)
+		#declare N_Hip_Spacing = N_Shoulder_Len / 4;
+	#end
 
   /* Pose. Same defaults as Pose_Reset() in inc/Pose.inc */
 
