@@ -18,6 +18,7 @@
 | [dummy_small](#dummy_small) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [ghoul](#ghoul) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [goblin](#goblin) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [goblin_archer](#goblin_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [goblin_warrior](#goblin_warrior) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [jack](#jack) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [knight](#knight) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -201,6 +202,38 @@ Scène `c_goblin.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 images (60
 - **11** : DEATH 3: falling on the back
 - **12** : DEATH 4: hitting the ground, knees up
 - **13** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## goblin_archer
+
+Scène `c_goblin_archer.pov`, poses `inc/frames/archer.inc`. Cadre 64×96, 102 images (6528 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 8 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 5 WALK 1 · 6 WALK 2 · 7 WALK 3 · 7→5 (50%) |
+| `attack` | 4 | 8 | 48 + 4·d | 150 ms | NONE | 1 ATTACK 1 · 2 ATTACK 2 · 3 ATTACK 3 · 4 ATTACK 4 |
+| `pain` | 2 | 8 | 80 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 | 96 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: aim, bow raised, arrow nocked, string at rest
+- **2** : ATTACK 2: half draw
+- **3** : ATTACK 3: full draw, string at the cheek
+- **4** : ATTACK 4: release, the arrow is gone, the hand flies back
+- **5** : WALK 1: left leg forward, right arm forward
+- **6** : WALK 2: passing
+- **7** : WALK 3: right leg forward, left arm forward
+- **8** : IDLE: weight on one leg, head turned
+- **9** : PAIN: thrown backward, arms flung out
+- **10** : DEATH 1: hit, head snapping back, arms flung forward
+- **11** : DEATH 2: tipping backward, knees giving way
+- **12** : DEATH 3: falling on the back
+- **13** : DEATH 4: hitting the ground, knees up
+- **14** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
 
 </details>
 
