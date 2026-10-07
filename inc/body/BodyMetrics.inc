@@ -38,16 +38,27 @@
     #declare AV_Head_Offset = <0, 0, 0>;
   #end
 	
+	/* proportions (1 = default): length of the legs, of the arms, size of the head */
+	#ifndef (N_BodyMetrics_Leg_Factor)
+		#declare N_BodyMetrics_Leg_Factor = 1;
+	#end
+	#ifndef (N_BodyMetrics_Arm_Factor)
+		#declare N_BodyMetrics_Arm_Factor = 1;
+	#end
+	#ifndef (N_BodyMetrics_Head_Factor)
+		#declare N_BodyMetrics_Head_Factor = 1;
+	#end
+	
 	#declare N_Torso_Len = N_BodyMetrics_Value; // size of torso from shoulder to legs
 	#declare N_Shoulder_Len = N_Torso_Len; // distance between two shoulders
 	#declare N_Lower_Member_Len = N_Torso_Len * N_BodyMetrics_Member_Factor; // default memebrs length
 	#declare N_Upper_Member_Len = N_Torso_Len * N_BodyMetrics_Member_Factor * 0.75; // default memebrs length
-	#declare N_Arm_Len = N_Upper_Member_Len; // arm length from shoulder to elbow
-	#declare N_Wrist_Len = N_Upper_Member_Len; // distance from elbow to hand
-	#declare N_Thigh_Len = N_Lower_Member_Len; // distance from torso to kneel
-	#declare N_Shin_Len = N_Lower_Member_Len; // distance from kneel to foot
+	#declare N_Arm_Len = N_Upper_Member_Len * N_BodyMetrics_Arm_Factor; // arm length from shoulder to elbow
+	#declare N_Wrist_Len = N_Upper_Member_Len * N_BodyMetrics_Arm_Factor; // distance from elbow to hand
+	#declare N_Thigh_Len = N_Lower_Member_Len * N_BodyMetrics_Leg_Factor; // distance from torso to kneel
+	#declare N_Shin_Len = N_Lower_Member_Len * N_BodyMetrics_Leg_Factor; // distance from kneel to foot
 	#declare N_Neck_Len = N_Torso_Len * 0.666; 
-	#declare N_Head_Size = N_Shoulder_Len / 1.75;
+	#declare N_Head_Size = N_Shoulder_Len / 1.75 * N_BodyMetrics_Head_Factor;
 	#declare N_BodyPart_Boobs_Size = N_Shoulder_Len / 4;
 	#declare N_BodyPart_Boobs_Spacing = N_Shoulder_Len / 6;
 	#declare N_Leg_Thickness = N_BodyMetrics_Leg_Thickness;

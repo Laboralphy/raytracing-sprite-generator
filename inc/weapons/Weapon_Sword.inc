@@ -9,6 +9,7 @@
 */
 
 #include "metals"
+#include "inc/body/BodyMetrics.inc"
 
 #ifndef (T_Sword_Blade)
 	#declare T_Sword_Blade = texture {

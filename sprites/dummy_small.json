@@ -1,0 +1,12 @@
+{
+	"scene": "c_dummy_small.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 0.6, "opacity": 0.45 },
+	"animations": [
+		{ "id": "idle", "poses": [0, 7], "duration": 400, "loop": "@LOOP_YOYO" },
+		{ "id": "walk", "poses": [3, 4, 5, 6], "duration": 110, "loop": "@LOOP_FORWARD" },
+		{ "id": "attack", "poses": [[0, 1, 0.5], 1, 2], "duration": 130, "loop": "@LOOP_NONE" },
+		{ "id": "pain", "poses": [8, [8, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "death", "poses": [9, 10, 11, 12, [12, 13, 0.5], 13], "directions": 1, "view": 3, "duration": 120, "loop": "@LOOP_NONE" }
+	]
+}

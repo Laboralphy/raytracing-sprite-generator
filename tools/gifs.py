@@ -10,6 +10,13 @@ Reads output/<name>.png and output/<name>.json (the strip and its tileset,
 like the engine does) and writes output/gif/<name>_<animation>.gif, one per
 animation, facing the camera (engine direction 4).
 
+Options:
+    --anim attack [walk ...]   only these animations
+    --view face side           face: output/gif/<name>_<animation>.gif (default);
+                               side: nose to the right of the screen (engine
+                               direction 2), output/gif/<name>_<animation>_side.gif
+An animation rendered from one direction only (death) is the same in every view.
+
 - speed: the "duration" of the animation;
 - @LOOP_YOYO: forth and back; @LOOP_NONE (attack, death): a pause on the last
   frame before starting again;
@@ -29,9 +36,12 @@ import tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT = os.path.join(ROOT, "output")
 FACE = 4  # engine direction facing the camera (src/render/spriteFacing.ts)
+# view -> (engine direction, file name suffix)
+VIEWS = {"face": (FACE, ""), "side": (2, "_side")}
 
 
-def make_gifs(name, scale, background, hold):
+def make_gifs(name, scale, background, hold, anims=None, view="face"):
+    direction, suffix = VIEWS[view]
     sheet = os.path.join(OUTPUT, f"{name}.png")
     with open(os.path.join(OUTPUT, f"{name}.json")) as f:
         tileset = json.load(f)
@@ -39,7 +49,9 @@ def make_gifs(name, scale, background, hold):
     os.makedirs(os.path.join(OUTPUT, "gif"), exist_ok=True)
     with tempfile.TemporaryDirectory() as work:
         for anim in tileset["animations"]:
-            start = anim["start"][FACE] if isinstance(anim["start"], list) else anim["start"]
+            if anims and anim["id"] not in anims:
+                continue
+            start = anim["start"][direction] if isinstance(anim["start"], list) else anim["start"]
             frames = []
             for i in range(anim["length"]):
                 tile = os.path.join(work, f"{anim['id']}_{i}.png")
@@ -60,7 +72,7 @@ def make_gifs(name, scale, background, hold):
             args = ["convert", "-loop", "0"]
             for frame, d in sequence:
                 args += ["-delay", str(d), frame]
-            out = os.path.join(OUTPUT, "gif", f"{name}_{anim['id']}.gif")
+            out = os.path.join(OUTPUT, "gif", f"{name}_{anim['id']}{suffix}.gif")
             subprocess.run(args + ["-layers", "Optimize", out], check=True)
             print(f"  {os.path.relpath(out, ROOT)} ({len(sequence)} images)")
 
@@ -71,6 +83,8 @@ def main():
     parser.add_argument("--all", action="store_true", help="every sheet in output/")
     parser.add_argument("--scale", type=int, default=3)
     parser.add_argument("--background", default="#3a3632")
+    parser.add_argument("--anim", nargs="+", help="only these animations (default: all)")
+    parser.add_argument("--view", nargs="+", choices=sorted(VIEWS), default=["face"])
     parser.add_argument("--hold", type=int, default=100, help="pause on the last frame of a non looping animation, in 1/100 s")
     args = parser.parse_args()
     names = args.names
@@ -84,7 +98,8 @@ def main():
         return 1
     for name in names:
         print(name)
-        make_gifs(name, args.scale, args.background, args.hold)
+        for view in args.view:
+            make_gifs(name, args.scale, args.background, args.hold, args.anim, view)
     return 0
 
 

@@ -1,0 +1,12 @@
+{
+	"scene": "c_dummy_archer.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.1 },
+	"shadow": { "radius": 0.8, "opacity": 0.45 },
+	"animations": [
+		{ "id": "idle", "poses": [0, 8], "duration": 400, "loop": "@LOOP_YOYO" },
+		{ "id": "walk", "poses": [5, 6, 7, [7, 5, 0.5]], "duration": 150, "loop": "@LOOP_FORWARD" },
+		{ "id": "attack", "poses": [1, 2, 3, 4], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "pain", "poses": [9, [9, 0, 0.5]], "duration": 150, "loop": "@LOOP_NONE" },
+		{ "id": "death", "poses": [10, 11, 12, 13, [13, 14, 0.5], 14], "directions": 1, "view": 3, "duration": 120, "loop": "@LOOP_NONE" }
+	]
+}

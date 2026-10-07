@@ -57,8 +57,19 @@ __      _(_)______ _ _ __ __| |
 		               z: robe shape, from 0 to 1: the 2 surfaces of revolution of the robe
 		                  (P_WizardRobeGarb, P_WizardRobeGarb_2) are morphed point by point,
 		                  and the sleeves, the head and the hands follow its height (walking)
-	Distances before the final scale 0.8.
+	Distances before the final scale N_Wizard_Scale.
+	Size: N_Wizard_Robe_Stretch lengthens the robe (everything above it rises
+	accordingly), N_Wizard_Scale scales the whole wizard.
 */
+
+#ifndef (N_Wizard_Robe_Stretch)
+	#declare N_Wizard_Robe_Stretch = 1.2;
+#end
+#ifndef (N_Wizard_Scale)
+	#declare N_Wizard_Scale = 0.83;
+#end
+// rise of everything above the robe
+#local N_Lift = 2.25 * (N_Wizard_Robe_Stretch - 1);
 
 #ifndef (V_Pose_Extra)
 	#declare V_Pose_Extra = <0, 0, 0>;
@@ -114,6 +125,8 @@ __      _(_)______ _ _ __ __| |
 #local N_Collapse = V_Pose_Extra.x;
 #local V_Shoulder_Right = <-1.05, 1.8 + N_Rise, -0.7>;
 #local V_Wand_Hand = <-1.1, 1.6 + N_Rise, -1.05>;
+// the wand hand once lifted above the robe (for the dropping wand)
+#local V_Wand_Hand_Lifted = V_Wand_Hand + y * N_Lift;
 
 #local O_Wizard_Arm_Right = union {
 	object {
@@ -161,15 +174,15 @@ __      _(_)______ _ _ __ __| |
 			#if (vlength(AV_Head) > 0)
 				rotate AV_Head
 			#end
-			translate (2.7 + N_Rise) * y
+			translate (2.7 + N_Rise + N_Lift) * y
 		}
 	#else
 		/*
 			Dying: the hat (and the fading head) come down with the top of the
 			robe, and the hat ends up lying on it.
 		*/
-		#local N_Robe_Top_End = 2.25 * (1 - 0.05 * N_Shape) * (1 - 0.85);
-		#local N_Head_Y = (2.7 + N_Rise) * (1 - N_Collapse) + (N_Robe_Top_End - 0.15) * N_Collapse;
+		#local N_Robe_Top_End = 2.25 * N_Wizard_Robe_Stretch * (1 - 0.05 * N_Shape) * (1 - 0.85);
+		#local N_Head_Y = (2.7 + N_Rise + N_Lift) * (1 - N_Collapse) + (N_Robe_Top_End - 0.15) * N_Collapse;
 		union {
 			object {
 				O_WizardHatBrown
@@ -192,13 +205,13 @@ __      _(_)______ _ _ __ __| |
 		object {
 			O_Wand
 			rotate y * 30 * N_Collapse
-			translate V_Wand_Hand + (<-0.5, 0.12, -1.7> - V_Wand_Hand) * N_Collapse
+			translate V_Wand_Hand_Lifted + (<-0.5, 0.12, -1.7> - V_Wand_Hand_Lifted) * N_Collapse
 		}
 	#end
 	object {
 		Wizard_Robe_Garb(N_Shape)
 		texture { T_FabricWizardRobe }
-		scale <1.75, 2.25, 1.75>
+		scale <1.75, 2.25 * N_Wizard_Robe_Stretch, 1.75>
 		#if (N_Collapse > 0)
 			scale <1 + 0.25 * N_Collapse, 1 - 0.85 * N_Collapse, 1 + 0.25 * N_Collapse>
 		#end
@@ -212,11 +225,12 @@ __      _(_)______ _ _ __ __| |
 			rotate <100, 0, -20>
 			translate <0, 1.6 + N_Rise, -1>
 		}
+		translate y * N_Lift
 		#if (N_Collapse > 0)
-			translate -y * 1.3 * N_Collapse
+			translate -y * (1.3 + N_Lift) * N_Collapse
 		#end
 	}
-	scale 0.8
+	scale N_Wizard_Scale
 	#if (vlength(AV_Body) > 0)
 		rotate AV_Body
 	#end

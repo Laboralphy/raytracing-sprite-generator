@@ -14,12 +14,17 @@
 | [barrel](#barrel) | 64×96 | 1 | `default` |
 | [chain](#chain) | 64×96 | 1 | `default` |
 | [cube](#cube) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [dummy_archer](#dummy_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [dummy_small](#dummy_small) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [ghoul](#ghoul) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [goblin](#goblin) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [goblin_warrior](#goblin_warrior) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [jack](#jack) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [knight](#knight) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [lantern](#lantern) | 64×96 | 1 | `default` |
 | [mummy](#mummy) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [skeleton](#skeleton) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [skeleton_archer](#skeleton_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [slime](#slime) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [troll](#troll) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [witch](#witch) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -75,6 +80,69 @@ Scène `c_cube.pov`, poses `inc/frames/cube.inc`. Cadre 64×96, 94 images (6016 
 
 </details>
 
+## dummy_archer
+
+Scène `c_dummy_archer.pov`, poses `inc/frames/archer.inc`. Cadre 64×96, 102 images (6528 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 8 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 5 WALK 1 · 6 WALK 2 · 7 WALK 3 · 7→5 (50%) |
+| `attack` | 4 | 8 | 48 + 4·d | 150 ms | NONE | 1 ATTACK 1 · 2 ATTACK 2 · 3 ATTACK 3 · 4 ATTACK 4 |
+| `pain` | 2 | 8 | 80 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 | 96 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: aim, bow raised, arrow nocked, string at rest
+- **2** : ATTACK 2: half draw
+- **3** : ATTACK 3: full draw, string at the cheek
+- **4** : ATTACK 4: release, the arrow is gone, the hand flies back
+- **5** : WALK 1: left leg forward, right arm forward
+- **6** : WALK 2: passing
+- **7** : WALK 3: right leg forward, left arm forward
+- **8** : IDLE: weight on one leg, head turned
+- **9** : PAIN: thrown backward, arms flung out
+- **10** : DEATH 1: hit, head snapping back, arms flung forward
+- **11** : DEATH 2: tipping backward, knees giving way
+- **12** : DEATH 3: falling on the back
+- **13** : DEATH 4: hitting the ground, knees up
+- **14** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## dummy_small
+
+Scène `c_dummy_small.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 7 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 110 ms | FORWARD | 3 TROT 1 · 4 TROT 2 · 5 TROT 3 · 6 TROT 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 130 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 8 PAIN · 8→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 9 DEATH 1 · 10 DEATH 2 · 11 DEATH 3 · 12 DEATH 4 · 12→13 (50%) · 13 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND: knees slightly bent, sword ready
+- **1** : ATTACK 1: sword raised over the shoulder, crouching
+- **2** : ATTACK 2: slash, lunging
+- **3** : TROT 1: left foot reaching forward, right foot kicked back, in the air
+- **4** : TROT 2: on the left foot, right leg tucked, lowest point
+- **5** : TROT 3: right foot reaching forward, left foot kicked back, in the air
+- **6** : TROT 4: on the right foot, left leg tucked, lowest point
+- **7** : IDLE: shifting weight, shoulders up, head nearly still
+- **8** : PAIN: thrown backward
+- **9** : DEATH 1: hit, head snapping back, arms flung forward
+- **10** : DEATH 2: tipping backward, knees giving way
+- **11** : DEATH 3: falling on the back
+- **12** : DEATH 4: hitting the ground, knees up
+- **13** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
 ## ghoul
 
 Scène `c_ghoul_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (6016 px de large).
@@ -102,6 +170,68 @@ Scène `c_ghoul_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (
 - **10** : DEATH 3: falling on the back
 - **11** : DEATH 4: hitting the ground, knees up
 - **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## goblin
+
+Scène `c_goblin.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 7 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 110 ms | FORWARD | 3 TROT 1 · 4 TROT 2 · 5 TROT 3 · 6 TROT 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 130 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 8 PAIN · 8→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 9 DEATH 1 · 10 DEATH 2 · 11 DEATH 3 · 12 DEATH 4 · 12→13 (50%) · 13 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND: knees slightly bent, sword ready
+- **1** : ATTACK 1: sword raised over the shoulder, crouching
+- **2** : ATTACK 2: slash, lunging
+- **3** : TROT 1: left foot reaching forward, right foot kicked back, in the air
+- **4** : TROT 2: on the left foot, right leg tucked, lowest point
+- **5** : TROT 3: right foot reaching forward, left foot kicked back, in the air
+- **6** : TROT 4: on the right foot, left leg tucked, lowest point
+- **7** : IDLE: shifting weight, shoulders up, head nearly still
+- **8** : PAIN: thrown backward
+- **9** : DEATH 1: hit, head snapping back, arms flung forward
+- **10** : DEATH 2: tipping backward, knees giving way
+- **11** : DEATH 3: falling on the back
+- **12** : DEATH 4: hitting the ground, knees up
+- **13** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## goblin_warrior
+
+Scène `c_goblin_warrior.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 7 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 110 ms | FORWARD | 3 TROT 1 · 4 TROT 2 · 5 TROT 3 · 6 TROT 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 130 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 8 PAIN · 8→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 9 DEATH 1 · 10 DEATH 2 · 11 DEATH 3 · 12 DEATH 4 · 12→13 (50%) · 13 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND: knees slightly bent, sword ready
+- **1** : ATTACK 1: sword raised over the shoulder, crouching
+- **2** : ATTACK 2: slash, lunging
+- **3** : TROT 1: left foot reaching forward, right foot kicked back, in the air
+- **4** : TROT 2: on the left foot, right leg tucked, lowest point
+- **5** : TROT 3: right foot reaching forward, left foot kicked back, in the air
+- **6** : TROT 4: on the right foot, left leg tucked, lowest point
+- **7** : IDLE: shifting weight, shoulders up, head nearly still
+- **8** : PAIN: thrown backward
+- **9** : DEATH 1: hit, head snapping back, arms flung forward
+- **10** : DEATH 2: tipping backward, knees giving way
+- **11** : DEATH 3: falling on the back
+- **12** : DEATH 4: hitting the ground, knees up
+- **13** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
 
 </details>
 
@@ -231,6 +361,38 @@ Scène `c_skeleton_1.pov`, poses `inc/frames/skeleton.inc`. Cadre 64×96, 94 ima
 - **10** : DEATH 3: falling on the back
 - **11** : DEATH 4: hitting the ground, knees up
 - **12** : DEATH 5: lying on the back, arms and legs fallen flat, skull turned aside
+
+</details>
+
+## skeleton_archer
+
+Scène `c_skeleton_archer.pov`, poses `inc/frames/archer.inc`. Cadre 64×96, 102 images (6528 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 8 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 5 WALK 1 · 6 WALK 2 · 7 WALK 3 · 7→5 (50%) |
+| `attack` | 4 | 8 | 48 + 4·d | 150 ms | NONE | 1 ATTACK 1 · 2 ATTACK 2 · 3 ATTACK 3 · 4 ATTACK 4 |
+| `pain` | 2 | 8 | 80 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.1) | 96 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: aim, bow raised, arrow nocked, string at rest
+- **2** : ATTACK 2: half draw
+- **3** : ATTACK 3: full draw, string at the cheek
+- **4** : ATTACK 4: release, the arrow is gone, the hand flies back
+- **5** : WALK 1: left leg forward, right arm forward
+- **6** : WALK 2: passing
+- **7** : WALK 3: right leg forward, left arm forward
+- **8** : IDLE: weight on one leg, head turned
+- **9** : PAIN: thrown backward, arms flung out
+- **10** : DEATH 1: hit, head snapping back, arms flung forward
+- **11** : DEATH 2: tipping backward, knees giving way
+- **12** : DEATH 3: falling on the back
+- **13** : DEATH 4: hitting the ground, knees up
+- **14** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
 
 </details>
 
