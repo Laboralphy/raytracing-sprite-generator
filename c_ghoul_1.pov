@@ -57,7 +57,7 @@
 #include "inc/armors/Belt_Thick_Dark_Leather_Iron_Round_Buckle"
 #include "inc/armors/Boot_Leather_Brown_Dirty"
 #include "inc/hair/Texture_Black_Gray"
-#include "inc/skeleton/Skull"
+#include "inc/skeleton/Skull_old"
 #include "inc/skeleton/Tongue"
 #include "inc/armors/Wrist_Spiked"
 

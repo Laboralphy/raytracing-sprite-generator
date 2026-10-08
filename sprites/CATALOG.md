@@ -11,27 +11,57 @@
 
 | Sprite | Cadre | Images | Animations |
 |---|---|---|---|
+| [anvil](#anvil) | 64×96 | 1 | `default` |
+| [armillary_sphere](#armillary_sphere) | 64×96 | 1 | `default` |
 | [barrel](#barrel) | 64×96 | 1 | `default` |
+| [basket](#basket) | 64×96 | 1 | `default` |
+| [books](#books) | 64×96 | 1 | `default` |
+| [brazier](#brazier) | 64×96 | 4 | `default` |
+| [brazier_out](#brazier_out) | 64×96 | 1 | `default` |
+| [cauldron](#cauldron) | 64×96 | 1 | `default` |
 | [chain](#chain) | 64×96 | 1 | `default` |
+| [clay_pot](#clay_pot) | 64×96 | 1 | `default` |
 | [cube](#cube) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [dummy_archer](#dummy_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [dummy_small](#dummy_small) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [ghoul](#ghoul) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [globe](#globe) | 64×96 | 1 | `default` |
 | [goblin](#goblin) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [goblin_archer](#goblin_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [goblin_warrior](#goblin_warrior) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [golem](#golem) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [grain_sack](#grain_sack) | 64×96 | 1 | `default` |
 | [jack](#jack) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [jack_old](#jack_old) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [knight](#knight) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [lantern](#lantern) | 64×96 | 1 | `default` |
 | [mummy](#mummy) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [skeleton](#skeleton) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [skeleton_archer](#skeleton_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [skeleton_old](#skeleton_old) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [slime](#slime) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [telescope](#telescope) | 64×96 | 1 | `default` |
 | [troll](#troll) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [witch](#witch) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_blue](#wizard_blue) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_red](#wizard_red) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [zombie](#zombie) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+
+## anvil
+
+Scène `p_anvil.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
+## armillary_sphere
+
+Scène `p_armillary_sphere.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
 
 ## barrel
 
@@ -41,6 +71,46 @@ Scène `p_barrel.pov`. Cadre 64×96, 1 image (64 px de large).
 |---|---|---|---|---|---|---|
 | `default` | 1 | 1 | 0 (vue 4) | 1000 ms | NONE | 0 |
 
+## basket
+
+Scène `p_basket.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
+## books
+
+Scène `p_books.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
+## brazier
+
+Scène `p_brazier.pov`. Cadre 64×96, 4 images (256 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 4 | 1 (caméra 15°) | 0 (vue 3) | 100 ms | FORWARD | 0 · 1 · 2 · 3 |
+
+## brazier_out
+
+Scène `p_brazier_out.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
+## cauldron
+
+Scène `p_cauldron.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
 ## chain
 
 Scène `p_chain.pov`. Cadre 64×96, 1 image (64 px de large).
@@ -48,6 +118,14 @@ Scène `p_chain.pov`. Cadre 64×96, 1 image (64 px de large).
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
 | `default` | 1 | 1 | 0 (vue 4) | 1000 ms | NONE | 0 |
+
+## clay_pot
+
+Scène `p_clay_pot.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
 
 ## cube
 
@@ -174,6 +252,14 @@ Scène `c_ghoul_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (
 
 </details>
 
+## globe
+
+Scène `p_globe.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
 ## goblin
 
 Scène `c_goblin.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 images (6016 px de large).
@@ -268,9 +354,77 @@ Scène `c_goblin_warrior.pov`, poses `inc/frames/small.inc`. Cadre 64×96, 94 im
 
 </details>
 
+## golem
+
+Scène `c_golem.pov`, poses `inc/frames/golem.inc`. Cadre 96×96, 94 images (9024 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 450 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 180 ms | FORWARD | 3 WALK 1 · 4 WALK 2 · 5 WALK 3 · 4 WALK 2 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.2) | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: right fist drawn back, torso twisted
+- **2** : ATTACK 2: punch, right arm thrown forward, lunging
+- **3** : WALK 1: left leg forward, swaying onto it
+- **4** : WALK 2: passing, upright
+- **5** : WALK 3: right leg forward, swaying onto it
+- **6** : IDLE: shoulders rolling, head turning
+- **7** : PAIN: rocked backward
+- **8** : DEATH 1: hit, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## grain_sack
+
+Scène `p_grain_sack.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
 ## jack
 
 Scène `c_jack.pov`, poses `inc/frames/jack.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 3 | 8 | 0 + 3·d | 250 ms | YOYO | 0 FLOAT 1 · 1 FLOAT 2 · 2 FLOAT 3 |
+| `walk` | 4 | 8 | 24 + 4·d | 150 ms | FORWARD | 3 MOVE 1 · 4 MOVE 2 · 5 MOVE 3 · 4 MOVE 2 |
+| `attack` | 2 | 8 | 56 + 2·d | 150 ms | NONE | 6 ATTACK · 6→0 (75%) |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 4) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 10→11 (50%) · 11 DEATH 4 · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : FLOAT 1
+- **1** : FLOAT 2
+- **2** : FLOAT 3
+- **3** : MOVE 1: gliding, leaning forward
+- **4** : MOVE 2
+- **5** : MOVE 3
+- **6** : ATTACK: fire, lantern held out and kicking up a little (recoil), blazing
+- **7** : PAIN: thrown backward, flame flickering
+- **8** : DEATH 1: shudder, flame dying
+- **9** : DEATH 2: the robe starts to empty
+- **10** : DEATH 3: collapsing, the pumpkin falls
+- **11** : DEATH 4: on the ground
+- **12** : DEATH 5: empty robe, pumpkin rolled over, lantern out
+
+</details>
+
+## jack_old
+
+Scène `c_jack_old.pov`, poses `inc/frames/jack.inc`. Cadre 64×96, 94 images (6016 px de large).
 
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
@@ -429,6 +583,36 @@ Scène `c_skeleton_archer.pov`, poses `inc/frames/archer.inc`. Cadre 64×96, 102
 
 </details>
 
+## skeleton_old
+
+Scène `c_skeleton_1_old.pov`, poses `inc/frames/skeleton.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 3 WALK 1 · 4 WALK 2 · 5 WALK 3 · 5→3 (50%) |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND: sword held low, pointing forward
+- **1** : ATTACK 1: sword raised over the shoulder
+- **2** : ATTACK 2: slash
+- **3** : WALK 1: left leg forward, right arm forward
+- **4** : WALK 2: passing
+- **5** : WALK 3: right leg forward, left arm forward
+- **6** : IDLE: head tilted, sword lowered
+- **7** : PAIN: thrown backward, arms flung out
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, skull turned aside
+
+</details>
+
 ## slime
 
 Scène `c_slime.pov`, poses `inc/frames/slime.inc`. Cadre 96×96, 94 images (9024 px de large).
@@ -461,6 +645,14 @@ Scène `c_slime.pov`, poses `inc/frames/slime.inc`. Cadre 96×96, 94 images (902
 - **15** : DEATH 6: puddle
 
 </details>
+
+## telescope
+
+Scène `p_telescope.pov`. Cadre 64×96, 1 image (64 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
 
 ## troll
 

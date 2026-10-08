@@ -1,13 +1,14 @@
 /*
 	Feathered hat (bycocket, as Robin Hood's): a felt crown peaked at the
-	front, a narrow brim turned up at the back, a leather band and a long
+	front, a narrow brim turned up at the back, a small leather belt with a brass
+	buckle around the base of the crown, and a long
 	feather stuck in the band on the left side, sweeping back and up.
 
 	O_Hat_Feathered is built in a unit frame, as O_Helm_Horned_Cap: the crown
 	covers the upper half of the unit sphere (base on y = 0), front towards
 	-z. Each character scales and places it on its head (c_goblin_archer.pov).
 
-	Textures overridable: T_Hat_Felt, T_Hat_Band, T_Hat_Feather.
+	Textures overridable: T_Hat_Felt, T_Hat_Band, T_Hat_Buckle, T_Hat_Feather.
 	N_Hat_Feather_Size scales the feather (1 by default).
 */
 
@@ -36,7 +37,7 @@
 #ifndef (T_Hat_Band)
 	#declare T_Hat_Band = texture {
 		pigment {
-			color rgb <0.1, 0.06, 0.03>
+			color rgb <0.05, 0.03, 0.015>
 		}
 		finish {
 			specular 0.15
@@ -59,6 +60,19 @@
 		finish {
 			specular 0.1
 			roughness 0.1
+		}
+	}
+#end
+
+#ifndef (T_Hat_Buckle)
+	#declare T_Hat_Buckle = texture {
+		pigment {
+			color rgb <0.75, 0.6, 0.25>
+		}
+		finish {
+			specular 0.8
+			roughness 0.01
+			metallic
 		}
 	}
 #end
@@ -99,18 +113,39 @@
 		<0, -1, 0>, <0, 1, 0>, 0.9
 		scale <1, 1, 1.05>
 	}
+	// turned up at the back, around the front of the crown (the front stays
+	// at the base of the crown)
+	translate z * 1.12
 	rotate x * -22
+	translate z * -1.12
 	texture {
 		T_Hat_Felt
 	}
 }
 
-#local O_Hat_Band = torus {
-	1, 0.06
-	scale <1.02, 1, 1.12>
-	translate y * 0.12
-	texture {
-		T_Hat_Band
+// band: a small leather belt around the base of the crown, its buckle in front
+#local O_Hat_Band = union {
+	torus {
+		1, 0.09
+		scale <1, 1.4, 1>
+		scale <1.02, 1, 1.12>
+		translate y * 0.13
+		texture {
+			T_Hat_Band
+		}
+	}
+	// buckle: a square frame
+	difference {
+		box {
+			<-0.14, -0.13, -0.03>, <0.14, 0.13, 0.03>
+		}
+		box {
+			<-0.08, -0.07, -1>, <0.08, 0.07, 1>
+		}
+		translate <0, 0.13, -1.2>
+		texture {
+			T_Hat_Buckle
+		}
 	}
 }
 

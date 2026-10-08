@@ -43,7 +43,7 @@ a feathered hat (inc/armors/Hat_Feathered.inc) instead of a helm.
 // ears): over the top of the head, the ears sticking out under the brim
 #include "inc/armors/Hat_Feathered.inc"
 
-#declare V_Goblin_Hat_Centre = <0, 1.42, 0.05>;
+#declare V_Goblin_Hat_Centre = <0, 1.38, 0.05>;
 
 #declare P_BodyPart_ArmorPart_Helm = union {
 	object {
@@ -55,7 +55,8 @@ a feathered hat (inc/armors/Hat_Feathered.inc) instead of a helm.
 	}
 	object {
 		O_Hat_Feathered
-		scale 0.82
+		// wider than high: the crown covers the whole top of the head
+		scale <0.92, 0.82, 0.92>
 		rotate x * 6
 		translate V_Goblin_Hat_Centre
 		scale N_Head_Size

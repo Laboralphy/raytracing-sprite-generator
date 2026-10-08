@@ -1,0 +1,8 @@
+{
+	"scene": "p_telescope.pov",
+	"frame": { "width": 64, "height": 96, "units_height": 6.0, "baseline": 0.35 },
+	"shadow": { "radius": 0.95, "opacity": 0.3 },
+	"animations": [
+		{ "id": "default", "poses": [0], "directions": 1, "view": 3, "camera_elevation": 15, "duration": 1000, "loop": "@LOOP_NONE" }
+	]
+}

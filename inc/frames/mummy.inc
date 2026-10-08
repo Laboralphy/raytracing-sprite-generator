@@ -132,8 +132,10 @@
 			#declare AV_Arm_Right = <100, 0, -40>;
 			#declare AV_Wrist_Right = <20, 0, 0>;
 			#declare AV_Torso = <15, 0, 0>;
-			#declare AV_Head = <12, 0, 0>;
-			#declare AV_Body = <25, 0, 0>;
+			// head and body less thrown back than before the crown: it would
+			// leave the frame
+			#declare AV_Head = <0, 0, 0>;
+			#declare AV_Body = <20, 0, 0>;
 			#declare V_Body_Offset = <0, -0.35, -0.46>;
 		#break
 

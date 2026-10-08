@@ -1,10 +1,14 @@
+/*
+	OLD VERSION of Jack-o'-lantern, kept for comparison: the pumpkin head is
+	a torus with alternate bands (PumpkinHead). Used by c_jack_old.pov
+	(sprites/jack_old.json). The current Jack is inc/jack/Jack.inc.
+*/
 
 
 #include "inc/MyShapes"
 #include "colors"
 #include "inc/body/BodyParts"
 #include "inc/jack/Lantern"
-#include "inc/jack/Pumpkin"
 
 #declare WizardRobeTint = color rgb 0.05;
 #declare T_WizardHatFabric = texture {
@@ -28,6 +32,32 @@
 	}
 }
 
+
+#local PumpkinHead = torus {
+	1
+	1.666
+	texture {
+		pigment {
+			radial
+			color_map {
+				[0 Orange]
+				[1 Red * 0.3]
+			}
+			frequency 16
+		}
+		rotate y * 10
+	}
+}
+
+#local PumpkinHead_Inner = torus {
+	1
+	1.444
+	texture {
+		pigment {
+			color rgb <1, 1, 0>
+		}
+	}
+}
 
 #local O_Razor_0 = box {
 	<-10, 0, 0>
@@ -144,15 +174,113 @@
 	texture { T_FabricWizardRobe }
 }
 
-/*
-	Head: the carved pumpkin of inc/jack/Pumpkin.inc (the old torus pumpkin
-	is kept in inc/jack/Jack_old.inc, rendered by c_jack_old.pov).
-*/
+#local Pumpkin_Face_Digger0 = box {
+	<-1, 1, 1>
+	<1, -1, -2>
+	rotate 45 * z
+	scale <0.66, 1.3, 1.3>
+}
+
+#local Pumpkin_Face_Digger1 = union {
+	cylinder {
+		<0, 0, 1>
+		<0, 0, -2>
+		1.5
+	}
+	object {
+		Pumpkin_Face_Digger0
+		rotate 8 * z
+	}
+	object {
+		Pumpkin_Face_Digger0
+		scale <1, 0.92, 1>
+		rotate -8 * z
+	}
+	object {
+		Pumpkin_Face_Digger0
+		scale <1, 0.95, 1>
+		rotate 24 * z
+	}
+	object {
+		Pumpkin_Face_Digger0
+		scale <1, 0.95, 1>
+		rotate -24 * z
+	}
+	translate y
+}
+
+#local Pumpkin_Face_1 = difference {
+	cylinder {
+		<0, 0, 0>
+		<0, 0, -1>
+		1
+	}
+	object {
+		Pumpkin_Face_Digger1
+	}
+}
+
+#local Pumpkin_Nose_1 = prism {
+	linear_spline
+	-1, 0, 4,
+	<-1, 0>, <-1, 1>, <-1.6, 0>, <-1, 0>
+	scale 0.4
+	rotate <90, 0, 180>
+	translate <-0.3, -0.3, 0>
+}
+
+#local Pumpkin_Eye_1 = cylinder {
+	<0, 0, 0>
+	<0, 0, -1>
+	0.444
+	scale <1, 0.5, 1>
+	rotate -15 * z
+	translate <-0.6, 0.4, 0>
+}
+
+#local Pumpkin_Face_2 = union {
+	object {
+		Pumpkin_Face_1
+	}
+	object {
+		Pumpkin_Nose_1
+	}
+	object {
+		Pumpkin_Nose_1
+		scale <-1, 1, 1>
+	}
+	object {
+		Pumpkin_Eye_1
+	}
+	object {
+		Pumpkin_Eye_1
+		scale <-1, 1, 1>
+	}
+	texture {
+		pigment {
+			color rgb <0.8, 0.8, 0>
+		}
+	}
+}
+
+#local Pumpkin_Head_2 = difference {
+	object {
+		PumpkinHead
+		scale 0.4
+	}
+	object {
+		Pumpkin_Face_2
+		scale <0.55, 0.55, 10>
+	}
+}
+
 #local Pumpkin_Head_3 = union {
 	object {
-		O_Jack_Pumpkin
-		// as wide as the old torus pumpkin, a little higher
-		scale <1, 0.9, 1>
+		Pumpkin_Head_2
+	}
+	object {
+		PumpkinHead_Inner
+		scale 0.4
 	}
 	object {
 		O_WizardHatBrown
