@@ -69,7 +69,7 @@ Scène `p_barrel.pov`. Cadre 64×96, 1 image (64 px de large).
 
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
-| `default` | 1 | 1 | 0 (vue 4) | 1000 ms | NONE | 0 |
+| `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
 
 ## basket
 

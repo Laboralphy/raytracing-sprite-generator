@@ -1,12 +1,14 @@
 /*
 	Smithy anvil on a wooden stump, on the floor (y = 0). The horn points
-	towards -x.
+	towards -x. Dark cast iron (as the cauldron) with a polished working face
+	and worn bright edges, so that it reads at sprite size; two tool holes in
+	the face; an iron hoop around the stump.
 	O_Anvil: about 2 units high, 1.6 long.
 */
 
 #declare T_Anvil_Iron = texture {
 	pigment {
-		color rgb <0.16, 0.16, 0.17>
+		color rgb <0.07, 0.07, 0.08>
 	}
 	normal {
 		dents 0.3
@@ -14,8 +16,8 @@
 	}
 	finish {
 		ambient 0.1
-		diffuse 0.7
-		specular 0.6
+		diffuse 0.6
+		specular 0.7
 		roughness 0.02
 		metallic
 	}
@@ -24,11 +26,11 @@
 // polished working face
 #declare T_Anvil_Face = texture {
 	pigment {
-		color rgb <0.45, 0.45, 0.47>
+		color rgb <0.62, 0.62, 0.64>
 	}
 	finish {
-		ambient 0.1
-		diffuse 0.6
+		ambient 0.15
+		diffuse 0.7
 		specular 0.9
 		roughness 0.008
 		metallic
@@ -39,8 +41,8 @@
 	pigment {
 		bozo
 		color_map {
-			[0 color rgb <0.35, 0.22, 0.1>]
-			[1 color rgb <0.25, 0.15, 0.07>]
+			[0 color rgb <0.3, 0.18, 0.08>]
+			[1 color rgb <0.18, 0.1, 0.04>]
 		}
 		scale <0.05, 1, 0.05>
 	}
@@ -64,6 +66,16 @@
 }
 
 #local N_Stump = 1.05;
+
+// a worn bright edge, from A to B
+#macro Anvil_Edge(V_A, V_B)
+	cylinder {
+		V_A, V_B, 0.022
+		texture {
+			T_Anvil_Face
+		}
+	}
+#end
 
 #declare O_Anvil = union {
 	// stump
@@ -117,11 +129,38 @@
 		}
 		translate y * N_Stump
 	}
-	box {
-		<-0.53, 0.775, -0.18>, <0.56, 0.785, 0.18>
+	// polished face, with its two tool holes (hardy, square; pritchel, round)
+	difference {
+		box {
+			<-0.53, 0.775, -0.18>, <0.56, 0.785, 0.18>
+		}
+		box {
+			<0.32, 0.7, -0.05>, <0.42, 0.8, 0.05>
+		}
+		cylinder {
+			<0.18, 0.7, 0>, <0.18, 0.8, 0>, 0.035
+		}
 		translate y * N_Stump
 		texture {
 			T_Anvil_Face
+		}
+	}
+	// worn edges of the face and of the horn
+	union {
+		Anvil_Edge(<-0.55, 0.78, -0.2>, <0.58, 0.78, -0.2>)
+		Anvil_Edge(<-0.55, 0.78, 0.2>, <0.58, 0.78, 0.2>)
+		Anvil_Edge(<0.58, 0.78, -0.2>, <0.58, 0.78, 0.2>)
+		Anvil_Edge(<-0.55, 0.78, -0.18>, <-1.05, 0.78, 0>)
+		Anvil_Edge(<-0.55, 0.78, 0.18>, <-1.05, 0.78, 0>)
+		// bottom edge of the feet, front
+		Anvil_Edge(<-0.42, 0.01, -0.3>, <0.42, 0.01, -0.3>)
+		translate y * N_Stump
+	}
+	// iron hoop around the stump
+	cylinder {
+		<0, 0.78, 0>, <0, 0.88, 0>, 0.49
+		texture {
+			T_Anvil_Iron
 		}
 	}
 }

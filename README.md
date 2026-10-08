@@ -34,8 +34,9 @@ Toutes les planches d'un coup :
 for f in sprites/*.json; do tools/sprites.py "$f"; done
 ```
 
-Personnages disponibles : `zombie`, `ghoul`, `skeleton`, `knight`, `mummy`, `troll`, `witch`, `jack`, `wizard_blue`, `wizard_red`.
-Décors disponibles : `barrel`, `chain`, `lantern`.
+Créatures et décors disponibles, avec vignettes : [documentation/npc.md](documentation/npc.md)
+et [documentation/things.md](documentation/things.md). Toutes les commandes (planches,
+prévisualisations, GIF, moteur, image isolée) : [documentation/render.md](documentation/render.md).
 
 ## Contrôler le résultat
 
