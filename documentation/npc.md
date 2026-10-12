@@ -135,6 +135,25 @@ Scène `c_cube.pov` (`inc/cube/Cube.inc`), poses `inc/frames/cube.inc`.
 Gelée verdâtre translucide, noyau sombre et bulles, quatre pseudopodes ; crache
 un jet d'acide. Cadre 96×96. Scène `c_slime.pov` (`inc/slime/Slime.inc`), poses `inc/frames/slime.inc`.
 
+### wasp
+![wasp](img/wasp.png)
+
+Guêpe géante qui vole à hauteur d'homme : chitine noire et jaune, gros yeux rouge
+sombre, mandibules, dard. Battement d'ailes rapide (idle et vol à 80 ms par
+image) ; attaque en recourbant l'abdomen sous elle pour piquer vers l'avant ;
+meurt en tombant sur le dos. Cadre 96×96. Scène `c_wasp.pov` (`inc/wasp/Wasp.inc`),
+poses `inc/frames/wasp.inc`.
+
+### spider
+![spider](img/spider.png)
+
+Araignée géante, de la masse d'un gobelin : corps velu brun très sombre,
+chevrons pâles sur l'abdomen, pattes annelées, huit yeux dont deux gros rouges
+lumineux, crochets. Marche en deux groupes de quatre pattes alternés ; attaque
+en se cabrant, pattes avant levées, puis mord ; meurt sur le dos, pattes
+recroquevillées. Couleurs surchargeables et `N_Spider_Hue_Shift`. Cadre 96×96.
+Scène `c_spider.pov` (`inc/spider/Spider.inc`), poses `inc/frames/spider.inc`.
+
 ## Bases et anciennes versions (hors jeu)
 
 Gardées pour construire de nouvelles créatures ou pour comparer.

@@ -40,8 +40,10 @@
 | [skeleton_archer](#skeleton_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [skeleton_old](#skeleton_old) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [slime](#slime) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [spider](#spider) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [telescope](#telescope) | 64×96 | 1 | `default` |
 | [troll](#troll) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [wasp](#wasp) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [witch](#witch) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_blue](#wizard_blue) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_red](#wizard_red) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -646,6 +648,38 @@ Scène `c_slime.pov`, poses `inc/frames/slime.inc`. Cadre 96×96, 94 images (902
 
 </details>
 
+## spider
+
+Scène `c_spider.pov`, poses `inc/frames/spider.inc`. Cadre 96×96, 94 images (9024 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 IDLE 1 · 1 IDLE 2 |
+| `walk` | 4 | 8 | 16 + 4·d | 110 ms | FORWARD | 2 WALK 1 · 3 WALK 2 · 4 WALK 3 · 5 WALK 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 6 ATTACK 1 · 7 ATTACK 2 · 8 ATTACK 3 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (caméra 20°) | 88 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : IDLE 1
+- **1** : IDLE 2: body a little lower, front legs stirring
+- **2** : WALK 1
+- **3** : WALK 2
+- **4** : WALK 3
+- **5** : WALK 4
+- **6** : ATTACK 1: rears up, front legs raised, fangs open
+- **7** : ATTACK 2: lunges and bites
+- **8** : ATTACK 3: recovers
+- **9** : PAIN: knocked back, tilted, legs flinching
+- **10** : DEATH 1: rears up, shuddering
+- **11** : DEATH 2: rolling over
+- **12** : DEATH 3: on its back
+- **13** : DEATH 4: legs curling
+- **14** : DEATH 5: dead, legs curled up
+
+</details>
+
 ## telescope
 
 Scène `p_telescope.pov`. Cadre 64×96, 1 image (64 px de large).
@@ -681,6 +715,38 @@ Scène `c_troll_1.pov`, poses `inc/frames/troll.inc`. Cadre 96×96, 94 images (9
 - **10** : DEATH 3: falling on the back
 - **11** : DEATH 4: hitting the ground, knees up
 - **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## wasp
+
+Scène `c_wasp.pov`, poses `inc/frames/wasp.inc`. Cadre 96×96, 94 images (9024 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 80 ms | YOYO | 0 IDLE 1 · 1 IDLE 2 |
+| `walk` | 4 | 8 | 16 + 4·d | 80 ms | FORWARD | 2 FLY 1 · 3 FLY 2 · 4 FLY 3 · 5 FLY 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 6 ATTACK 1 · 7 ATTACK 2 · 8 ATTACK 3 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (caméra 20°) | 88 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : IDLE 1: hovering, wings up
+- **1** : IDLE 2: wings down, a little lower
+- **2** : FLY 1: nose down, wings up
+- **3** : FLY 2: wings level
+- **4** : FLY 3: wings down, dipping
+- **5** : FLY 4: wings level, rising
+- **6** : ATTACK 1: draws back, rearing, abdomen curling under
+- **7** : ATTACK 2: lunges, the stinger thrust forward under the head
+- **8** : ATTACK 3: recovers
+- **9** : PAIN: knocked back and tilted, abdomen jerking up
+- **10** : DEATH 1: hit, rolling over, wings stopped
+- **11** : DEATH 2: falling, on its side
+- **12** : DEATH 3: hits the floor on its back
+- **13** : DEATH 4: legs kicking, curling up
+- **14** : DEATH 5: dead on its back, legs curled
 
 </details>
 
