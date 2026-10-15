@@ -24,6 +24,22 @@ re-rendre la planche (`tools/sprites.py sprites/<nom>.json`) puis relancer
 Zombie en chemise déchirée, pantalon bleuté, cheveux noirs. Attaque à mains nues.
 Scène `c_zombie_1.pov`, poses `inc/frames/zombie.inc` (le modèle du format des poses).
 
+### zombie_2
+![zombie_2](img/zombie_2.png)
+
+Variante du zombie : peau verdâtre, pantalon gris très foncé, chemise gris pâle,
+cheveux gris clairsemés (le crâne vert se voit entre les mèches). Mêmes poses.
+Scène `c_zombie_2.pov`, poses `inc/frames/zombie.inc`.
+
+### zombie_monarch
+![zombie_monarch](img/zombie_monarch.png)
+
+Roi des zombies : le zombie vert, un peu plus grand, un crâne de squelette
+verdâtre pour tête, fine couronne d'or,
+sans chemise ni pantalon, très large manteau ouvert bleu passé bordé d'or (col
+montant, épaulettes, manches évasées). À la mort, le manteau s'aplatit au sol.
+Scène `c_zombie_monarch.pov`, poses `inc/frames/zombie.inc`.
+
 ### ghoul
 ![ghoul](img/ghoul.png)
 

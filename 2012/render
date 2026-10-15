@@ -1,0 +1,270 @@
+#!/bin/sh
+
+POVRAY_VERSION=3.6
+
+# Génère 8 direction de 3 frames walk
+processRender() {
+  local X=$2
+  local sScene=$1
+  local w=320
+  local h=240
+  local sAniFile="ani/$sScene.ani"
+  if [ ! -f $sAniFile ]
+  then
+    echo "no $1.ani file - $1.ani must contain one direction framecount and explosion code"
+    return 1
+  fi
+  local nMaxAnim=`head -n 1 $sAniFile`
+  local nFrame
+  local sOutput
+  local sBar="XXXXXXXX"
+  local sBarMax="........"
+  local sRunBar
+  local sRunBarMax
+  local nCompDir
+
+  for nDir in 0 1 2 3 4 5 6 7
+  do
+    nFrame=0
+    while [ $nFrame -lt $nMaxAnim ]
+    do
+      sFrame=$nFrame
+      if [ $nFrame -lt 10 ]
+      then
+        sFrame=0$sFrame
+      fi
+      sOutput=$sScene-$nDir$sFrame.png
+      povray -GA +I$sScene.pov +O$sOutput +FN +W$w +H$h +SC128 +EC192 +ua +k$nDir$sFrame -D 2>/dev/null
+      mv $sOutput images/$sOutput
+      nCompDir=`expr 7 - $nDir`
+      sRunBar=`expr substr $sBar 1 $nDir`
+      sRunBarMax=`expr substr $sBarMax 1 $nCompDir`
+      echo -n "\r$EXTRA_INFO Rendering [$sRunBar$sRunBarMax]"
+      nFrame=`expr $nFrame + 1`
+    done
+  done
+  return 0
+}
+
+processSprite() {
+  local sChar=$1
+  local sFiles=""
+  local i
+  for i in `ls images/$sChar-*`
+  do
+    sFiles="$sFiles $i"
+    mogrify +repage -crop 64x96+128+72 +repage $i
+    echo -n "\r$EXTRA_INFO                                                      "
+    echo -n "\r$EXTRA_INFO Cropping sprites $i"
+  done
+  echo -n "\r$EXTRA_INFO                                                      "
+  echo -n "\r$EXTRA_INFO Appending sprites"
+  convert $sFiles +append sprites/$sChar.png
+  echo -n "\r$EXTRA_INFO                                                      "
+}
+
+reprocessSprite() {
+  local sChar=$1
+  local sFiles=""
+  local i
+  for i in `ls images/$sChar-*`
+  do
+    sFiles="$sFiles $i"
+  done
+  echo -n "\r$EXTRA_INFO                                                      "
+  echo -n "\r$EXTRA_INFO Re-appending sprites"
+  convert $sFiles +append sprites/$sChar.png
+  echo -n "\r$EXTRA_INFO                                                      "
+}
+
+previewRender() {
+  local sFrame=$3 
+  if [ $3 -lt 10 ]
+  then
+    sFrame=0$sFrame
+  fi
+  povray -GA +p +I$1.pov +O$1.png +FN +W640 +H480 +K0$2$sFrame
+  mv $1.png previews
+}
+
+checkIORestrictions() {
+  local sConf1=$HOME/.povray/$POVRAY_VERSION/povray.conf
+  local sConf2=/usr/local/etc/povray/$POVRAY_VERSION/povray.conf
+  if [ -f $sConf1 ]
+  then
+    return 1
+  elif [ -f $sConf2 ]
+  then
+    return 1
+  else
+    return 0
+  fi
+}
+
+setIORestrictionsOff() {
+  local sConf=$HOME/.povray/$POVRAY_VERSION/povray.conf
+  if [ ! -f $sConf ]
+  then
+    mkdir $HOME/.povray
+    mkdir $HOME/.povray/$POVRAY_VERSION
+    echo "[File I/O Security]" > $sConf
+    echo "none" >> $sConf
+  fi
+  cat $sConf
+}
+
+explosionBlood() {
+  sBase=$1
+  s000="-000"
+  sExp="-exp"
+  nAlpha=100
+  for i in 0 1 2 3 4 5 6
+  do
+    composite -compose src-over -gravity $2 -dissolve $nAlpha effects/xpblood-$i.png images/$sBase$s000.png images/$sBase-exp$i.png
+    nAlpha=`expr $nAlpha + 15`
+  done
+}
+
+explosionBloodBottom() {
+  explosionBlood $1 South
+}
+
+explosionBloodTop() {
+  explosionBlood $1 North
+}
+
+explosionBloodCenter() {
+  explosionBlood $1 center
+}
+
+explosionBloodTriple() {
+  sBase=$1
+  s000="-000"
+  nAlpha=100
+  for i in 0 1 2 3 4 5 6 7 8 9 10
+  do
+    s0=$i
+    if [ $i -lt 10 ]
+    then
+      s0="0$i"
+    else
+      s0="$i"
+    fi
+    sImage=images/$sBase-exp$s0.png
+    if [ $i -le 6 ]
+    then
+      composite -compose src-over -gravity South -dissolve $nAlpha effects/xpblood-$i.png images/$sBase$s000.png $sImage
+    else
+      composite -compose xor images/$sBase$s000.png images/$sBase$s000.png $sImage
+    fi
+    if [ $i -ge 2 -a $i -le 8 ]
+    then
+      i2=`expr $i - 2`
+      composite -compose src-over -gravity North effects/xpblood-$i2.png $sImage $sImage
+    fi
+    if [ $i -ge 4 -a $i -le 10 ]
+    then
+      i4=`expr $i - 4`
+      composite -compose src-over -gravity center effects/xpblood-$i4.png $sImage $sImage
+    fi
+    if [ $nAlpha -lt 200 ]
+    then
+      nAlpha=`expr $nAlpha + 15`
+    fi
+  done
+}
+
+explosionSprite() {
+  local sAniFile="ani/$1.ani"
+  if [ ! -f $sAniFile ]
+  then
+    echo "no $1.ani file - $1.ani must contain one direction framecount and explosion code"
+    return 1
+  fi
+  local nExplo=`tail -n 1 $sAniFile`
+  case "$nExplo" in
+    "b")
+      explosionBloodBottom $1
+      ;;
+  
+    "t")
+      explosionBloodTop $1
+      ;;
+  
+    "c")
+      explosionBloodCenter $1
+      ;;
+
+    "3")
+      explosionBloodTriple $1
+      ;;
+  esac 
+}
+
+
+
+printHelp() {
+  echo "use options:"
+  echo " -r character extra_info: render all character images. displays extra_info"
+  echo " -p dir frame character : render character preview at specified direction and frame"
+  echo " -s character : create spritesheet"
+  echo " -rs character : render all character images and create spritesheet"
+  echo " -x character : render explosion"
+  echo " -io create IO restrictions off in $HOME/.povray/$POVRAY_VERSION/"
+}
+
+
+EXTRA_INFO=$3
+case "$1" in
+  "")
+    printHelp
+    ;;
+  
+  "-r")
+    processRender $2
+    ;;
+  
+  "-s")
+    processSprite $2
+    ;;
+  
+  "-rs")
+    processRender $2
+    if [ "$?" = "0" ]
+    then
+      processSprite $2
+    fi
+    ;;
+
+  "-p")
+    previewRender $4 $2 $3
+    ;;
+
+  "-io")
+    setIORestrictionsOff
+    ;;
+
+  "-x")
+    explosionSprite $2
+    ;;
+
+  "-rsx")
+    processRender $2
+    if [ "$?" = "0" ]
+    then
+      processSprite $2
+      explosionSprite $2
+      reprocessSprite $2
+    fi
+    ;;
+
+  *)
+    printHelp
+    ;;
+esac  
+
+if [ -z "$EXTRA_INFO" ]
+then
+  echo ""
+fi
+

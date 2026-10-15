@@ -1,0 +1,29 @@
+#!/bin/sh
+
+if [ -z "$*" ] 
+then
+  aSprites="wasp warlock warlock2 spider roboturret raven pumpkin imp1 imp2 cube blob blob2 bigface bigface2 bigface3 otto"
+else
+  aSprites=$*
+fi
+nSprites=`echo $aSprites | wc -w`
+
+makeAll() {
+  local i
+  local n=0
+  local nProg=0
+  echo "Building all sprites"
+  rm images/*.png
+  rm sprites/*.png
+
+  for i in $aSprites
+  do
+    nProg=`expr $n \* 100 \/ $nSprites`
+    sh render -rsx $i "$nProg% - $i -"
+    n=`expr $n + 1`
+  done
+  echo "\rdone.                                          "
+}
+
+makeAll
+

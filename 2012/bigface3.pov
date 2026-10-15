@@ -1,0 +1,38 @@
+#include "inc/clock.inc"
+
+#declare FaceTexture = "textures/face.png";
+#declare ShirtColor1 = color rgb <0, 0, 0>;
+#declare ShirtColor2 = color rgb <1, 1, 1>;
+#declare ArmorPigment = pigment {
+  color rgb <0.5, 0.5, 0.5>
+}
+
+#include "inc/knife_sword.inc"
+#include "inc/bigarmor.inc"
+
+
+camera {
+  location <0, 4, -22>
+  look_at <0, 4, 0>
+}
+
+light_source {
+  <0, 4, -10>
+  color rgb <1, 1, 1>
+}
+
+object {
+  BigFaceArmor
+  scale 0.8
+  rotate CameraAngle * y
+}
+
+disc {
+  <0, 0, 0>
+  y
+  1.5
+  pigment {
+    ShadowDiscColor
+  }
+}
+

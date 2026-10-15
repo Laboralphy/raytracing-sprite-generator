@@ -18,6 +18,8 @@
 | [books](#books) | 64×96 | 1 | `default` |
 | [brazier](#brazier) | 64×96 | 4 | `default` |
 | [brazier_out](#brazier_out) | 64×96 | 1 | `default` |
+| [c_bigface](#c_bigface) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [c_bigface_2](#c_bigface_2) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [cauldron](#cauldron) | 64×96 | 1 | `default` |
 | [chain](#chain) | 64×96 | 1 | `default` |
 | [clay_pot](#clay_pot) | 64×96 | 1 | `default` |
@@ -48,6 +50,8 @@
 | [wizard_blue](#wizard_blue) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_red](#wizard_red) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [zombie](#zombie) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [zombie_2](#zombie_2) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [zombie_monarch](#zombie_monarch) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 
 ## anvil
 
@@ -104,6 +108,70 @@ Scène `p_brazier_out.pov`. Cadre 64×96, 1 image (64 px de large).
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
 | `default` | 1 | 1 (caméra 15°) | 0 (vue 3) | 1000 ms | NONE | 0 |
+
+## c_bigface
+
+Scène `c_bigface.pov`, poses `inc/frames/bigface.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 8 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 130 ms | FORWARD | 4 WALK 1 · 5 WALK 2 · 6 WALK 3 · 7 WALK 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 1 ATTACK 1 · 2 ATTACK 2 · 3 ATTACK 3 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (caméra 25°, shift_x 0.3) | 88 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: knife raised high, leaning back
+- **2** : ATTACK 2: stabs forward, leaning in
+- **3** : ATTACK 3: recovers
+- **4** : WALK 1: left foot passing, lifted
+- **5** : WALK 2: left foot forward
+- **6** : WALK 3: right foot passing, lifted
+- **7** : WALK 4: right foot forward
+- **8** : IDLE: head tilted, arms lowered, a little lower
+- **9** : PAIN: thrown back, arms up
+- **10** : DEATH 1: hit, head thrown back
+- **11** : DEATH 2: toppling backwards
+- **12** : DEATH 3: falling
+- **13** : DEATH 4: hits the ground on head and belly, arms flung
+- **14** : DEATH 5: lying on the back, head turned aside
+
+</details>
+
+## c_bigface_2
+
+Scène `c_bigface_2.pov`, poses `inc/frames/bigface.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 8 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 130 ms | FORWARD | 4 WALK 1 · 5 WALK 2 · 6 WALK 3 · 7 WALK 4 |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 1 ATTACK 1 · 2 ATTACK 2 · 3 ATTACK 3 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 9 PAIN · 9→0 (50%) |
+| `death` | 6 | 1 (caméra 25°, shift_x 0.3) | 88 (vue 3) | 120 ms | NONE | 10 DEATH 1 · 11 DEATH 2 · 12 DEATH 3 · 13 DEATH 4 · 13→14 (50%) · 14 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: knife raised high, leaning back
+- **2** : ATTACK 2: stabs forward, leaning in
+- **3** : ATTACK 3: recovers
+- **4** : WALK 1: left foot passing, lifted
+- **5** : WALK 2: left foot forward
+- **6** : WALK 3: right foot passing, lifted
+- **7** : WALK 4: right foot forward
+- **8** : IDLE: head tilted, arms lowered, a little lower
+- **9** : PAIN: thrown back, arms up
+- **10** : DEATH 1: hit, head thrown back
+- **11** : DEATH 2: toppling backwards
+- **12** : DEATH 3: falling
+- **13** : DEATH 4: hits the ground on head and belly, arms flung
+- **14** : DEATH 5: lying on the back, head turned aside
+
+</details>
 
 ## cauldron
 
@@ -843,6 +911,66 @@ Scène `c_zombie_1.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images 
 | `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
 | `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
 | `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1
+- **2** : ATTACK 2
+- **3** : WALK 1
+- **4** : WALK 2
+- **5** : WALK 3
+- **6** : IDLE: swaying, head hanging
+- **7** : PAIN: thrown backward
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## zombie_2
+
+Scène `c_zombie_2.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 3 WALK 1 · 4 WALK 2 · 5 WALK 3 · 5→3 (50%) |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1
+- **2** : ATTACK 2
+- **3** : WALK 1
+- **4** : WALK 2
+- **5** : WALK 3
+- **6** : IDLE: swaying, head hanging
+- **7** : PAIN: thrown backward
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## zombie_monarch
+
+Scène `c_zombie_monarch.pov`, poses `inc/frames/zombie.inc`. Cadre 64×96, 94 images (6016 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 3 WALK 1 · 4 WALK 2 · 5 WALK 3 · 5→3 (50%) |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.07) | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
 
 <details><summary>Poses</summary>
 
