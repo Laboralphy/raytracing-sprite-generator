@@ -81,6 +81,17 @@ Scène `c_jack.pov`, poses `inc/frames/jack.inc`.
 Chevalier en armure chromée, masse à pointes et bouclier à croix.
 Scène `c_knight_mace.pov`, poses `inc/frames/knight.inc`.
 
+### darknight
+![darknight](img/darknight.png)
+
+Chevalier noir : le chevalier (mêmes poses), plus grand et plus massif, armure
+d'acier noirci piquée de rouille, pointes supplémentaires, grandes cornes
+recourbées vers l'avant, cape cramoisie, bouclier à tête de mort démoniaque
+(orbites rougeoyantes), épée large. Planche 96×96 (la mort et l'attaque
+débordent de 64 px). Scène `c_darknight.pov` (armure `inc/armors/DarkArmor.inc`,
+bouclier `inc/weapons/Weapon_Demon_Skull_Shield.inc`, épée
+`inc/weapons/Weapon_Broad_Sword.inc`), poses `inc/frames/knight.inc`.
+
 ### witch
 ![witch](img/witch.png)
 

@@ -24,6 +24,7 @@
 | [chain](#chain) | 64×96 | 1 | `default` |
 | [clay_pot](#clay_pot) | 64×96 | 1 | `default` |
 | [cube](#cube) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [darknight](#darknight) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [dummy_archer](#dummy_archer) | 64×96 | 102 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [dummy_small](#dummy_small) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [ghoul](#ghoul) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -228,6 +229,36 @@ Scène `c_cube.pov`, poses `inc/frames/cube.inc`. Cadre 64×96, 94 images (6016 
 - **12** : DEATH 4: falling face down
 - **13** : DEATH 5: face down, the face on top now looks forward, embers
 - **14** : DEATH 6: cold
+
+</details>
+
+## darknight
+
+Scène `c_darknight.pov`, poses `inc/frames/knight.inc`. Cadre 96×96, 94 images (9024 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 3 WALK 1 · 4 WALK 2 · 5 WALK 3 · 5→3 (50%) |
+| `attack` | 3 | 8 | 48 + 3·d | 150 ms | NONE | 0→1 (50%) · 1 ATTACK 1 · 2 ATTACK 2 |
+| `pain` | 2 | 8 | 72 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.2) | 88 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK 1: weapon raised
+- **2** : ATTACK 2: strike
+- **3** : WALK 1
+- **4** : WALK 2
+- **5** : WALK 3
+- **6** : IDLE: guard relaxed, shield a little lower
+- **7** : PAIN: thrown backward, shield knocked aside
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
 
 </details>
 
