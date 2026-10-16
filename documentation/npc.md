@@ -87,6 +87,27 @@ Scène `c_knight_mace.pov`, poses `inc/frames/knight.inc`.
 Sorcière : cheveux roux, chapeau pointu, robe bleue plissée, baguette à rubis
 (tir avec flash). Scène `c_witch_blue.pov`, poses `inc/frames/witch.inc` (numérotation propre).
 
+### succubus
+![succubus](img/succubus.png)
+
+Succube : la sorcière (même taille) avec cheveux sombres, deux cornes dressées,
+petites ailes de démon repliées dans le dos, corsage sans manches en cuir rouge
+brillant, jupe rouge échancrée sur chaque côté, bottes hautes rouges à bord
+pointu sous le genou. Pose aguicheuse à l'arrêt (jambes écartées, main sur la
+hanche), marche identique à la sorcière. Scène `c_succubus.pov` (costume
+`inc/armors/Succubus_Costume.inc`, ailes `inc/armors/Wings_Demon_Closed.inc`,
+cornes `inc/armors/Horns_Demon.inc`, bottes `inc/armors/Boot_High_Red_Pointed.inc`),
+poses `inc/frames/succubus.inc`.
+
+### witch_queen
+![witch_queen](img/witch_queen.png)
+
+Reine sorcière : la sorcière (même taille, mêmes poses) avec une petite couronne d'or
+haute et étroite (sans gemmes) à la place du chapeau, cheveux blond pâle, robe qui passe du bleu au
+gris foncé, losanges dorés sur le corsage, jupe échancrée devant, bordures
+dorées. Scène `c_witch_queen.pov` (costume `inc/armors/Witch_Queen_Costume.inc`,
+couronne `inc/armors/Crown_Gold_Gems.inc`), poses `inc/frames/witch.inc`.
+
 ### wizard_blue
 ![wizard_blue](img/wizard_blue.png)
 

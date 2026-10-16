@@ -43,10 +43,12 @@
 | [skeleton_old](#skeleton_old) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [slime](#slime) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [spider](#spider) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [succubus](#succubus) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [telescope](#telescope) | 64×96 | 1 | `default` |
 | [troll](#troll) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wasp](#wasp) | 96×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [witch](#witch) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
+| [witch_queen](#witch_queen) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_blue](#wizard_blue) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [wizard_red](#wizard_red) | 64×96 | 86 | `idle`, `walk`, `attack`, `pain`, `death` |
 | [zombie](#zombie) | 64×96 | 94 | `idle`, `walk`, `attack`, `pain`, `death` |
@@ -748,6 +750,36 @@ Scène `c_spider.pov`, poses `inc/frames/spider.inc`. Cadre 96×96, 94 images (9
 
 </details>
 
+## succubus
+
+Scène `c_succubus.pov`, poses `inc/frames/succubus.inc`. Cadre 64×96, 86 images (5504 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 2 WALK 1 · 3 WALK 2 · 4 WALK 3 · 4→2 (50%) |
+| `attack` | 2 | 8 | 48 + 2·d | 150 ms | NONE | 5 ATTACK · 5→0 (75%) |
+| `pain` | 2 | 8 | 64 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.2) | 80 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND: legs apart, weight on the left leg, right knee bent, left hand on the hip
+- **1** : ATTACK: wand forward *(inutilisée)*
+- **2** : WALK 1
+- **3** : WALK 2
+- **4** : WALK 3
+- **5** : ATTACK: fire, wand held out, kicking up a little (recoil), flash at the tip
+- **6** : IDLE: same stance, the hip swaying further out, head tilted the other way, wand raised
+- **7** : PAIN: thrown backward
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
 ## telescope
 
 Scène `p_telescope.pov`. Cadre 64×96, 1 image (64 px de large).
@@ -821,6 +853,36 @@ Scène `c_wasp.pov`, poses `inc/frames/wasp.inc`. Cadre 96×96, 94 images (9024 
 ## witch
 
 Scène `c_witch_blue.pov`, poses `inc/frames/witch.inc`. Cadre 64×96, 86 images (5504 px de large).
+
+| Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
+|---|---|---|---|---|---|---|
+| `idle` | 2 | 8 | 0 + 2·d | 400 ms | YOYO | 0 STAND · 6 IDLE |
+| `walk` | 4 | 8 | 16 + 4·d | 150 ms | FORWARD | 2 WALK 1 · 3 WALK 2 · 4 WALK 3 · 4→2 (50%) |
+| `attack` | 2 | 8 | 48 + 2·d | 150 ms | NONE | 5 ATTACK · 5→0 (75%) |
+| `pain` | 2 | 8 | 64 + 2·d | 150 ms | NONE | 7 PAIN · 7→0 (50%) |
+| `death` | 6 | 1 (shift_x 0.2) | 80 (vue 3) | 120 ms | NONE | 8 DEATH 1 · 9 DEATH 2 · 10 DEATH 3 · 11 DEATH 4 · 11→12 (50%) · 12 DEATH 5 |
+
+<details><summary>Poses</summary>
+
+- **0** : STAND
+- **1** : ATTACK: wand forward *(inutilisée)*
+- **2** : WALK 1
+- **3** : WALK 2
+- **4** : WALK 3
+- **5** : ATTACK: fire, wand held out, kicking up a little (recoil), flash at the tip
+- **6** : IDLE: hand on the hip, head tilted
+- **7** : PAIN: thrown backward
+- **8** : DEATH 1: hit, head snapping back, arms flung forward
+- **9** : DEATH 2: tipping backward, knees giving way
+- **10** : DEATH 3: falling on the back
+- **11** : DEATH 4: hitting the ground, knees up
+- **12** : DEATH 5: lying on the back, arms and legs fallen flat, head turned aside
+
+</details>
+
+## witch_queen
+
+Scène `c_witch_queen.pov`, poses `inc/frames/witch.inc`. Cadre 64×96, 86 images (5504 px de large).
 
 | Animation | Images | Directions | Première tuile | Durée | Boucle | Poses |
 |---|---|---|---|---|---|---|
